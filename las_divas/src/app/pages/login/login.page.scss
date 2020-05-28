@@ -1,0 +1,178 @@
+*
+{
+    padding: 0;
+    margin: 0;
+    color: ghostwhite;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.contenedor
+{
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.6)
+      ),
+      url(../../../assets/img/title-login.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1
+{
+    text-align: center;
+    font-family: "boli";
+    font-size: 4.5em;
+    letter-spacing: 1px;
+    padding: 10%;
+}
+
+.contenedorLogin
+{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 70%;
+}
+
+form
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-flow: column;
+    height: 70%;
+    width: 100%;
+}
+
+.datos
+{
+    width: 100%;
+}
+
+#correo, #pass
+{
+    position: relative;
+    width: 100%;
+    height: 7vh;
+    text-align: center;
+    border-bottom: 1px solid ghostwhite;
+    font-size: 1.2em;
+    transition: 1s;
+    --placeholder-opacity: 0.9;
+}
+
+#correo:focus, #pass:focus
+{
+    box-shadow: inset 0px 100px 0 rgb(0,0,0);
+    color: ghostwhite;
+}
+
+#pass
+{
+    margin-top: 5vw;
+}
+
+::placeholder
+{
+    color: black;
+}
+
+.button
+{
+    position: relative;
+    width: 100%;
+    height: 14%;
+    display: block;
+}
+
+#submit
+{
+    background: rgba(65, 32, 119, 0.9);
+    width: 100%;
+    height: 100%;
+    color: ghostwhite;
+    border-radius: 5px;
+    border: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    outline: none;
+    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#submit:active
+{
+    background: rgba(65, 32, 119, 1);
+}
+
+.mensaje
+{
+    position: absolute;
+    display: flex;
+    width: 60vw;
+    height: 7vh;
+    bottom: 5%;
+    background: rgb(255, 0, 0);
+    border-radius: 4px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: 4vw;
+    color: ghostwhite;
+    animation-name: aparicion;
+    animation-duration: 1s;
+}
+
+@keyframes aparicion
+{
+    0% {background-color:rgb(5, 5, 5); bottom:-400px}
+  100%  {background-color:rgb(255, 0, 0); left:13%;}
+
+}
+
+span
+{
+    width: 100vw;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+ion-icon
+{
+    position: relative;
+    color: ghostwhite;
+    width: 6vw;
+    height: 2vh;
+    right: 0vw;
+    bottom: 5vw;
+}
+
+.usuarios
+{
+    position: absolute;
+    width: 80vw;
+    height: 10vh;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+
+.loading
+{
+    opacity: 0.5;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 30vw;
+    height: 20vh;
+}
