@@ -3,13 +3,15 @@
   <div class="contenedorLogin">
       <form action="">
         <div class="datos">
-          <ion-input type="text" id="correo" placeholder="Correo electronico" maxlength="25"></ion-input>
+          <ion-input type="text" id="correo" placeholder="Correo electrónico" maxlength="25" clear-input (ionFocus)='focus("correo")' (ionBlur)='noFocus("correo")'></ion-input>
           <br>
-          <ion-input type="password" id="pass" placeholder="Contraseña" maxlength="25" minlength="4"></ion-input>
+          <ion-input type="password" id="pass" placeholder="Contraseña" maxlength="25" minlength="4" clear-input (ionFocus)='focus("pass")' (ionBlur)='noFocus("pass")'></ion-input>
         </div>
         <div class="button">
           <input type="submit" value="Ingresar" id="submit" >
+          <p class="texto-registro">No estás registrado? <span id="registrate">Registrate</span></p>
         </div>
+        
         <div class="mensaje" id="mensaje" hidden>
           <span id="mensajeTexto"></span>
           <ion-icon name="close-outline" ></ion-icon>

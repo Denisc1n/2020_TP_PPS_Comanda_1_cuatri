@@ -12,4 +12,12 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
+  focus(id) {
+    document.getElementById(id).style.borderBottom = "3px solid rgb(36, 136, 202)";
+  }
+
+  noFocus(id) {
+    document.getElementById(id).style.borderBottom = "1px solid ghostwhite";
+  }
+
 }

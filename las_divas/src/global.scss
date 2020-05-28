@@ -24,7 +24,13 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
 @font-face {
     font-family: 'boli';
     src: url('./assets/fuentes/Bolina.otf');
+}
+
+@font-face {
+    font-family: 'ageo';
+    src: url('./assets/fuentes/AgeoPersonalUse-Medium.otf');
 }

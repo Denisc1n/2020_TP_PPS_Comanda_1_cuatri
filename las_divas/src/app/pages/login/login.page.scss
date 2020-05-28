@@ -3,7 +3,7 @@
     padding: 0;
     margin: 0;
     color: ghostwhite;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'ageo';
 }
 
 .contenedor
@@ -66,19 +66,13 @@ form
     text-align: center;
     border-bottom: 1px solid ghostwhite;
     font-size: 1.2em;
-    transition: 1s;
+    transition: 0.1s;
     --placeholder-opacity: 0.9;
-}
-
-#correo:focus, #pass:focus
-{
-    box-shadow: inset 0px 100px 0 rgb(0,0,0);
-    color: ghostwhite;
 }
 
 #pass
 {
-    margin-top: 5vw;
+    margin-top: 5vh;
 }
 
 ::placeholder
@@ -102,7 +96,7 @@ form
     color: ghostwhite;
     border-radius: 5px;
     border: none;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'ageo';
     outline: none;
     transition: 0.3s;
     text-transform: uppercase;
@@ -111,7 +105,16 @@ form
 
 #submit:active
 {
-    background: rgba(65, 32, 119, 1);
+    background: rgb(42, 21, 77);
+}
+
+#registrate {
+    color: rgb(36, 136, 202);
+    font-weight: bold;
+}
+
+.texto-registro {
+    margin-top: 3vh;
 }
 
 .mensaje
@@ -142,7 +145,7 @@ form
 span
 {
     width: 100vw;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'ageo';
 }
 
 ion-icon
