@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
 import { Router } from '@angular/router';
+import { VibrationService } from 'src/app/servicios/vibration.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginPage implements OnInit {
   email : string;
   pass : string;
 
-  constructor(private servicio : FirebaseService, private navegador : Router) { }
+  constructor(private fireService : FirebaseService, private vibrationService : VibrationService ,private navegador : Router) { }
 
   ngOnInit() {
     this.getUsers();
@@ -35,11 +36,12 @@ export class LoginPage implements OnInit {
 
     if(this.validarCorreo() && this.validarClave())
     {
-      this.servicio.loginEmail(this.email, this.pass).then((user) => {
+      this.fireService.loginEmail(this.email, this.pass).then((user) => {
         this.navegador.navigate(["home"]);
       }).catch((error) =>{
         console.log(error)
         this.textoMostrar(error.code);
+        this.vibrationService.error()
       })
     }
 
@@ -129,7 +131,7 @@ export class LoginPage implements OnInit {
 
   getUsers()
   {
-    this.servicio.getUsers().then((users)=>{
+    this.fireService.getUsers().then((users)=>{
       this.listado = users;
     })
   }

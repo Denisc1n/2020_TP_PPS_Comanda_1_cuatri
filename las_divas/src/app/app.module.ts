@@ -13,6 +13,8 @@ import { AngularFireAuthModule} from 'angularfire2/auth';
 import { firebaseconfig } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
+import { Vibration } from '@ionic-native/vibration/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -21,7 +23,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
   providers: [
     StatusBar,
     SplashScreen,
-
+    Vibration,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
