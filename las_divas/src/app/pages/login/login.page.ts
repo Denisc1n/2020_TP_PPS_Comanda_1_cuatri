@@ -3,6 +3,8 @@ import * as $ from 'jquery';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
 import { Router } from '@angular/router';
 import { VibrationService } from 'src/app/servicios/vibration.service';
+import { SpinnerService } from 'src/app/servicios/spinner.service';
+
 
 @Component({
   selector: 'app-login',
@@ -11,14 +13,18 @@ import { VibrationService } from 'src/app/servicios/vibration.service';
 })
 export class LoginPage implements OnInit {
 
+  showBackdrop = true;
+
   listado : any = [];
   email : string;
   pass : string;
 
-  constructor(private fireService : FirebaseService, private vibrationService : VibrationService ,private navegador : Router) { }
+  constructor(private fireService : FirebaseService, private vibrationService : VibrationService ,private navegador : Router, private spinner : SpinnerService) { }
 
   ngOnInit() {
+    this.spinner.activateFor("backdrop",3000);
     this.getUsers();
+
   }
 
   focus(id) {
@@ -37,7 +43,7 @@ export class LoginPage implements OnInit {
     if(this.validarCorreo() && this.validarClave())
     {
       this.fireService.loginEmail(this.email, this.pass).then((user) => {
-        this.navegador.navigate(["home"]);
+        this.spinner.activateAndRedirect("backdrop",3000,"home");
       }).catch((error) =>{
         console.log(error)
         this.textoMostrar(error.code);

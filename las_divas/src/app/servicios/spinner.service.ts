@@ -9,25 +9,26 @@ export class SpinnerService {
 
   constructor(private router : Router) { }
 
-  activate(id:string, idBackdrop:string){
+  activate(idBackdrop:string){
     $(`#${idBackdrop}`).removeAttr('hidden');
-    $(`#${id}`).removeAttr('hidden');
   }
 
-  deactivate(id:string, idBackdrop:string){
+  deactivate(idBackdrop:string){
     $(`#${idBackdrop}`).attr('hidden', true);
-    $(`#${id}`).attr('hidden', true);
   }
 
-  async activateAndRedirect(id:string, idBackdrop:string, time:number,route:string){
-    await this.activateFor(id, idBackdrop,time);
-    this.router.navigate([route]);
-  }
-
-  activateFor(id:string, idBackdrop:string, time:number){
-    this.activate(id, idBackdrop);
+  async activateAndRedirect(idBackdrop:string, time:number,route:string){
+    this.activateFor(idBackdrop,time);
     setTimeout(() => {
-      this.deactivate(id, idBackdrop);
+      this.router.navigate([route]);
+    }, time);
+    
+  }
+
+  activateFor(idBackdrop:string, time:number){
+    this.activate(idBackdrop);
+    setTimeout(() => {
+      this.deactivate(idBackdrop);
     }, time);
   }
 }
