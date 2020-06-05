@@ -4,6 +4,7 @@ import { FirebaseService } from 'src/app/servicios/firebase.service';
 import { Router } from '@angular/router';
 import { VibrationService } from 'src/app/servicios/vibration.service';
 import { SpinnerService } from 'src/app/servicios/spinner.service';
+import { UtilidadService } from 'src/app/servicios/utilidad.service';
 
 
 @Component({
@@ -14,12 +15,14 @@ import { SpinnerService } from 'src/app/servicios/spinner.service';
 export class LoginPage implements OnInit {
 
   showBackdrop = true;
-
+  mostrarFrmLogin : boolean = false;
+  mostrarFrmInvitado : boolean = false;
   listado : any = [];
   email : string;
   pass : string;
+  invitedPhoto
 
-  constructor(private fireService : FirebaseService, private vibrationService : VibrationService ,private navegador : Router, private spinner : SpinnerService) { }
+  constructor(private fireService : FirebaseService, private vibrationService : VibrationService ,private navegador : Router, private spinner : SpinnerService, private utilidadService:UtilidadService) { }
 
   ngOnInit() {
     this.spinner.activateFor("backdrop",3000);
@@ -33,6 +36,49 @@ export class LoginPage implements OnInit {
 
   noFocus(id) {
     document.getElementById(id).style.borderBottom = "1px solid ghostwhite";
+  }
+
+  mostrarLogin() {
+    this.mostrarFrmLogin = !this.mostrarFrmLogin;
+
+    if(this.mostrarFrmLogin == true) {
+      $("#formUsuario").css("width","100%");
+      $("#formUsuario").css("height","50%");
+      $("#formUsuario").css("opacity","1");
+      $("#botonUsuario").attr("value","Cerrar");
+      $("#botonInvitado").css("display","none");
+      $(".usuarios").fadeIn()
+    } else {
+      $("#formUsuario").css("opacity","0");
+      setTimeout(() => {
+        $("#formUsuario").css("height","0%");
+        $("#formUsuario").css("width","0%");
+        $("#botonUsuario").attr("value","Usuario");
+        $("#botonInvitado").css("display","block");
+        $(".usuarios").fadeOut();
+      }, 100);
+      
+    }
+  }
+
+  mostrarInvitado() {
+    this.mostrarFrmInvitado = !this.mostrarFrmInvitado;
+
+    if(this.mostrarFrmInvitado == true) {
+      $("#formInvitado").css("width","100%");
+      $("#formInvitado").css("height","50%");
+      $("#formInvitado").css("opacity","1");
+      $("#botonInvitado").attr("value","Cerrar");
+      $("#botonUsuario").css("display","none");
+    } else {
+      $("#formInvitado").css("opacity","0");
+      setTimeout(() => {
+        $("#formInvitado").css("height","0%");
+        $("#formInvitado").css("width","0%");
+        $("#botonInvitado").attr("value","Invitado");
+        $("#botonUsuario").css("display","block");
+      }, 100);
+    }
   }
 
   loguear()
@@ -137,8 +183,29 @@ export class LoginPage implements OnInit {
 
   getUsers()
   {
-    this.fireService.getUsers().then((users)=>{
+    this.fireService.getDB('usuarios').then((users)=>{
       this.listado = users;
     })
+  }
+
+  logInAsInvited(){
+    let nombre = $("#nombreInvitado").val();
+
+    if(nombre != null){
+      let id = nombre + '_' + this.utilidadService.getDateTime();
+      let photoUrl;
+      if(this.invitedPhoto != null)
+        photoUrl = this.fireService.uploadPhoto(this.invitedPhoto, `clientesInvitados/${id}`);
+      else
+        photoUrl = 'default';
+      this.fireService.createDocInDB('clientesInvitados', id, {nombre: nombre, foto: photoUrl, id: id});
+    }
+    else{
+      console.error('Elija un nombre');
+    }
+  }
+
+  selectPhotoInPhotolibrary(){
+    this.invitedPhoto = this.fireService.choosePhotoLibrary()
   }
 }

@@ -2,7 +2,10 @@
 <div class="contenedor">
   <h1>Las Divas</h1>
   <div class="contenedorLogin">
-      <form (ngSubmit)="loguear()">
+    <div class="button">
+      <input type="button" value="Usuario" id="botonUsuario" (click)="mostrarLogin()">
+    </div>
+      <form (ngSubmit)="loguear()" id="formUsuario">
         <div class="datos">
           <ion-input type="text" id="correo" placeholder="Correo electrónico" maxlength="35" clear-input (ionFocus)='focus("correo")' (ionBlur)='noFocus("correo")'></ion-input>
           <br>
@@ -10,12 +13,26 @@
         </div>
         <div class="button">
           <input type="submit" value="Ingresar" id="submit">
-          <p class="texto-registro">No estás registrado? <span id="registrate">Registrate</span></p>
         </div>
         <div class="mensaje" id="mensajeLogin" style="display: none;">
           <span id="mensajeTexto"></span>
         </div>
       </form>
+      <div class="button">
+        <input type="button" value="Invitado" id="botonInvitado" (click)="mostrarInvitado()">
+      </div>
+      <form ngNativeValidate id="formInvitado" (ngSubmit)="logInAsInvited()">
+        <div class="container-avatar" (click)="selectPhotoInPhotolibrary()">
+          <img src="../../../assets/img/userDefault.png" alt="">
+        </div>
+        <ion-input type="text" id="nombreInvitado" placeholder="Nombre" maxlength="35" clear-input (ionFocus)='focus("nombreInvitado")' (ionBlur)='noFocus("nombreInvitado")'></ion-input>
+        <div class="button">
+          <input type="submit" value="Ingresar" id="submit">
+        </div>
+      </form>
+      <div class="container-texto-registro">
+        <p class="texto-registro">No estás registrado? <span id="registrate">Registrate</span></p>
+      </div>
   </div>
   <div class="usuarios">
     <ion-icon name="restaurant-outline" *ngFor="let usuarios of this.listado" (click)="completar(usuarios.correo)"></ion-icon>
