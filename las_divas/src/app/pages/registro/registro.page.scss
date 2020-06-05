@@ -115,3 +115,39 @@ form img
 {
     width: 35%;
 }
+
+ion-icon
+{
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    font-size: 2em;
+}
+
+.modal-error
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 70%;
+    height: 35%;
+}
+
+.modal-error-img
+{
+    text-align: center;
+    height: 60%;
+    background: #fcfefc
+}
+
+.modal-error-img img
+{
+    width: 65%;
+}
+
+.modal-error-text
+{
+    height: 40%;
+    background: red
+}

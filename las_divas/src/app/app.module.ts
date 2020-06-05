@@ -14,6 +14,7 @@ import { firebaseconfig } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { Vibration } from '@ionic-native/vibration/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { Vibration } from '@ionic-native/vibration/ngx';
     StatusBar,
     SplashScreen,
     Vibration,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
