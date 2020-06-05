@@ -77,4 +77,12 @@ export class FirebaseService {
     })
   }
 
+  getDBByDoc(collection:string, docName:string){
+    return new Promise((resolve, reject) => {
+      this.db.collection(collection).doc(docName).valueChanges().subscribe((data)=> {
+        resolve(data);
+      }, error => reject(error));
+    })
+  }
+  
 }
