@@ -21,8 +21,8 @@
       <div class="button">
         <input type="button" value="Invitado" id="botonInvitado" (click)="mostrarInvitado()">
       </div>
-      <form id="formInvitado">
-        <div class="container-avatar">
+      <form ngNativeValidate id="formInvitado" (ngSubmit)="logInAsInvited()">
+        <div class="container-avatar" (click)="selectPhotoInPhotolibrary()">
           <img src="../../../assets/img/userDefault.png" alt="">
         </div>
         <ion-input type="text" id="nombreInvitado" placeholder="Nombre" maxlength="35" clear-input (ionFocus)='focus("nombreInvitado")' (ionBlur)='noFocus("nombreInvitado")'></ion-input>

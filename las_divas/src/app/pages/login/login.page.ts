@@ -4,6 +4,7 @@ import { FirebaseService } from 'src/app/servicios/firebase.service';
 import { Router } from '@angular/router';
 import { VibrationService } from 'src/app/servicios/vibration.service';
 import { SpinnerService } from 'src/app/servicios/spinner.service';
+import { UtilidadService } from 'src/app/servicios/utilidad.service';
 
 
 @Component({
@@ -19,8 +20,9 @@ export class LoginPage implements OnInit {
   listado : any = [];
   email : string;
   pass : string;
+  invitedPhoto
 
-  constructor(private fireService : FirebaseService, private vibrationService : VibrationService ,private navegador : Router, private spinner : SpinnerService) { }
+  constructor(private fireService : FirebaseService, private vibrationService : VibrationService ,private navegador : Router, private spinner : SpinnerService, private utilidadService:UtilidadService) { }
 
   ngOnInit() {
     this.spinner.activateFor("backdrop",3000);
@@ -181,8 +183,29 @@ export class LoginPage implements OnInit {
 
   getUsers()
   {
-    this.fireService.getUsers().then((users)=>{
+    this.fireService.getDB('usuarios').then((users)=>{
       this.listado = users;
     })
+  }
+
+  logInAsInvited(){
+    let nombre = $("#nombreInvitado").val();
+
+    if(nombre != null){
+      let id = nombre + '_' + this.utilidadService.getDateTime();
+      let photoUrl;
+      if(this.invitedPhoto != null)
+        photoUrl = this.fireService.uploadPhoto(this.invitedPhoto, `clientesInvitados/${id}`);
+      else
+        photoUrl = 'default';
+      this.fireService.createDocInDB('clientesInvitados', id, {nombre: nombre, foto: photoUrl, id: id});
+    }
+    else{
+      console.error('Elija un nombre');
+    }
+  }
+
+  selectPhotoInPhotolibrary(){
+    this.invitedPhoto = this.fireService.choosePhotoLibrary()
   }
 }
