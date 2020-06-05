@@ -37,5 +37,10 @@ export class FirebaseService {
       }, error => reject(error));
     })
   }
+
+  registerEmail(email:string, password:string)
+  {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email,password);
+  }
   
 }

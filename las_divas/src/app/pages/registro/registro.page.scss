@@ -1,0 +1,117 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    color: ghostwhite;
+    font-family: 'cicero';
+}
+
+.container-registro
+{
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.6)
+      ),
+      url(../../../assets/img/title-login.jpg);
+    background-position: center;
+    background-size: cover;
+    flex-flow: column;
+    display: flex;
+    background-repeat: no-repeat;
+}
+
+div.titulo{
+    height: 14%;
+}
+
+div.form{
+    height: 86%;
+    display: flex;
+    justify-content: center;
+}
+
+h1
+{
+    text-align: center;
+    font-family: "boli";
+    font-size: 4.5em;
+    letter-spacing: 1px;
+    padding: 10%;
+}
+
+form
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-flow: column;
+    width: 70%;
+    height: 95%;
+}
+
+.form-input
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-flow: column;
+    height: 62%;
+    width: 100%;
+}
+
+ion-input
+{
+    width: 100%;
+    max-height: 10%;
+    text-align: center;
+    border-bottom: 1px solid ghostwhite;
+    font-size: 1.2em;
+    transition: 0.2s;
+    text-align: left;
+    --placeholder-opacity: 0.9;
+}
+
+ion-input:nth-child(6)
+{
+    border-bottom: none
+}
+
+::placeholder
+{
+    color: black;
+}
+
+.form-button
+{
+    width: 80%;
+    text-align: center;
+    position: relative;
+    top: 3%;
+}
+
+
+.form-button button
+{
+    position: relative;
+    height: 6vh;
+    width: 70%;
+    font-size: 1em;
+    border-radius: 30px;
+    background: rgb(122, 1, 1);
+    outline: none;
+    font-weight: bold;
+}
+
+@keyframes change
+{
+    0%{transform: scaleX(1); background: rgb(122, 1, 1);font-size: 0;}
+    50%{transform: scaleX(0); font-size: 0;}
+    100%{transform: scaleX(1); background: rgb(51, 158, 30);font-size: 1em; font-weight: bold;}
+}
+
+form img
+{
+    width: 35%;
+}

@@ -1,0 +1,20 @@
+<div class="container-registro">
+  <div class="titulo">
+    <h1>Las Divas</h1>
+  </div>
+  <div class="form">
+    <form>
+      <img src="../../../assets/img/userDefault.png" alt="">
+      <div class="form-input">
+        <ion-input type="text" id="nombre" name="nombre" placeholder="Nombre" maxlength="30" clear-input (ionFocus)='focus("nombre")' (ionBlur)='noFocus("nombre")' [(ngModel)]="this.nombre"></ion-input>
+        <ion-input type="text" id="apellido" name="apellido" placeholder="Apellido" maxlength="30" clear-input (ionFocus)='focus("apellido")' (ionBlur)='noFocus("apellido")' [(ngModel)]="this.apellido"></ion-input>
+        <ion-input type="text" id="dni" name="dni" placeholder="Nª Documento" maxlength="10" clear-input (ionFocus)='focus("dni")' (ionBlur)='noFocus("dni")' [(ngModel)]="this.dni"></ion-input>
+        <ion-input type="text" id="correo" name="correo" placeholder="Correo electrónico" maxlength="35" clear-input (ionFocus)='focus("correo")' (ionBlur)='noFocus("correo")' [(ngModel)]="this.correo"></ion-input>
+        <ion-input type="password" id="pass" name="clave" placeholder="Contraseña" maxlength="25" minlength="4" clear-input (ionFocus)='focus("pass")' (ionBlur)='noFocus("pass")' [(ngModel)]="this.clave"></ion-input>
+      </div>
+      <div class="form-button">
+        <button>Registrar</button>
+      </div>
+    </form>  
+  </div>
+</div>
