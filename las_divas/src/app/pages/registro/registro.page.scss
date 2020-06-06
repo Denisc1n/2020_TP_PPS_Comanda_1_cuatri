@@ -104,6 +104,11 @@ ion-input:nth-child(6)
     font-weight: bold;
 }
 
+.animation
+{
+    animation: change 0.4s linear forwards;
+}
+
 @keyframes change
 {
     0%{transform: scaleX(1); background: rgb(122, 1, 1);font-size: 0;}

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
+import { UtilidadService } from 'src/app/servicios/utilidad.service';
+import * as $ from 'jquery';
+import { SpinnerService } from 'src/app/servicios/spinner.service';
 
 @Component({
   selector: 'app-registro',
@@ -8,14 +11,15 @@ import { FirebaseService } from 'src/app/servicios/firebase.service';
 })
 export class RegistroPage implements OnInit {
 
-  nombre:string;
-  apellido:string;
-  correo:string
-  clave:string
+  nombre:string = "";
+  apellido:string = "";
+  correo:string = "";
+  clave:string = "";
   dni:number
   file:string;
+  url:string;
   
-  constructor(private servicio : FirebaseService) { }
+  constructor(private servicio : FirebaseService, private s_utilidad : UtilidadService, private spinner : SpinnerService) { }
 
   ngOnInit() {
   }
@@ -30,11 +34,130 @@ export class RegistroPage implements OnInit {
 
   registrar()
   {
-    this.servicio.registerEmail(this.correo, this.clave).then(() => {
+    if(this.validarNombreApellido() && this.validarDni() && this.validarCorreo() &&  this.validarClave()  )
+    {
+      this.servicio.registerEmail(this.correo, this.clave).then(() => {
 
-    }).catch((error)=>{
-      
-    })
+        if(this.file != null){
+          this.servicio.uploadPhoto(this.file, `clientes/${this.correo}`).then((datos) => {
+            this.url = <string>datos;
+            this.servicio.createDocInDB("clientes", this.correo, this.toJSON());
+          });
+        }
+        else{
+          this.url = 'default';
+          this.servicio.createDocInDB("clientes", this.correo, this.toJSON());
+        }
+
+        $("#form-button-register").addClass("animation");
+        setTimeout(()=> {
+          this.spinner.activateAndRedirect("backdrop",3000,"login");
+        },1000)
+
+      }).catch((error)=>{
+        this.s_utilidad.textoMostrar("#modal-error-text-p","Usuario ya existente", "#modal-error")
+      })
+    }
+  }
+
+  validarCorreo() : boolean
+  {
+    let retorno = false;
+    let regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
+    if(!regex.test(this.correo))
+    {
+      this.s_utilidad.textoMostrar("#modal-error-text-p","El campo debe ser de tipo correo", "#modal-error");
+    }
+    else if(this.correo == "")
+    {
+      this.s_utilidad.textoMostrar("#modal-error-text-p","Correo requerido", "#modal-error");
+    }
+    else
+    {
+      retorno = true;
+    }
+
+    return retorno;
+  }
+
+  validarClave() : boolean
+  {
+    let retorno = false
+
+    if(this.clave == "")
+    {
+      this.s_utilidad.textoMostrar("#modal-error-text-p","Contraseña requerida", "#modal-error");
+    }
+    else if(this.clave.length < 6)
+    {
+      this.s_utilidad.textoMostrar("#modal-error-text-p","La clave debe ser mayor a 6 digitos", "#modal-error");
+    }
+    else
+    {
+      retorno = true;
+    }
+
+    return retorno;
+  }
+
+  validarNombreApellido() : boolean
+  {
+    let retorno = false;
+    let regexLetras = /[a-zA-Z]/;
+
+    if(this.nombre == "")
+    {
+      this.s_utilidad.textoMostrar("#modal-error-text-p","Nombre requerida", "#modal-error");
+    }
+    else if(this.apellido == "")
+    {
+      this.s_utilidad.textoMostrar("#modal-error-text-p","Contraseña requerida", "#modal-error");
+    }
+    else if(!regexLetras.test(this.nombre) || !regexLetras.test(this.apellido))
+    {
+      this.s_utilidad.textoMostrar("#modal-error-text-p","El campo debe incluir solo letras", "#modal-error");
+    }
+    else
+    {
+      retorno = true;
+    }
+
+    return retorno;
+  }
+
+  validarDni() : boolean
+  {
+    let retorno = false;
+    let regexNumero = /[0-9]/;
+
+    if(this.dni == undefined)
+    {
+      this.s_utilidad.textoMostrar("#modal-error-text-p","Dni requerido", "#modal-error");
+    }
+    else if(!regexNumero.test(this.dni.toString()))
+    {
+      this.s_utilidad.textoMostrar("#modal-error-text-p","El campo dni debe ser de tipo numerico", "#modal-error");
+    }
+    else if(this.dni.toString().length != 8)
+    {
+      this.s_utilidad.textoMostrar("#modal-error-text-p","El campo dni debe poseer 8 numeros", "#modal-error");
+    }
+    else
+    {
+      retorno = true;
+    }
+
+    return retorno;
+  }
+
+  toJSON()
+  {
+    return {correo : this.correo, clave : this.clave, nombre : this.nombre, apellido : this.apellido, dni : this.dni, foto : this.url, habilitado: false};
+  }
+
+  selectPhotoInPhotolibrary(){
+    this.servicio.choosePhotoLibrary().then(foto => this.file = <string>foto);
   }
 
 }

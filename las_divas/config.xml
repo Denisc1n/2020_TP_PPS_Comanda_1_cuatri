@@ -3,7 +3,7 @@
     <name>Las Divas</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://localhost:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -25,7 +25,7 @@
     <preference name="StatusBarOverlayWebView" value="true" />
     <preference name="StatusBarStyle" value="blacktranslucent" />
     <preference name="orientation" value="portrait" />
-    <preference name="KeyboardResize" value="true" />
+    <preference name="KeyboardResize" value="false" />
     <preference name="KeyboardStyle" value="dark" />
     <platform name="android">
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
@@ -121,4 +121,5 @@
         <icon src="resources/windows/icon/StoreLogo.png" target="StoreLogo" />
         <splash src="resources/windows/splash/Splash.png" target="SplashScreen" />
     </platform>
+    <allow-navigation href="http://localhost:8100" sessionid="6d3d934b" />
 </widget>

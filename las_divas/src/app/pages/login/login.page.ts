@@ -191,21 +191,28 @@ export class LoginPage implements OnInit {
   logInAsInvited(){
     let nombre = $("#nombreInvitado").val();
 
-    if(nombre != null){
+    if(nombre != ""){
       let id = nombre + '_' + this.utilidadService.getDateTime();
       let photoUrl;
-      if(this.invitedPhoto != null)
-        photoUrl = this.fireService.uploadPhoto(this.invitedPhoto, `clientesInvitados/${id}`);
-      else
+      if(this.invitedPhoto != undefined)
+      {
+        this.fireService.uploadPhoto(this.invitedPhoto, `clientesInvitados/${id}`).then((foto)=> {
+          photoUrl = foto;
+          this.fireService.createDocInDB('clientesInvitados', id, {nombre: nombre, foto: photoUrl, id: id});
+        });
+      }
+      else{
         photoUrl = 'default';
-      this.fireService.createDocInDB('clientesInvitados', id, {nombre: nombre, foto: photoUrl, id: id});
+        this.fireService.createDocInDB('clientesInvitados', id, {nombre: nombre, foto: photoUrl, id: id});
+      }
+      
     }
     else{
-      console.error('Elija un nombre');
+      this.utilidadService.textoMostrar("#mensajeTexto", "Campo nombre requerido", "#mensajeLogin");
     }
   }
 
   selectPhotoInPhotolibrary(){
-    this.invitedPhoto = this.fireService.choosePhotoLibrary()
+    this.fireService.choosePhotoLibrary().then(foto => this.invitedPhoto = <string>foto);
   }
 }

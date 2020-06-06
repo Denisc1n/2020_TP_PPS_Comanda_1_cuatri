@@ -51,9 +51,11 @@ export class FirebaseService {
       correctOrientation: true,
     }
   
-    this.camera.getPicture(options).then(imageData=>{
-      photo = 'data:image/jpeg;base64,' + imageData;
-      return photo;
+    return new Promise((resolve, reject) => {
+        this.camera.getPicture(options).then(imageData=>{
+        photo = 'data:image/jpeg;base64,' + imageData;
+        resolve(photo);
+      },error => reject(error));
     });
   }
 
@@ -61,19 +63,23 @@ export class FirebaseService {
     let photoUrl;
     const uploadString = storage().ref(route);
 
-    uploadString.putString(photo, 'data_url');
+    return new Promise((resolve, reject)=>{ 
+      uploadString.putString(photo, 'data_url').then(() => {
+          
+          uploadString.getDownloadURL().then(url=>{
+          photoUrl = url;
+          if(metaData != null)
+            uploadString.updateMetadata(metaData);
+          resolve(photoUrl);
+        },error=>reject(error));
+      })
+    });
 
-    uploadString.getDownloadURL().then(url=>{
-      photoUrl = url;
-      if(metaData != null)
-        uploadString.updateMetadata(metaData);
-      return photoUrl;
-    })
   }
      
   createDocInDB(collection:string, docName:string, data:any){
     return new Promise((resolve, reject) => {
-      this.db.collection(collection).doc(docName).set(data).then(succes=>resolve(succes)).catch(error=>reject(error));
+      this.db.collection(collection).doc(docName).set(data).then(success=>resolve(success)).catch(error=>reject(error));
     })
   }
 
