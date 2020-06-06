@@ -16,6 +16,7 @@ export class LoginPage implements OnInit {
   showBackdrop = true;
   mostrarFrmLogin : boolean = false;
   mostrarFrmInvitado : boolean = false;
+  
   listado : any = [];
   email : string;
   pass : string;
