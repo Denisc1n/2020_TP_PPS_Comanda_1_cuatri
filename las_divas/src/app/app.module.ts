@@ -15,6 +15,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { Vibration } from '@ionic-native/vibration/ngx';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
