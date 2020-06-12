@@ -21,7 +21,7 @@ export class ClienteHabilitadoGuard implements CanActivate {
         return datos.habilitado
       }
       else{
-        this.utilidad.textoMostrar("#mensajeTexto", "Usted no se encuentra autorizado, contactese con el mozo", "#mensajeLogin");
+        this.utilidad.textoMostrar("#mensajeTexto", "Usted no se encuentra autorizado, contactese con el mozo", "#mensajeLogin", "");
       }
     })
   }

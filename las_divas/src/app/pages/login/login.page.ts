@@ -208,7 +208,7 @@ export class LoginPage implements OnInit {
       
     }
     else{
-      this.utilidadService.textoMostrar("#mensajeTexto", "Campo nombre requerido", "#mensajeLogin");
+      this.utilidadService.textoMostrar("#mensajeTexto", "Campo nombre requerido", "#mensajeLogin", "");
     }
   }
 

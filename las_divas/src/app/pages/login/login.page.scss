@@ -112,7 +112,7 @@ form
 }
 
 
-#submit
+#submit, #submitInvitado
 {
     background: rgb(180, 0, 0);//rgba(65, 32, 119, 0.9);
     width: 100%;
@@ -126,7 +126,7 @@ form
     letter-spacing: 2px;
 }
 
-#submit:active
+#submit:active, #submitInvitado:active
 {
     background: rgb(122, 1, 1)//rgb(42, 21, 77);
 }

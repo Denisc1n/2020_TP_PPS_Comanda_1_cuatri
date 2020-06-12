@@ -14,12 +14,12 @@
         <ion-input type="password" id="pass" name="clave" placeholder="Contraseña" maxlength="25" minlength="4" clear-input (ionFocus)='focus("pass")' (ionBlur)='noFocus("pass")' [(ngModel)]="this.clave"></ion-input>
       </div>
       <div class="form-button">
-        <button id="form-button-register">Registrar</button>
+        <button type="submit" id="form-button-register">Registrar</button>
       </div>
     </form>  
   </div>
 </div>
-<div class="modal-error" hidden> 
+<div id="modal-error" class="modal-error"> 
   <div class="modal-error-img">
     <img src="../../../assets/img/banana-podrida.gif" alt="">
   </div>

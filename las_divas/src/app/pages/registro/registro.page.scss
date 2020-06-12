@@ -20,6 +20,7 @@
     flex-flow: column;
     display: flex;
     background-repeat: no-repeat;
+    transition: all ease 0.5s;
 }
 
 div.titulo{
@@ -131,28 +132,41 @@ ion-icon
 
 .modal-error
 {
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     width: 70%;
     height: 35%;
+    z-index: 5;
 }
 
 .modal-error-img
 {
-    text-align: center;
-    height: 60%;
-    background: #fcfefc
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background: #fcfefc;
 }
 
 .modal-error-img img
 {
-    width: 65%;
+    width: 60%;
 }
 
 .modal-error-text
 {
     height: 40%;
-    background: red
+    background: #7a0101;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 5;
+}
+
+.modal-error-text p {
+    font-size: 1.5em;
 }

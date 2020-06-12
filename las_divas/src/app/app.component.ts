@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-  splash = false;
+  splash = true;
 
   constructor(
     private platform: Platform,
@@ -31,7 +31,7 @@ export class AppComponent {
       if(this.splash) {
         setTimeout(() => {
            this.splash = false;
-          this.router.navigate(['login']);
+          this.router.navigate(['home']);
          },5000);
        }
     });

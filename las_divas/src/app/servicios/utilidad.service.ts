@@ -21,7 +21,7 @@ export class UtilidadService {
     return y + "-" + m + "-" + d + "_" + h + "-" + min + "-" + s;
   }
 
-  textoMostrar(tag:string, msj:string, container:string){
+  textoMostrar(tag:string, msj:string, container:string, containerBlur:string){
     switch(msj){
       case "auth/user-not-found":
         $(`${tag}`).text('El E-Mail no fue encontrado');
@@ -40,7 +40,9 @@ export class UtilidadService {
         break;
     }
 
+    this.blur(`${containerBlur}`, 2000);
     this.fadeInAndOut(`${container}`);
+
   }
 
   fadeInAndOut(tag:string)
@@ -49,5 +51,13 @@ export class UtilidadService {
     setTimeout( () => {
       $(`${tag}`).fadeOut();
     },2000);
+  }
+
+  blur(tag:string, time: number)
+  {
+    $(`${tag}`).css("filter", "blur(5px)");
+    setTimeout( () => {
+      $(`${tag}`).css("filter", "blur(0px)");
+    },time);
   }
 }

@@ -55,7 +55,7 @@ export class RegistroPage implements OnInit {
         },1000)
 
       }).catch((error)=>{
-        this.s_utilidad.textoMostrar("#modal-error-text-p","Usuario ya existente", "#modal-error")
+        this.s_utilidad.textoMostrar("#modal-error-text-p","Usuario ya existente", "#modal-error", ".container-registro")
       })
     }
   }
@@ -67,11 +67,11 @@ export class RegistroPage implements OnInit {
 
     if(!regex.test(this.correo))
     {
-      this.s_utilidad.textoMostrar("#modal-error-text-p","El campo debe ser de tipo correo", "#modal-error");
+      this.s_utilidad.textoMostrar("#modal-error-text-p","El campo debe ser de tipo correo", "#modal-error", ".container-registro");
     }
     else if(this.correo == "")
     {
-      this.s_utilidad.textoMostrar("#modal-error-text-p","Correo requerido", "#modal-error");
+      this.s_utilidad.textoMostrar("#modal-error-text-p","Correo requerido", "#modal-error", ".container-registro");
     }
     else
     {
@@ -87,11 +87,11 @@ export class RegistroPage implements OnInit {
 
     if(this.clave == "")
     {
-      this.s_utilidad.textoMostrar("#modal-error-text-p","Contraseña requerida", "#modal-error");
+      this.s_utilidad.textoMostrar("#modal-error-text-p","Contraseña requerida", "#modal-error", ".container-registro");
     }
     else if(this.clave.length < 6)
     {
-      this.s_utilidad.textoMostrar("#modal-error-text-p","La clave debe ser mayor a 6 digitos", "#modal-error");
+      this.s_utilidad.textoMostrar("#modal-error-text-p","La clave debe ser mayor a 6 digitos", "#modal-error", ".container-registro");
     }
     else
     {
@@ -108,15 +108,15 @@ export class RegistroPage implements OnInit {
 
     if(this.nombre == "")
     {
-      this.s_utilidad.textoMostrar("#modal-error-text-p","Nombre requerida", "#modal-error");
+      this.s_utilidad.textoMostrar("#modal-error-text-p","Nombre requerido", "#modal-error", ".container-registro");
     }
     else if(this.apellido == "")
     {
-      this.s_utilidad.textoMostrar("#modal-error-text-p","Contraseña requerida", "#modal-error");
+      this.s_utilidad.textoMostrar("#modal-error-text-p","Contraseña requerida", "#modal-error", ".container-registro");
     }
     else if(!regexLetras.test(this.nombre) || !regexLetras.test(this.apellido))
     {
-      this.s_utilidad.textoMostrar("#modal-error-text-p","El campo debe incluir solo letras", "#modal-error");
+      this.s_utilidad.textoMostrar("#modal-error-text-p","El campo debe incluir solo letras", "#modal-error", ".container-registro");
     }
     else
     {
@@ -133,15 +133,15 @@ export class RegistroPage implements OnInit {
 
     if(this.dni == undefined)
     {
-      this.s_utilidad.textoMostrar("#modal-error-text-p","Dni requerido", "#modal-error");
+      this.s_utilidad.textoMostrar("#modal-error-text-p","Dni requerido", "#modal-error", ".container-registro");
     }
     else if(!regexNumero.test(this.dni.toString()))
     {
-      this.s_utilidad.textoMostrar("#modal-error-text-p","El campo dni debe ser de tipo numerico", "#modal-error");
+      this.s_utilidad.textoMostrar("#modal-error-text-p","El campo dni debe ser de tipo numerico", "#modal-error", ".container-registro");
     }
     else if(this.dni.toString().length != 8)
     {
-      this.s_utilidad.textoMostrar("#modal-error-text-p","El campo dni debe poseer 8 numeros", "#modal-error");
+      this.s_utilidad.textoMostrar("#modal-error-text-p","El campo dni debe poseer 8 numeros", "#modal-error", ".container-registro");
     }
     else
     {
