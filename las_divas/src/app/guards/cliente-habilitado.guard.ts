@@ -17,12 +17,17 @@ export class ClienteHabilitadoGuard implements CanActivate {
 
     this.current = this.fire.getCurrentUser();
     return this.fire.getDBByDoc("clientes",this.current.email).then((datos:any) => {
-      if(datos.habilitado){
-        return datos.habilitado
+
+      if(datos != undefined){
+        if(datos.habilitado)
+          return datos.habilitado
+        else
+          this.utilidad.textoMostrar("#mensajeTexto", "Usted no se encuentra autorizado, contactese con el mozo", "#mensajeLogin", "");
       }
       else{
-        this.utilidad.textoMostrar("#mensajeTexto", "Usted no se encuentra autorizado, contactese con el mozo", "#mensajeLogin", "");
+        return true;
       }
+      
     })
   }
   
