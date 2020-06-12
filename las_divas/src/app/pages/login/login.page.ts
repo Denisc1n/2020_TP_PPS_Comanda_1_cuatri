@@ -89,6 +89,9 @@ export class LoginPage implements OnInit {
     if(this.validarCorreo() && this.validarClave())
     {
       this.fireService.loginEmail(this.email, this.pass).then((user) => {
+        this.pass = ""
+        $("#pass").val("");
+
         this.spinner.activateAndRedirect("backdrop",3000,"home");
       }).catch((error) =>{
         console.log(error)
@@ -96,6 +99,8 @@ export class LoginPage implements OnInit {
         this.vibrationService.error()
       })
     }
+
+    
 
   }
 

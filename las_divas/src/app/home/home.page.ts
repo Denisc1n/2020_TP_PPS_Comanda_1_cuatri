@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  tipoUser: string;
+  tipoUser: string = 'cliente';
 
   constructor() {}
 
