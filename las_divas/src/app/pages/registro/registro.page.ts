@@ -3,6 +3,8 @@ import { FirebaseService } from 'src/app/servicios/firebase.service';
 import { UtilidadService } from 'src/app/servicios/utilidad.service';
 import * as $ from 'jquery';
 import { SpinnerService } from 'src/app/servicios/spinner.service';
+import { Platform } from '@ionic/angular';
+import { QRScannerService } from 'src/app/servicios/qrscanner.service';
 
 @Component({
   selector: 'app-registro',
@@ -18,8 +20,14 @@ export class RegistroPage implements OnInit {
   dni:number
   file:string;
   url:string;
+  registro = false;
   
-  constructor(private servicio : FirebaseService, private s_utilidad : UtilidadService, private spinner : SpinnerService) { }
+  constructor(private servicio : FirebaseService, private s_utilidad : UtilidadService, private spinner : SpinnerService, private platform:Platform, private QRService:QRScannerService) {
+    this.platform.backButton.subscribeWithPriority(0, () => { //cuando apreto el boton volver de la pantalla de android, dejo de intentar scanear el codigo
+      document.getElementsByTagName("body")[0].style.opacity = "1";
+      QRService.destroy();
+    })
+   }
 
   ngOnInit() {
   }
@@ -160,4 +168,21 @@ export class RegistroPage implements OnInit {
     this.servicio.choosePhotoLibrary().then(foto => this.file = <string>foto);
   }
 
+  scanDNI(){
+    this.QRService.scan('PDF_417').then((data:any)=>{
+      let datosUsuario = this.QRService.decodeDNI(data.text)
+      console.log(datosUsuario)
+      this.nombre = this.upperCaseToFirstUpperCase(datosUsuario.nombre)
+      this.apellido = this.upperCaseToFirstUpperCase(datosUsuario.apellido)
+      this.dni = datosUsuario.dni
+      this.registro = true
+    })
+  }
+
+  upperCaseToFirstUpperCase(string:string){
+    let notFirstChar = string.substring(1, string.length).toLowerCase()
+    string = string.substring(0,1) + notFirstChar
+    console.log(string)
+    return string
+  }
 }

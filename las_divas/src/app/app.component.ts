@@ -28,10 +28,10 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.show()
       this.splashScreen.hide();
-      if(this.splash) {
+      if(this.splash) { 
         setTimeout(() => {
            this.splash = false;
-          this.router.navigate(['home']);
+          this.router.navigate(['login']);
          },5000);
        }
     });
