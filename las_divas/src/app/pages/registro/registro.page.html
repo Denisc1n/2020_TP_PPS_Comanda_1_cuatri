@@ -7,7 +7,7 @@
   <div class="botones-registro" *ngIf="!registro">
     <button type="button" (click)="registro=true">Ingreso Manual</button><button type="button" (click)="scanDNI()">Escanear DNI</button>
   </div>
-  <div class="form" *ngIf="registro">
+  <div class="form" *ngIf="registro" data-aos="fade-up">
     <form (ngSubmit)="registrar()">
       <img src="../../../assets/img/userDefault.png" alt="" (click)="this.selectPhotoInPhotolibrary()">
       <div class="form-input">

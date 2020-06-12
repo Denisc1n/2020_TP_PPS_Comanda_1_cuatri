@@ -5,6 +5,7 @@ import * as $ from 'jquery';
 import { SpinnerService } from 'src/app/servicios/spinner.service';
 import { Platform } from '@ionic/angular';
 import { QRScannerService } from 'src/app/servicios/qrscanner.service';
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-registro',
@@ -30,6 +31,7 @@ export class RegistroPage implements OnInit {
    }
 
   ngOnInit() {
+    AOS.init();
   }
 
   focus(id) {
