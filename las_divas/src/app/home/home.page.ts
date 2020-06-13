@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FirebaseService } from '../servicios/firebase.service';
+import { SpinnerService } from '../servicios/spinner.service';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +9,13 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  tipoUser: string = 'cliente';
+  currentUser
+  tipoUser
 
-  constructor() {}
+  constructor(private fireService:FirebaseService, private spinnerService:SpinnerService) {
+    spinnerService.activateFor('backdrop', 2000)
+    this.currentUser = fireService.getCurrentUser()
+    fireService.getUserProfile(this.currentUser.email).then((data:any)=>this.tipoUser=data)
+  }
 
 }

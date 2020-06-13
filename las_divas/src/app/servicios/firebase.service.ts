@@ -3,6 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 import {storage} from 'firebase'
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -98,4 +99,45 @@ export class FirebaseService {
     })
   }
   
+  getUserProfile(email:string){
+    return  new Promise((resolve,reject)=>{
+        this.getDBByDoc('cliente', email).then((dataCli:any)=>{
+          if(dataCli != undefined)
+            resolve(dataCli.perfil)
+          else{
+            this.getDBByDoc('mozo', email).then((dataMozo:any)=>{
+              if(dataMozo != undefined)
+                resolve(dataMozo.perfil)
+              else{
+                this.getDBByDoc('cocinero', email).then((dataCoc:any)=>{
+                  if(dataCoc != undefined)
+                    resolve(dataCoc.perfil)
+                  else{
+                    this.getDBByDoc('bartender', email).then((dataBar:any)=>{
+                      if(dataBar != undefined)
+                        resolve(dataBar.perfil)
+                      else{
+                        this.getDBByDoc('supervisor', email).then((dataSup:any)=>{
+                          if(dataSup != undefined)
+                            resolve(dataSup.perfil)
+                          else{
+                            this.getDBByDoc('dueño', email).then((dataDuen:any)=>{
+                              if(dataDuen != undefined)
+                                resolve(dataDuen.perfil)
+                              else{
+                                resolve('No existe')
+                              }
+                            },e=>reject(e))
+                          }
+                        },e=>reject(e))
+                      }
+                    },e=>reject(e))
+                  }
+                },e=>reject(e))
+              }
+            },error=>reject(error))
+          }
+        },error=>reject(error))
+      })
+     }
 }

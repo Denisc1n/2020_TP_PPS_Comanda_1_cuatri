@@ -90,17 +90,13 @@ export class LoginPage implements OnInit {
       this.fireService.loginEmail(this.email, this.pass).then((user) => {
         this.pass = ""
         $("#pass").val("");
-
-        this.spinner.activateAndRedirect("backdrop",3000,"home");
+          this.spinner.activateAndRedirect("backdrop",3000,"home");
       }).catch((error) =>{
-        console.log(error)
+        console.error(error)
         this.textoMostrar(error.code);
-        this.vibrationService.error()
+        this.vibrationService.error();
       })
     }
-
-    
-
   }
 
   textoMostrar(msj){

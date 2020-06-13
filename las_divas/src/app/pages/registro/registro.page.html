@@ -1,5 +1,5 @@
 <div class="container-registro">
-  <ion-icon routerLink="/login" *ngIf="!registro" name="chevron-back-outline"></ion-icon>
+  <ion-icon (click)="this.redirectBack()" *ngIf="!registro" name="chevron-back-outline"></ion-icon>
   <ion-icon (click)="registro=false" *ngIf="registro" name="chevron-back-outline"></ion-icon>
   <div class="titulo">
     <h1>Las Divas</h1>
@@ -8,13 +8,13 @@
     <button type="button" (click)="registro=true">Ingreso Manual</button>
     <button type="button" (click)="scanDNI()">Escanear DNI</button>
   </div>
-  <div class="form" *ngIf="registro" data-aos="fade-up">
+  <div class="form" *ngIf="registro">
     <form (ngSubmit)="registrar()">
       <img src="../../../assets/img/userDefault.png" alt="" (click)="this.selectPhotoInPhotolibrary()">
       <div class="form-input">
         <div class="cnt-form-input-select" [hidden]="this.perfil == 'cliente'">
           <select name="" id="form-input-select" class="form-input-select" (change)="setSelectedProfile()">
-            <option value="" *ngFor="let perfil of this.perfiles" selected hidden>Seleccione tipo usuario</option>
+            <option value="" selected hidden>Seleccione tipo usuario</option>
             <option value="" *ngFor="let perfil of this.perfiles">{{perfil}}</option>
           </select>
         </div>

@@ -6,6 +6,8 @@ import { SpinnerService } from 'src/app/servicios/spinner.service';
 import { Platform } from '@ionic/angular';
 import { QRScannerService } from 'src/app/servicios/qrscanner.service';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { VibrationService } from 'src/app/servicios/vibration.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-registro',
@@ -27,11 +29,11 @@ export class RegistroPage implements OnInit {
   perfiles:string[] = ["Cocinero","Mozo","Dueño","Supervisor","Bartender"];
   perfilSeleccionado:string = "cliente";
   
-  constructor(private servicio : FirebaseService, private s_utilidad : UtilidadService, private spinner : SpinnerService, private platform:Platform, private QRService:QRScannerService, private db : AngularFirestore) {
-    this.platform.backButton.subscribeWithPriority(0, () => { //cuando apreto el boton volver de la pantalla de android, dejo de intentar scanear el codigo
+  constructor(private servicio : FirebaseService, private vibrationService:VibrationService,private s_utilidad : UtilidadService, private spinner : SpinnerService, private platform:Platform, private QRService:QRScannerService, private location : Location ) {
+    /* this.platform.backButton.subscribeWithPriority(0, () => { //cuando apreto el boton volver de la pantalla de android, dejo de intentar scanear el codigo
       document.getElementsByTagName("body")[0].style.opacity = "1";
       QRService.destroy();
-    })
+    }) */
 
    }
 
@@ -48,7 +50,7 @@ export class RegistroPage implements OnInit {
 
   registrar()
   {
-    if(this.validarNombreApellido() && this.validarDni() && this.validarCorreo() &&  this.validarClave()  )
+    if(this.validarTipoEmpleado() && this.validarNombreApellido() && this.validarDni() && this.validarCorreo() &&  this.validarClave() && this.validarCuil() )
     {
       this.servicio.registerEmail(this.correo, this.clave).then((a) => {
 
@@ -71,6 +73,9 @@ export class RegistroPage implements OnInit {
       }).catch((error)=>{
         this.s_utilidad.textoMostrar("#modal-error-text-p","Usuario ya existente", "#modal-error", ".container-registro")
       })
+    }
+    else{
+      this.vibrationService.error()
     }
   }
 
@@ -165,6 +170,48 @@ export class RegistroPage implements OnInit {
     return retorno;
   }
 
+  validarCuil() : boolean
+  {
+    let retorno = false;
+
+    if(this.perfil != 'cliente'){
+      let regexNumero = /[0-9-]/;
+
+      if(this.cuil == undefined)
+      {
+        this.s_utilidad.textoMostrar("#modal-error-text-p","Cuil requerido", "#modal-error", ".container-registro");
+      }
+      else if(!regexNumero.test(this.cuil.toString()))
+      {
+        this.s_utilidad.textoMostrar("#modal-error-text-p","El campo cuil tiene formato incorrecto", "#modal-error", ".container-registro");
+      }
+      else if(this.cuil.toString().length != 13)
+      {
+        this.s_utilidad.textoMostrar("#modal-error-text-p","El campo cuil debe poseer 13 caracteres", "#modal-error", ".container-registro");
+      }
+      else{
+        retorno = true
+      }
+    }
+    else{
+      retorno = true
+    }
+
+    return retorno;
+  }
+
+  validarTipoEmpleado(){
+    let flag = false
+    if(this.perfil != 'cliente'){
+      if(this.perfilSeleccionado == 'cliente' || this.perfilSeleccionado == 'Seleccione tipo usuario'){
+        this.s_utilidad.textoMostrar("#modal-error-text-p", ' Seleccione un perfil de empleado', "#modal-error", ".container-registro")
+        flag = true
+      }
+    }
+
+    return !flag
+  }
+
   toJSON()
   {
     let data:any; 
@@ -202,5 +249,10 @@ export class RegistroPage implements OnInit {
   {
     var select: any = document.getElementById("form-input-select");
     this.perfilSeleccionado = select.options[select.selectedIndex].text;
+  }
+
+  redirectBack()
+  {
+    this.location.back();
   }
 }
