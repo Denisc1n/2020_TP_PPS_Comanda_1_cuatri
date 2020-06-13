@@ -37,7 +37,7 @@ export class QRScannerService {
     //let destroy = this.scanner.()
   }  
 
-  scan(format:string){ 
+  scan(format:string=""){ 
     return new Promise((resolve, reject)=>{
       this.scanner.scan({ "formats": `${format}` }).then(data=>{
         resolve(data)
