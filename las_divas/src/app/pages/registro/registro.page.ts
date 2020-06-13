@@ -216,7 +216,7 @@ export class RegistroPage implements OnInit {
   {
     let data:any; 
     if(this.perfil.toLowerCase() == 'cliente')
-      data = {correo : this.correo, clave : this.clave, nombre : this.nombre, apellido : this.apellido, dni : this.dni, foto : this.url, habilitado: false, perfil : "cliente"};
+      data = {correo : this.correo, clave : this.clave, nombre : this.nombre, apellido : this.apellido, dni : this.dni, foto : this.url, habilitado: 'pendiente', perfil : "cliente"};
     else
       data = {correo : this.correo, clave : this.clave, nombre : this.nombre, apellido : this.apellido, dni : this.dni, foto : this.url, perfil : this.perfilSeleccionado.toLowerCase(), cuil : this.cuil};
 

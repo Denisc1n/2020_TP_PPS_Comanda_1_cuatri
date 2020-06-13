@@ -1,0 +1,13 @@
+<div class="cnt-solicitudes">
+  <div class="cnt-listado-solicitudes">
+    <ul>
+      <li *ngFor="let cliente of this.clientes">
+        {{cliente.nombre}} {{cliente.apellido}}
+        <div class="listado-solicitudes-icons">
+          <ion-icon name="checkmark-sharp" (click)="this.cambiarEstado('habilitar',cliente)"></ion-icon>
+          <ion-icon name="close-sharp" (click)="this.cambiarEstado('deshabilitar',cliente)"></ion-icon>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

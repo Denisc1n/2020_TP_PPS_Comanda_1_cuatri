@@ -140,4 +140,18 @@ export class FirebaseService {
         },error=>reject(error))
       })
      }
+
+    getDisabledClient()
+    {
+      return new Promise((resolve,reject) => {
+        this.db.collection('cliente', ref => { return ref.where('habilitado', '==', 'pendiente')}).valueChanges().subscribe((clientes:any) => {
+          resolve(clientes);
+        },error=>reject(error))
+      })
+    }
+    
+    updateDoc(collection:string, doc:string, data:any)
+    {
+      this.db.collection(collection).doc(doc).update(data);
+    }
 }
