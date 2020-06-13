@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
 import { UtilidadService } from 'src/app/servicios/utilidad.service';
 import * as $ from 'jquery';
 import { SpinnerService } from 'src/app/servicios/spinner.service';
 import { Platform } from '@ionic/angular';
 import { QRScannerService } from 'src/app/servicios/qrscanner.service';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-registro',
@@ -18,15 +19,20 @@ export class RegistroPage implements OnInit {
   correo:string = "";
   clave:string = "";
   dni:number
+  cuil:any;
   file:string;
   url:string;
   registro = false;
+  @Input() perfil:string = "cliente";
+  perfiles:string[] = ["Cocinero","Mozo","Dueño","Supervisor","Bartender"];
+  perfilSeleccionado:string = "cliente";
   
-  constructor(private servicio : FirebaseService, private s_utilidad : UtilidadService, private spinner : SpinnerService, private platform:Platform, private QRService:QRScannerService) {
+  constructor(private servicio : FirebaseService, private s_utilidad : UtilidadService, private spinner : SpinnerService, private platform:Platform, private QRService:QRScannerService, private db : AngularFirestore) {
     this.platform.backButton.subscribeWithPriority(0, () => { //cuando apreto el boton volver de la pantalla de android, dejo de intentar scanear el codigo
       document.getElementsByTagName("body")[0].style.opacity = "1";
       QRService.destroy();
     })
+
    }
 
   ngOnInit() {
@@ -44,17 +50,17 @@ export class RegistroPage implements OnInit {
   {
     if(this.validarNombreApellido() && this.validarDni() && this.validarCorreo() &&  this.validarClave()  )
     {
-      this.servicio.registerEmail(this.correo, this.clave).then(() => {
+      this.servicio.registerEmail(this.correo, this.clave).then((a) => {
 
         if(this.file != null){
-          this.servicio.uploadPhoto(this.file, `clientes/${this.correo}`).then((datos) => {
+          this.servicio.uploadPhoto(this.file, `${this.perfilSeleccionado.toLowerCase()}/${this.correo}`).then((datos) => {
             this.url = <string>datos;
-            this.servicio.createDocInDB("clientes", this.correo, this.toJSON());
+            this.servicio.createDocInDB(`${this.perfilSeleccionado.toLowerCase()}`, this.correo, this.toJSON());
           });
         }
         else{
           this.url = 'default';
-          this.servicio.createDocInDB("clientes", this.correo, this.toJSON());
+          this.servicio.createDocInDB(`${this.perfilSeleccionado.toLowerCase()}`, this.correo, this.toJSON());
         }
 
         $("#form-button-register").addClass("animation");
@@ -161,7 +167,13 @@ export class RegistroPage implements OnInit {
 
   toJSON()
   {
-    return {correo : this.correo, clave : this.clave, nombre : this.nombre, apellido : this.apellido, dni : this.dni, foto : this.url, habilitado: false};
+    let data:any; 
+    if(this.perfil.toLowerCase() == 'cliente')
+      data = {correo : this.correo, clave : this.clave, nombre : this.nombre, apellido : this.apellido, dni : this.dni, foto : this.url, habilitado: false, perfil : "cliente"};
+    else
+      data = {correo : this.correo, clave : this.clave, nombre : this.nombre, apellido : this.apellido, dni : this.dni, foto : this.url, perfil : this.perfilSeleccionado.toLowerCase(), cuil : this.cuil};
+
+    return data;
   }
 
   selectPhotoInPhotolibrary(){
@@ -184,5 +196,11 @@ export class RegistroPage implements OnInit {
     string = string.substring(0,1) + notFirstChar
     console.log(string)
     return string
+  }
+
+  setSelectedProfile()
+  {
+    var select: any = document.getElementById("form-input-select");
+    this.perfilSeleccionado = select.options[select.selectedIndex].text;
   }
 }

@@ -74,11 +74,6 @@ ion-input
     --placeholder-opacity: 0.9;
 }
 
-ion-input:nth-child(6)
-{
-    border-bottom: none
-}
-
 ::placeholder
 {
     color: black;
@@ -175,18 +170,19 @@ ion-icon
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,-35%);
     display: flex; 
     flex-flow: column;
     justify-content: space-around;
     align-items: center;
+    width: 80%;
+    height: 20%;
 }
 
 .botones-registro button {
     background: rgb(180, 0, 0);//rgba(65, 32, 119, 0.9);
     width: 100%;
-    height: 100%;
-    color: ghostwhite;
+    height: 35%;
     border-radius: 5px;
     border: none;
     outline: none;
@@ -198,4 +194,27 @@ ion-icon
 
 .botones-registro button:active{
     background: rgb(122, 1, 1)//rgb(42, 21, 77);
+}
+
+.form-input-select
+{
+    width: 100%;
+    color: gainsboro;
+    border-radius: 20px;
+    background: none;
+    /* border: none; */
+    border: 2px solid ghostwhite;
+    text-indent: 4px;
+    font-size: 1.2em;
+}
+
+.form-input-select option
+{
+    color: black;
+}
+
+.cnt-form-input-select
+{
+    text-align: center;
+    width: 100%;
 }

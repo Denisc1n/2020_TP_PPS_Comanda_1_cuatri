@@ -10,7 +10,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 export class FirebaseService {
 
   
-  constructor(public afAuth: AngularFireAuth, public db: AngularFirestore, private camera:Camera) { }
+  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore, private camera:Camera) { }
 
   logout(){
     return this.afAuth.auth.signOut();
@@ -78,9 +78,7 @@ export class FirebaseService {
   }
      
   createDocInDB(collection:string, docName:string, data:any){
-    return new Promise((resolve, reject) => {
-      this.db.collection(collection).doc(docName).set(data).then(success=>resolve(success)).catch(error=>reject(error));
-    })
+    this.db.collection(collection).doc(docName).set(data);
   }
 
   getDBByDoc(collection:string, docName:string){
@@ -93,7 +91,11 @@ export class FirebaseService {
 
   registerEmail(email:string, password:string)
   {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email,password);
+    return new Promise((resolve,reject)=> {
+      this.afAuth.auth.createUserWithEmailAndPassword(email,password).then((data)=>{
+        resolve(data);
+      },error => reject(error));
+    })
   }
   
 }

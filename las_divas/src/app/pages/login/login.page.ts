@@ -27,7 +27,6 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.spinner.activateFor("backdrop",3000);
     this.getUsers();
-
   }
 
   focus(id) {
