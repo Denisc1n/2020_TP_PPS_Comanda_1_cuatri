@@ -7,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DuenioComponent implements OnInit {
 
+  solicitudes:boolean = false;
   constructor() { }
 
   ngOnInit() {}
 
+  verSolicitudes()
+  {
+    this.solicitudes = true;
+  }
 }

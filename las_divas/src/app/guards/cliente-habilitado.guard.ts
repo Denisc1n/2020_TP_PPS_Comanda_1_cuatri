@@ -19,8 +19,8 @@ export class ClienteHabilitadoGuard implements CanActivate {
     return this.fire.getDBByDoc("clientes",this.current.email).then((datos:any) => {
 
       if(datos != undefined){
-        if(datos.habilitado)
-          return datos.habilitado
+        if(datos.habilitado == 'aceptado')
+          return true;
         else
           this.utilidad.textoMostrar("#mensajeTexto", "Usted no se encuentra autorizado, contactese con el mozo", "#mensajeLogin", "");
       }

@@ -1,8 +1,11 @@
-<div class="container-duenio">
+<div class="container-duenio"  *ngIf="!this.solicitudes">
   <div class="btn-alta" routerLink="/registro">
     <p>Alta empleado</p>
   </div>
-  <div class="btn-solicitudes">
+  <div class="btn-solicitudes" (click)="this.verSolicitudes()">
     <p>Solicitudes</p>
   </div>
+</div>
+<div class="solicitudes" *ngIf="this.solicitudes">
+  <app-solicitudes></app-solicitudes>
 </div>
