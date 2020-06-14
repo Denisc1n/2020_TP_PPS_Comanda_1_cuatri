@@ -4,7 +4,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import {storage} from 'firebase'
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Router } from '@angular/router';
-import { resolve } from 'dns';
+
 
 @Injectable({
   providedIn: 'root'
