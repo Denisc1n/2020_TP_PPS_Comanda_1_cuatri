@@ -13,6 +13,11 @@ export class SolicitudesComponent implements OnInit {
   {
     this.fireService.getDisabledClient().then((datos) => {
       this.clientes = datos;
+      console.log(this.clientes);
+
+      if(this.clientes.length == 0){
+        document.getElementById("msj-solicitudes").innerHTML = "No hay solicitudes pendientes";
+      }
     })
   }
 
@@ -32,5 +37,9 @@ export class SolicitudesComponent implements OnInit {
     this.fireService.updateDoc("cliente", cliente.correo, cliente)
 
     console.log(this.clientes);
+
+    if(this.clientes.length == 0){
+      document.getElementById("msj-solicitudes").innerHTML = "No hay solicitudes pendientes";
+    }
   }
 }

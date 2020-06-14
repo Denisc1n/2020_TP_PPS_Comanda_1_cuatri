@@ -20,7 +20,8 @@ p {
         align-items: center;
         justify-content: center;
         background: #b40000;
-        box-shadow: 0px 0px 30px 15px rgba(0,0,0,0.75);
+        //box-shadow: 0px 0px 30px 15px rgba(0,0,0,0.75);
+        box-shadow: inset 0px 0px 40px 10px rgba(0,0,0,0.8);
         min-height: 215px;
 
     }

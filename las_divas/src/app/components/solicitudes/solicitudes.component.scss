@@ -6,6 +6,16 @@
     font-size: 1em;
     font-family: 'cicero';
 }
+
+.template-lista {
+    background: url(../../../assets/img/template-lista.png) center;
+    background-size: cover;
+    width: 90%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .cnt-solicitudes
 {
     display: flex;
@@ -22,8 +32,15 @@
     background: #fff;
     border-radius: 5px;
     border-radius: #fff;
-    box-shadow: 25px -22px 0px 2px rgb(228, 228, 228);
+    //box-shadow: 25px -22px 0px 2px rgb(228, 228, 228);
     overflow: auto;
+    position: relative;
+    top: 5%;
+    text-align: center;
+}
+
+.cnt-listado-solicitudes span {
+    color: black;
 }
 
 .cnt-listado-solicitudes ul
@@ -34,6 +51,7 @@
 
 .cnt-listado-solicitudes li
 {
+    color: black;
     display: flex;
     align-items: center;
     justify-content: space-between;
