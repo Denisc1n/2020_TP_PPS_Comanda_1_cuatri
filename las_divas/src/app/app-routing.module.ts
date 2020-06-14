@@ -21,7 +21,7 @@ const routes: Routes = [
     loadChildren: () => import('./app.module').then( m => m.AppModule)
   },
   {
-    path: 'registro',
+    path: 'registro/:perfil',
     loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   },
 
