@@ -13,9 +13,13 @@ export class HomePage {
   tipoUser
 
   constructor(private fireService:FirebaseService, private spinnerService:SpinnerService) {
-    spinnerService.activateFor('backdrop', 2000)
+    spinnerService.activateFor('backdrop', 2000);
     this.currentUser = fireService.getCurrentUser()
-    fireService.getUserProfile(this.currentUser.email).then((data:any)=>this.tipoUser=data)
+
+    if(!this.currentUser.isAnonymous)
+      fireService.getUserProfile(this.currentUser.email).then((data:any)=>this.tipoUser=data);
+    else
+      this.tipoUser = 'cliente';
   }
 
 }

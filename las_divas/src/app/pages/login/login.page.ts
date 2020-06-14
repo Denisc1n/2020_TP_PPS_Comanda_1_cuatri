@@ -194,18 +194,24 @@ export class LoginPage implements OnInit {
     if(nombre != ""){
       let id = nombre + '_' + this.utilidadService.getDateTime();
       let photoUrl;
-      if(this.invitedPhoto != undefined)
-      {
-        this.fireService.uploadPhoto(this.invitedPhoto, `clientesInvitados/${id}`).then((foto)=> {
-          photoUrl = foto;
-          this.fireService.createDocInDB('clientesInvitados', id, {nombre: nombre, foto: photoUrl, id: id});
-        });
-      }
-      else{
-        photoUrl = 'default';
-        this.fireService.createDocInDB('clientesInvitados', id, {nombre: nombre, foto: photoUrl, id: id});
-      }
-      
+
+      this.fireService.registerAsAnonymously().then((id:any) => {
+
+          if(this.invitedPhoto != undefined)
+          {
+            this.fireService.uploadPhoto(this.invitedPhoto, `clientesInvitados/${id}`).then((foto)=> {
+              photoUrl = foto;
+              this.fireService.createDocInDB('clientesInvitados', id, {nombre: nombre, foto: photoUrl, id: id});
+              this.spinner.activateAndRedirect("backdrop",3000,"home");
+            });
+          }
+          else{
+            photoUrl = 'default';
+            this.fireService.createDocInDB('clientesInvitados', id, {nombre: nombre, foto: photoUrl, id: id});
+            this.spinner.activateAndRedirect("backdrop",3000,"home");
+          }
+
+      })
     }
     else{
       this.utilidadService.textoMostrar("#mensajeTexto", "Campo nombre requerido", "#mensajeLogin", "");

@@ -4,6 +4,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import {storage} from 'firebase'
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Router } from '@angular/router';
+import { resolve } from 'dns';
 
 @Injectable({
   providedIn: 'root'
@@ -98,6 +99,16 @@ export class FirebaseService {
       },error => reject(error));
     })
   }
+
+  registerAsAnonymously()
+  {
+    return new Promise((resolve, reject) => {
+      this.afAuth.auth.signInAnonymously().then((user:any) => {
+        resolve(user.user.uid);
+      });
+    }) 
+  }
+  
   
   getUserProfile(email:string){
     return  new Promise((resolve,reject)=>{

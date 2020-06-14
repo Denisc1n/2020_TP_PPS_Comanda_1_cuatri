@@ -16,19 +16,27 @@ export class ClienteHabilitadoGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     this.current = this.fire.getCurrentUser();
-    return this.fire.getDBByDoc("clientes",this.current.email).then((datos:any) => {
 
-      if(datos != undefined){
-        if(datos.habilitado == 'aceptado')
-          return true;
-        else
-          this.utilidad.textoMostrar("#mensajeTexto", "Usted no se encuentra autorizado, contactese con el mozo", "#mensajeLogin", "");
-      }
-      else{
-        return true;
-      }
+    if(!this.current.isAnonymous)
+    {
+        return this.fire.getDBByDoc("clientes",this.current.email).then((datos:any) => {
+
+          if(datos != undefined){
+            if(datos.habilitado == 'aceptado')
+              return true;
+            else
+              this.utilidad.textoMostrar("#mensajeTexto", "Usted no se encuentra autorizado, contactese con el mozo", "#mensajeLogin", "");
+          }
+          else{
+            return true;
+          }
+          
+        })
+    }
+    else{
+      return true;
+    }
       
-    })
   }
   
 }

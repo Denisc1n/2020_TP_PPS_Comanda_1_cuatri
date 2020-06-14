@@ -1,5 +1,9 @@
 <div class="container-client">
-  <div class="btn-scan" (click)="scanListaDeEspera()">
+  <p id="container-client-p">¡Anotate en la lista!</p>
+  <div class="btn-scan" (click)="scanListaDeEspera()" *ngIf="!this.listaEspera">
+    <img src="../../../assets/img/qr.png" alt="">
+  </div>
+  <div class="btn-scan" (click)="scanListaDeEspera()" *ngIf="this.listaEspera">
     <img src="../../../assets/img/qr.png" alt="">
   </div>
 </div>
