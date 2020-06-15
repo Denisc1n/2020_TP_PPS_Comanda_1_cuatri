@@ -33,7 +33,7 @@ export class FirebaseService {
     return this.afAuth.auth.currentUser
   }
 
-  getDB(collection)
+  getDB(collection:string)
   {
     return new Promise((resolve, reject) => {
       this.db.collection(collection).valueChanges().subscribe((data)=> {
@@ -180,6 +180,7 @@ export class FirebaseService {
         },error => reject(error));
       }) 
     }
+
 
     getTable(id:string)
     {

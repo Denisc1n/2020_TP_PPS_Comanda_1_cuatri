@@ -11,7 +11,23 @@ export class MetreComponent implements OnInit {
   clientes:any;
   constructor(private fireService : FirebaseService) 
   {
-    this.fireService.getDisabledClient().then((datos) => {
+    /*this.fireService.getDB("listaEspera").then((datos) => {
+      this.clientes = datos;
+      console.log(this.clientes);
+
+      if(this.clientes.length == 0){
+        document.getElementById("msj-espera").innerHTML = "No hay clientes en espera";
+      }
+    })*/
+    this.traerLista();
+  }
+
+  ngOnInit(){
+  }
+
+  traerLista()
+  {
+    this.fireService.getDB("listaEspera").then((datos) => {
       this.clientes = datos;
       console.log(this.clientes);
 
@@ -21,17 +37,4 @@ export class MetreComponent implements OnInit {
     })
   }
 
-  ngOnInit(){
-  }
-
-  actualizarLista(cliente:any)
-  {
-    this.fireService.updateDoc("cliente", cliente.correo, cliente)
-
-    console.log(this.clientes);
-
-    if(this.clientes.length == 0){
-      document.getElementById("msj-espera").innerHTML = "No hay clientes en espera";
-    }
-  }
 }
