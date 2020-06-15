@@ -171,4 +171,22 @@ export class FirebaseService {
     {
       this.db.collection(collection).doc(doc).update(data);
     }
+
+    getWaitingList(email:string)
+    {
+      return new Promise((resolve, reject) => {
+        this.db.collection("listaEspera").doc(email).valueChanges().subscribe((datos) => {
+          resolve(datos);
+        },error => reject(error));
+      }) 
+    }
+
+    getTable(id:string)
+    {
+      return new Promise((resolve, reject) => {
+        this.db.collection("mesas").doc(id).valueChanges().subscribe((datos) => {
+          resolve(datos);
+        },error => reject(error));
+      })
+    }
 }

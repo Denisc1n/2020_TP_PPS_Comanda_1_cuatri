@@ -1,6 +1,6 @@
 <div class="container-home">
   <div class="nav-home">
-    <ion-icon routerLink="/login" name="chevron-back-outline"></ion-icon>
+    <ion-icon (click)="this.back()" name="chevron-back-outline"></ion-icon>
     <span class="nombre-user">{{tipoUser}}</span>
     <div class="container-avatar">
       <img src="../../assets/img/noPhoto.png" alt="">

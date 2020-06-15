@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
 import { UtilidadService } from 'src/app/servicios/utilidad.service';
 import * as $ from 'jquery';
@@ -8,6 +8,7 @@ import { QRScannerService } from 'src/app/servicios/qrscanner.service';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { VibrationService } from 'src/app/servicios/vibration.service';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -25,16 +26,17 @@ export class RegistroPage implements OnInit {
   file:string;
   url:string;
   registro = false;
-  @Input() perfil:string = "cliente";
-  perfiles:string[] = ["Cocinero","Mozo","Dueño","Supervisor","Bartender"];
+  perfil:string = "cliente";
+  perfiles:string[] = ["Cocinero","Mozo","Dueño","Supervisor","Bartender", "Metre"];
   perfilSeleccionado:string = "cliente";
   
-  constructor(private servicio : FirebaseService, private vibrationService:VibrationService,private s_utilidad : UtilidadService, private spinner : SpinnerService, private platform:Platform, private QRService:QRScannerService, private location : Location ) {
+  constructor(private servicio : FirebaseService, private vibrationService:VibrationService,private s_utilidad : UtilidadService, private spinner : SpinnerService, private platform:Platform, private QRService:QRScannerService, private location : Location, private router : ActivatedRoute ) {
     /* this.platform.backButton.subscribeWithPriority(0, () => { //cuando apreto el boton volver de la pantalla de android, dejo de intentar scanear el codigo
       document.getElementsByTagName("body")[0].style.opacity = "1";
       QRService.destroy();
     }) */
-
+      this.perfil = this.router.snapshot.params.perfil;
+      console.log(this.perfil);
    }
 
   ngOnInit() {
