@@ -136,6 +136,10 @@ export class FirebaseService {
                               if(dataDuen != undefined)
                                 resolve(dataDuen.perfil)
                               else{
+                                this.getDBByDoc('metre', email).then((dataMet:any)=>{
+                                  if(dataMet != undefined)
+                                    resolve(dataMet.perfil)
+                                  else {
                                 resolve('No existe')
                               }
                             },e=>reject(e))
@@ -149,8 +153,10 @@ export class FirebaseService {
             },error=>reject(error))
           }
         },error=>reject(error))
-      })
-     }
+      }
+    },error=>reject(error))
+  })
+  }
 
     getDisabledClient()
     {

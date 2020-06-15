@@ -1,0 +1,15 @@
+<div class="cnt-espera">
+  <div class="template-lista">
+    <div class="cnt-listado-espera">
+      <span id="msj-espera"></span>
+      <ul>
+        <li *ngFor="let cliente of this.clientes">
+          {{cliente.nombre}} {{cliente.apellido}}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="btn-update-lista">
+    <span>Actualizar lista</span>
+  </div>
+</div>
