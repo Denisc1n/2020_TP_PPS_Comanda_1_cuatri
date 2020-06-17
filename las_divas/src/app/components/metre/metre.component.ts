@@ -9,6 +9,8 @@ import { FirebaseService } from 'src/app/servicios/firebase.service';
 export class MetreComponent implements OnInit {
 
   clientes:any;
+  clienteSeleccionado : any;
+  
   constructor(private fireService : FirebaseService) 
   {
     /*this.fireService.getDB("listaEspera").then((datos) => {
@@ -35,6 +37,11 @@ export class MetreComponent implements OnInit {
         document.getElementById("msj-espera").innerHTML = "No hay clientes en espera";
       }
     })
+  }
+
+  seleccionarCliente(cliente) {
+    this.clienteSeleccionado = cliente;
+    console.log(this.clienteSeleccionado);
   }
 
 }

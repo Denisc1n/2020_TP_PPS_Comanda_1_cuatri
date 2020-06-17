@@ -1,9 +1,9 @@
-<div class="cnt-espera">
+<div class="cnt-espera" *ngIf="!clienteSeleccionado">
   <div class="template-lista">
     <div class="cnt-listado-espera">
       <span id="msj-espera"></span>
       <ul>
-        <li *ngFor="let cliente of this.clientes">
+        <li *ngFor="let cliente of this.clientes" (click)="seleccionarCliente(cliente)">
           {{cliente.nombre}} {{cliente.apellido}}
         </li>
       </ul>
@@ -13,3 +13,5 @@
     <span>Actualizar lista</span>
   </div>
 </div>
+
+<app-listado-mesas *ngIf="clienteSeleccionado" [clienteSeleccionado] = clienteSeleccionado (vaciarCliente)="seleccionarCliente($event)"></app-listado-mesas>

@@ -8,6 +8,7 @@ import { MozoComponent } from '../components/mozo/mozo.component';
 import { ClienteComponent } from '../components/cliente/cliente.component';
 import { SolicitudesComponent } from '../components/solicitudes/solicitudes.component';
 import { MetreComponent } from '../components/metre/metre.component';
+import { ListadoMesasComponent } from '../components/metre/listado-mesas/listado-mesas.component';
 
 import { HomePageRoutingModule } from './home-routing.module';
 
@@ -25,6 +26,7 @@ import { HomePageRoutingModule } from './home-routing.module';
     MozoComponent,
     ClienteComponent,
     SolicitudesComponent,
-    MetreComponent]
+    MetreComponent,
+    ListadoMesasComponent]
 })
 export class HomePageModule {}
