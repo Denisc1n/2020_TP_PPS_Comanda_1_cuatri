@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from 'src/app/servicios/firebase.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FirebaseService  } from 'src/app/servicios/firebase.service';
 
 @Component({
-  selector: 'app-metre',
-  templateUrl: './metre.component.html',
-  styleUrls: ['./metre.component.scss'],
+  selector: 'app-lista-espera',
+  templateUrl: './lista-espera.component.html',
+  styleUrls: ['./lista-espera.component.scss'],
 })
-export class MetreComponent implements OnInit {
+export class ListaEsperaComponent implements OnInit {
 
   clientes:any;
   clienteSeleccionado : any;
-  
+  @Output()volver : EventEmitter<any> = new EventEmitter<any>();
+
   constructor(private fireService : FirebaseService) 
   {
     /*this.fireService.getDB("listaEspera").then((datos) => {
@@ -25,6 +26,10 @@ export class MetreComponent implements OnInit {
   }
 
   ngOnInit(){
+  }
+
+  back() {
+    this.volver.emit('home');
   }
 
   traerLista()
@@ -43,5 +48,6 @@ export class MetreComponent implements OnInit {
     this.clienteSeleccionado = cliente;
     console.log(this.clienteSeleccionado);
   }
+
 
 }

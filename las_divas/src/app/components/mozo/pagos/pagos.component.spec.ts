@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { MozoComponent } from './mozo.component';
+import { PagosComponent } from './pagos.component';
 
-describe('MozoComponent', () => {
-  let component: MozoComponent;
-  let fixture: ComponentFixture<MozoComponent>;
+describe('PagosComponent', () => {
+  let component: PagosComponent;
+  let fixture: ComponentFixture<PagosComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MozoComponent ],
+      declarations: [ PagosComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MozoComponent);
+    fixture = TestBed.createComponent(PagosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

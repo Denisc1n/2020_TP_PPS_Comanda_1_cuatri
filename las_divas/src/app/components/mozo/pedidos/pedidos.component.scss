@@ -7,8 +7,16 @@
     font-family: 'cicero';
 }
 
+ion-icon {
+    font-size: 3.5em;
+    color: #000000;
+    position: absolute;
+    transition: all ease 0.3s;
+    z-index: 10;
+}
+
 .template-lista {
-    background: url(../../../assets/img/template-lista.png) center;
+    background: url(../../../../assets/img/template-lista.png) center;
     background-size: cover;
     width: 90%;
     height: 80%;
@@ -16,40 +24,40 @@
     justify-content: center;
     align-items: center;
 }
-.cnt-espera
+.cnt-pedidos
 {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
 }
 
-.cnt-listado-espera
+.cnt-listado-pedidos
 {
     width: 70%;
     height: 80%;
     background: #fff;
     border-radius: 5px;
     border-radius: #fff;
+    //box-shadow: 25px -22px 0px 2px rgb(228, 228, 228);
     overflow: auto;
     position: relative;
     top: 5%;
     text-align: center;
 }
 
-.cnt-listado-espera span {
+.cnt-listado-pedidos span {
     color: black;
 }
 
-.cnt-listado-espera ul
+.cnt-listado-pedidos ul
 {
     list-style: none;
     padding: 5%;
 }
 
-.cnt-listado-espera li
+.cnt-listado-pedidos li
 {
     color: black;
     display: flex;
@@ -61,21 +69,20 @@
     margin-top: 5%;
 }
 
-.btn-update-lista {
-    border-radius: 5%;
-    width: 75%;
-    height: 10%;
+.listado-pedidos-icons
+{
     display: flex;
-    align-items: center;
     justify-content: center;
-    background: #b40000;
-    box-shadow: 0px 18px 15px -10px rgba(0,0,0,0.75);
-    transition: all ease 0.2s;
-    margin-top: 5%;
-    font-size: 1.5em;
+    align-items: center;
+    width: 20%;
+}
 
-    &:active {
-         background: #8b0101;
-    }
+.listado-pedidos-icons ion-icon
+{
+    font-size: 1.5em;
+    border: 1px solid;
+    border-radius: 50%;
+    background: rgb(52, 151, 13);
+    color: ghostwhite;
 }
 

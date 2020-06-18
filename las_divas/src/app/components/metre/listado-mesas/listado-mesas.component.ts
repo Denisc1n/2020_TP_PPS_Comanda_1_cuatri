@@ -10,17 +10,13 @@ import { UtilidadService } from 'src/app/servicios/utilidad.service';
 export class ListadoMesasComponent implements OnInit {
 
   @Input()clienteSeleccionado;
-  @Output()vaciarCliente : EventEmitter<any> = new EventEmitter<any>();
+  @Output()volver : EventEmitter<any> = new EventEmitter<any>();
   mesas : any;
   mesaSeleccionada: any;
 
   constructor(private fireService : FirebaseService, private s_utilidad : UtilidadService) {
-    this.fireService.getDB("mesas").then((datos) => {
-      this.mesas = datos;
-      console.log(this.mesas);
-
-    })
-   }
+    this.actualizarLista()
+  }
 
   ngOnInit() {
 
@@ -33,10 +29,15 @@ export class ListadoMesasComponent implements OnInit {
     if(mesa.ocupada) {
       this.s_utilidad.textoMostrar("#modal-error-mesa-text-p","Mesa ocupada", "#modal-error-mesa", ".ctn-lista-mesas")
     }
+    
+  }
+
+  actualizarLista(){
+    this.fireService.getDB("mesas").then(datos=>this.mesas=datos)
   }
 
   back() {
-    this.vaciarCliente.emit(null);
+    this.volver.emit('home');
   }
 
 }
