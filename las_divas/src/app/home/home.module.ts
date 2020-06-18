@@ -9,7 +9,7 @@ import { ClienteComponent } from '../components/cliente/cliente.component';
 import { SolicitudesComponent } from '../components/solicitudes/solicitudes.component';
 import { MetreComponent } from '../components/metre/metre.component';
 import { ListadoMesasComponent } from '../components/metre/listado-mesas/listado-mesas.component';
-
+import { MenuComponent } from '../components/menu/menu.component';
 import { HomePageRoutingModule } from './home-routing.module';
 
 
@@ -27,6 +27,7 @@ import { HomePageRoutingModule } from './home-routing.module';
     ClienteComponent,
     SolicitudesComponent,
     MetreComponent,
-    ListadoMesasComponent]
+    ListadoMesasComponent,
+    MenuComponent]
 })
 export class HomePageModule {}
