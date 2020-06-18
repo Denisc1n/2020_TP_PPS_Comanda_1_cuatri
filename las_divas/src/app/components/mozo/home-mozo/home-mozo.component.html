@@ -1,9 +1,7 @@
 <div class="container-mozo" *ngIf="redirect=='home'">
-  <div class="btn btn-lista-pedidos">
-    <p>Lista de pedidos</p>
-  </div>
-  <div class="btn btn-lista-pagos">
-    <p>Lista de pagos</p>
+  <div class="btns-home-mozo">
+    <div (click)="redirect='pedidos'"><span>Lista de pedidos</span></div>
+    <div (click)="redirect='pagos'"><span>Lista de pagos</span></div>
   </div>
 </div>
 <app-pagos (volver)="redirect=$event" *ngIf="redirect=='pagos'"></app-pagos>

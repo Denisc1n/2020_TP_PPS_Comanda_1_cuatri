@@ -8,7 +8,7 @@
   </div>
   <div class="main">
     <app-duenio *ngIf="tipoUser == 'dueño' || tipoUser == 'supervisor'"></app-duenio>
-    <app-mozo *ngIf="tipoUser == 'mozo' "></app-mozo> 
+    <app-home-mozo *ngIf="tipoUser == 'mozo' "></app-home-mozo> 
     <app-cliente *ngIf="tipoUser == 'cliente' "></app-cliente>
     <app-home-metre *ngIf="tipoUser == 'metre' "></app-home-metre>  
   </div>

@@ -4,7 +4,7 @@
     <div class="cnt-listado-espera">
       <span id="msj-espera"></span>
       <ul>
-        <li *ngFor="let cliente of this.clientes" (click)="seleccionarCliente(cliente)">
+        <li *ngFor="let cliente of this.clientes">
           {{cliente.nombre}} {{cliente.apellido}}
         </li>
       </ul>

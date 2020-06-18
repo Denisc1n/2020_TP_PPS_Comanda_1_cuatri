@@ -10,7 +10,7 @@ import { PedidosComponent } from '../components/mozo/pedidos/pedidos.component';
 import { ClienteComponent } from '../components/cliente/cliente.component';
 import { SolicitudesComponent } from '../components/solicitudes/solicitudes.component';
 import { ListadoMesasComponent } from '../components/metre/listado-mesas/listado-mesas.component';
-import {HomeMetreComponent  } from '../components/metre/home-metre/home-metre.component'
+import { HomeMetreComponent  } from '../components/metre/home-metre/home-metre.component'
 import { HomePageRoutingModule } from './home-routing.module';
 import {ListaEsperaComponent  } from '../components/metre/lista-espera/lista-espera.component'
 
