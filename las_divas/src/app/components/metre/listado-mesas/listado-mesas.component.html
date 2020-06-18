@@ -1,11 +1,11 @@
 <ion-icon name="close-circle-sharp" (click)="back()"></ion-icon>
 <div class="ctn-lista-mesas">
   <div class="lista-mesas">
-    <div class="mesas {{mesa.ocupada}}" *ngFor="let mesa of this.mesas" (click)="seleccionarMesa(mesa)">{{mesa.numero}}</div>
+    <div class="mesas {{mesa.ocupada}}" *ngFor="let mesa of this.mesas">{{mesa.numero}}</div>
   </div>
 
-  <div class="btn-asignar-mesa" >
-    <span>Asignar Mesa</span>
+  <div class="btn-asignar-mesa" (click)="actualizarLista()">
+    <span>Actualizar</span>
   </div>
 </div>
 

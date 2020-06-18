@@ -8,7 +8,7 @@
 }
 
 .template-lista {
-    background: url(../../../assets/img/template-lista.png) center;
+    background: url(../../../../assets/img/template-lista.png) center;
     background-size: cover;
     width: 90%;
     height: 80%;
@@ -77,5 +77,13 @@
     &:active {
          background: #8b0101;
     }
+}
+
+ion-icon {
+    font-size: 3.5em;
+    color: #000000;
+    position: absolute;
+    transition: all ease 0.3s;
+    z-index: 10;
 }
 

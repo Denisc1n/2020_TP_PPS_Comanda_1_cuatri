@@ -1,0 +1,10 @@
+<div class="container-mozo" *ngIf="redirect=='home'">
+  <div class="btn btn-lista-pedidos">
+    <p>Lista de pedidos</p>
+  </div>
+  <div class="btn btn-lista-pagos">
+    <p>Lista de pagos</p>
+  </div>
+</div>
+<app-pagos (volver)="redirect=$event" *ngIf="redirect=='pagos'"></app-pagos>
+<app-pedidos (volver)="redirect=$event" *ngIf="redirect=='pedidos'"></app-pedidos>
