@@ -11,6 +11,7 @@ export class ClienteComponent implements OnInit {
 
   currentUser
   dataCurrentUser
+  estaEnMesa:boolean;
   listaEspera: boolean;
 
   constructor(private QRService:QRScannerService, private fireService:FirebaseService) {
@@ -71,18 +72,22 @@ export class ClienteComponent implements OnInit {
               { 
                 case 'Mesa 1 Las Divas':
                   this.fireService.updateDoc("mesas", a.text, this.dataCurrentUser)
+                  this.estaEnMesa = true;
                   break;
 
                 case 'Mesa 2 Las Divas':
                   this.fireService.updateDoc("mesas", a.text, this.dataCurrentUser)
+                  this.estaEnMesa = true;
                   break;
 
                 case 'Mesa 3 Las Divas':
                   this.fireService.updateDoc("mesas", a.text, this.dataCurrentUser)
+                  this.estaEnMesa = true;
                   break;
 
                 case 'Mesa 4 Las Divas':
                   this.fireService.updateDoc("mesas", a.text, this.dataCurrentUser)
+                  this.estaEnMesa = true;
                   break;
 
                 default:

@@ -11,6 +11,7 @@ import { ConsultasComponent } from '../components/mozo/consultas/consultas.compo
 import { ClienteComponent } from '../components/cliente/cliente.component';
 import { SolicitudesComponent } from '../components/solicitudes/solicitudes.component';
 import { ListadoMesasComponent } from '../components/metre/listado-mesas/listado-mesas.component';
+import { MenuComponent } from '../components/menu/menu.component';
 import { HomeMetreComponent  } from '../components/metre/home-metre/home-metre.component'
 import { HomePageRoutingModule } from './home-routing.module';
 import { ListaEsperaComponent  } from '../components/metre/lista-espera/lista-espera.component'
@@ -29,6 +30,8 @@ import { ListaEsperaComponent  } from '../components/metre/lista-espera/lista-es
     HomeMozoComponent,
     ClienteComponent,
     SolicitudesComponent,
+    ListadoMesasComponent,
+    MenuComponent,
     HomeMetreComponent,
     PagosComponent,
     PedidosComponent,

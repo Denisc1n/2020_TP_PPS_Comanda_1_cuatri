@@ -1,0 +1,129 @@
+<div class="cnt-menu">
+    <div class="menu-options">
+      <button>Platos</button>
+      <button>Bebidas</button>
+      <button>Postres</button>
+    </div>
+    <div class="menu">
+      <!--------------------------Milanga------------------------------->
+        <ion-slides>
+          <ion-slide>
+            <img src="../../../assets/menu/milanesa_1.jpg" alt="">  
+          </ion-slide>
+          <ion-slide>
+            <img src="../../../assets/menu/milanesa_2.jpg" alt="">
+          </ion-slide>
+          <ion-slide>
+            <img src="../../../assets/menu/milanesa_3.jpg" alt="">
+          </ion-slide>
+          <div class="info-slide" id="info-slide-1">
+            <ion-icon name="close" (click)="this.quitarMenu('info-slide-1')"></ion-icon>
+            <div class="food-info">
+              <div class="text-food">
+                <p>Milanesa</p>
+                <p>Precio: <span>$330</span></p>
+              </div>
+              <div class="button-food">
+                <p>Cantidad: 0</p>
+                <div>
+                  <ion-icon name="add-circle-outline" (click)="this.agregarProducto('Milanesa', 330)"></ion-icon>
+                  <ion-icon name="remove-circle-outline" (click)="this.removerProducto('Milanesa', 330)"></ion-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ion-icon class="open-icon" name="arrow-up-circle" (click)="desplegarMenu('info-slide-1')"></ion-icon>
+        </ion-slides>
+
+      <!--------------------------Milanga------------------------------->
+      <ion-slides>
+        <ion-slide>
+          <img src="../../../assets/menu/hamburguesa_1.jpg" alt="">
+        </ion-slide>
+        <ion-slide>
+          <img src="../../../assets/menu/hamburguesa_2.jpg" alt="">
+        </ion-slide>
+        <ion-slide>
+          <img src="../../../assets/menu/hamburguesa_3.jpg" alt="">
+        </ion-slide>
+        <div class="info-slide" id="info-slide-2">
+          <ion-icon name="close" (click)="this.quitarMenu('info-slide-2')"></ion-icon>
+          <div class="food-info">
+            <div class="text-food">
+              <p>Hamburguesa</p>
+              <p>Precio: <span>$280</span></p>
+            </div>
+            <div class="button-food">
+              <p>Cantidad: 0</p>
+              <div>
+                <ion-icon name="add-circle-outline" (click)="this.agregarProducto('Hamburguesa', 280)"></ion-icon>
+                <ion-icon name="remove-circle-outline" (click)="this.removerProducto('Hamburguesa', 280)"></ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ion-icon class="open-icon" name="arrow-up-circle" (click)="desplegarMenu('info-slide-2')"></ion-icon>
+      </ion-slides>
+
+      <!--------------------------Milanga------------------------------->
+      <ion-slides>
+        <ion-slide>
+          <img src="../../../assets/menu/muzzarelitas_1.jpg" alt="">
+        </ion-slide>
+        <ion-slide>
+          <img src="../../../assets/menu/muzzarelitas_2.jpg" alt="">
+        </ion-slide>
+        <ion-slide>
+          <img src="../../../assets/menu/muzzarelitas_3.jpg" alt="">
+        </ion-slide>
+        <div class="info-slide" id="info-slide-3">
+          <ion-icon name="close" (click)="this.quitarMenu('info-slide-3')"></ion-icon>
+          <div class="food-info">
+            <div class="text-food">
+              <p>Muzzarelitas</p>
+              <p>Precio: <span>$190</span></p>
+            </div>
+            <div class="button-food">
+              <p>Cantidad: 0</p>
+              <div>
+                <ion-icon name="add-circle-outline" (click)="this.agregarProducto('Muzzarelitas', 190)"></ion-icon>
+                <ion-icon name="remove-circle-outline" (click)="this.removerProducto('Muzzarelitas', 190)"></ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ion-icon class="open-icon" name="arrow-up-circle" (click)="desplegarMenu('info-slide-3')"></ion-icon>
+      </ion-slides>
+
+      <!--------------------------Milanga------------------------------->
+
+      <ion-slides>
+        <ion-slide>
+          <img src="../../../assets/menu/fideos_1.jpg" alt="">
+        </ion-slide>
+        <ion-slide>
+          <img src="../../../assets/menu/fideos_2.jpg" alt="">
+        </ion-slide>
+        <ion-slide>
+          <img src="../../../assets/menu/fideos_3.jpg" alt="">
+        </ion-slide>
+        <div class="info-slide" id="info-slide-4">
+          <ion-icon name="close" (click)="this.quitarMenu('info-slide-4')"></ion-icon>
+          <div class="food-info">
+            <div class="text-food">
+              <p>Fideos</p>
+              <p>Precio: <span>$230</span></p>
+            </div>
+            <div class="button-food">
+              <p>Cantidad: 0</p>
+              <div>
+                <ion-icon name="add-circle-outline" (click)="this.agregarProducto('Fideos', 230)"></ion-icon>
+                <ion-icon name="remove-circle-outline" (click)="this.removerProducto('Fideos', 230)"></ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ion-icon class="open-icon" name="arrow-up-circle" (click)="desplegarMenu('info-slide-4')"></ion-icon>
+      </ion-slides>
+    </div>
+</div>
