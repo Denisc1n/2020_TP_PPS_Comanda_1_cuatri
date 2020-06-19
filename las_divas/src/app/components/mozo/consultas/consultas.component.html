@@ -1,0 +1,18 @@
+<ion-icon name="close-circle-sharp" (click)="back()"></ion-icon>
+<div class="ctn-lista-mesas">
+  <div class="lista-mesas">
+    <div class="mesas {{mesa.ocupada}}" *ngFor="let mesa of this.consultas">
+      <span>{{mesa.numero}}</span>
+      <div class="ctn-notificaciones">
+        <div *ngIf="mesa.consulta != ''">!</div>
+        <div *ngIf="mesa.pedidoBebida != true"><ion-icon name="wine-outline"></ion-icon></div>
+        <div *ngIf="mesa.pedidoComida != true"><ion-icon name="fast-food-outline"></ion-icon></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="btn-asignar-mesa" (click)="actualizarLista()">
+    <span>Actualizar</span>
+  </div>
+</div>
