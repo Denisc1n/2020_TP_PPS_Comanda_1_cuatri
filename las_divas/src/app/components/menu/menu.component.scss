@@ -10,7 +10,7 @@
 {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-flow: column;
     width: 100%;
     height: 100%;
@@ -37,7 +37,7 @@
 .menu
 {
     width: 80%;
-    height: 60%;
+    height: 83%;
     background: #fff;
     overflow: auto;
 }
@@ -256,11 +256,11 @@ ion-slides
             }
 
             .cancel{
-                background: #ff0400;
+                background: #ea0400;
             }
 
             .confirm{
-                background: #83F52C;
+                background: #4c9e0e;
             }
         }
     }
@@ -270,4 +270,14 @@ ion-slides
     color: white;
     margin-left: 2%;
     margin-right: 2%;
+}
+
+.query{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    textarea{
+        border: solid 1px black;
+    }
 }

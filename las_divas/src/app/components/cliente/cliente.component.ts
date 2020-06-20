@@ -11,10 +11,8 @@ export class ClienteComponent implements OnInit {
 
   currentUser
   dataCurrentUser
-  estaEnMesa:boolean;
   mesaOcupada:string;
-  listaEspera: boolean;
-  encuesta = false;
+  estadoCliente:string 
 
   constructor(private QRService:QRScannerService, private fireService:FirebaseService) {
     this.currentUser = fireService.getCurrentUser()
@@ -24,7 +22,7 @@ export class ClienteComponent implements OnInit {
 
       this.fireService.getWaitingList(this.currentUser.email).then((data:any) => {
         if(data != undefined)
-          this.listaEspera = true;
+          this.estadoCliente = 'listaEspera';
       });
     }
     else{
@@ -32,7 +30,7 @@ export class ClienteComponent implements OnInit {
 
       this.fireService.getWaitingList(this.currentUser.uid).then((data:any) => {
         if(data != undefined)
-          this.listaEspera = true;
+          this.estadoCliente = 'listaEspera';
       });
     }
 
@@ -49,7 +47,7 @@ export class ClienteComponent implements OnInit {
         else
           this.fireService.createDocInDB('listaEspera', this.currentUser.uid, this.dataCurrentUser)
 
-        this.listaEspera = true;
+        this.estadoCliente = 'listaEspera';
       }
       else{
         console.error('Primero debe ir a la lista de espera')
@@ -69,30 +67,35 @@ export class ClienteComponent implements OnInit {
 
             if(!data.ocupada)
             {
-              this.dataCurrentUser.ocupada = true;
+              data.ocupada = true;
+              data.cliente = this.dataCurrentUser;
+              data.pedido = {productos: {}, total: 0};
+              data.pendienteBebida = false;
+              data.pendienteComida = false;
+              data.consulta = "";
               switch(a.text)
               { 
                 case 'Mesa 1 Las Divas':
-                  this.fireService.updateDoc("mesas", a.text, this.dataCurrentUser)
-                  this.estaEnMesa = true;
+                  this.fireService.updateDoc("mesas", a.text, data)
+                  this.estadoCliente = 'enMesa';
                   this.mesaOcupada = 'Mesa 1 Las Divas';
                   break;
 
                 case 'Mesa 2 Las Divas':
-                  this.fireService.updateDoc("mesas", a.text, this.dataCurrentUser)
-                  this.estaEnMesa = true;
+                  this.fireService.updateDoc("mesas", a.text, data)
+                  this.estadoCliente = 'enMesa';
                   this.mesaOcupada = 'Mesa 2 Las Divas';
                   break;
 
                 case 'Mesa 3 Las Divas':
-                  this.fireService.updateDoc("mesas", a.text, this.dataCurrentUser)
-                  this.estaEnMesa = true;
+                  this.fireService.updateDoc("mesas", a.text, data)
+                  this.estadoCliente = 'enMesa';
                   this.mesaOcupada = 'Mesa 3 Las Divas';
                   break;
 
                 case 'Mesa 4 Las Divas':
-                  this.fireService.updateDoc("mesas", a.text, this.dataCurrentUser)
-                  this.estaEnMesa = true;
+                  this.fireService.updateDoc("mesas", a.text, data)
+                  this.estadoCliente = 'enMesa';
                   this.mesaOcupada = 'Mesa 4 Las Divas';
                   break;
 

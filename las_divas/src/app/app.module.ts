@@ -16,11 +16,9 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { BebidasPipe } from './pipes/bebidas.pipe';
-import { ComidasPipe } from './pipes/comidas.pipe'
 
 @NgModule({
-  declarations: [AppComponent, BebidasPipe, ComidasPipe],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, 
     AngularFireModule.initializeApp(firebaseconfig), AngularFireAuthModule, AngularFirestoreModule],
