@@ -54,13 +54,13 @@ Matias Herrera: Registro de cliente Finalizado,
 <h2>Semana del 07/06 al 13/06</h2>
 <ul>
   <li>
-  Pablo Matwijiszyn: 
+  Pablo Matwijiszyn: Vista de mesas (diseño), lista de espera, principal de metre (diseño)
   </li>
   <li>
-Thomas Rosas: 
+Thomas Rosas: Menù de comidas y pedidos (lógica), Principal metre, lista de espera (lógica)
 </li>
   <li>
- Matias Herrera: 
+ Matias Herrera: Menù de comidas (diseño), Vista de bartender y cocinero, Scaner de Mesas
 </li>
 </ul>
 <hr>
