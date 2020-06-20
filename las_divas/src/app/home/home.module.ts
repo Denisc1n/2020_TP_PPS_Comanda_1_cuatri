@@ -15,13 +15,12 @@ import { HomeMetreComponent  } from '../components/metre/home-metre/home-metre.c
 import { HomePageRoutingModule } from './home-routing.module';
 import { ListaEsperaComponent  } from '../components/metre/lista-espera/lista-espera.component'
 
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
   ],
   declarations: [
     HomePage,

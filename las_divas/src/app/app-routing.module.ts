@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/menu',
+    redirectTo: '/splash',
     pathMatch: 'full'
   },
   {
