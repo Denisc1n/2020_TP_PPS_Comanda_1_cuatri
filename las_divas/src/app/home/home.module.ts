@@ -7,6 +7,7 @@ import { DuenioComponent } from '../components/duenio/duenio.component';
 import { HomeMozoComponent } from '../components/mozo/home-mozo/home-mozo.component';
 import { PagosComponent } from '../components/mozo/pagos/pagos.component';
 import { PedidosComponent } from '../components/mozo/pedidos/pedidos.component';
+import { ConsultasComponent } from '../components/mozo/consultas/consultas.component';
 import { ClienteComponent } from '../components/cliente/cliente.component';
 import { SolicitudesComponent } from '../components/solicitudes/solicitudes.component';
 import { ListadoMesasComponent } from '../components/metre/listado-mesas/listado-mesas.component';
@@ -33,6 +34,7 @@ import { ListaEsperaComponent  } from '../components/metre/lista-espera/lista-es
     HomeMetreComponent,
     PagosComponent,
     PedidosComponent,
+    ConsultasComponent,
     ListaEsperaComponent,
     ListadoMesasComponent]
 })
