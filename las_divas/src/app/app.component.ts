@@ -31,7 +31,7 @@ export class AppComponent {
       if(this.splash) { 
         setTimeout(() => {
           this.splash = false;
-          this.router.navigate(['home']);
+          this.router.navigate(['login']);
          },5000);
        }
     });

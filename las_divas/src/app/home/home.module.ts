@@ -15,6 +15,10 @@ import { MenuComponent } from '../components/menu/menu.component';
 import { HomeMetreComponent  } from '../components/metre/home-metre/home-metre.component'
 import { HomePageRoutingModule } from './home-routing.module';
 import { ListaEsperaComponent  } from '../components/metre/lista-espera/lista-espera.component'
+import { BartenderComponent } from '../components/bartender/bartender.component';
+import { CocineroComponent } from '../components/cocinero/cocinero.component';
+import { BebidasPipe } from '../pipes/bebidas.pipe';
+import { ComidasPipe } from '../pipes/comidas.pipe';
 
 
 @NgModule({
@@ -37,6 +41,10 @@ import { ListaEsperaComponent  } from '../components/metre/lista-espera/lista-es
     PedidosComponent,
     ConsultasComponent,
     ListaEsperaComponent,
-    ListadoMesasComponent]
+    ListadoMesasComponent,
+    BartenderComponent,
+    CocineroComponent,
+    BebidasPipe,
+    ComidasPipe]
 })
 export class HomePageModule {}
