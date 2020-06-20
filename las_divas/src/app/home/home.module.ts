@@ -20,13 +20,12 @@ import { CocineroComponent } from '../components/cocinero/cocinero.component';
 import { BebidasPipe } from '../pipes/bebidas.pipe';
 import { ComidasPipe } from '../pipes/comidas.pipe';
 
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
   ],
   declarations: [
     HomePage,

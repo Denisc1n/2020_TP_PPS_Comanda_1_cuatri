@@ -7,7 +7,10 @@
   <div class="btn-scan" (click)="scanMesa()" *ngIf="this.listaEspera">
     <img src="../../../assets/img/qr.png" alt="">
   </div>
+  <div class="btn-scan" (click)="scanEncuesta()" *ngIf="this.encuesta">
+    <img src="../../../assets/img/qr.png" alt="">
+  </div>
 </div>
 <div class="menu-comidas" *ngIf="this.estaEnMesa">
-  <app-menu></app-menu>
+  <app-menu (terminoPedido)="estaEnMesa=false; encuesta=$event;" [mesaOcupada]="mesaOcupada"></app-menu>
 </div>
