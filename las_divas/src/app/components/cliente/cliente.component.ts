@@ -11,7 +11,7 @@ export class ClienteComponent implements OnInit {
 
   currentUser
   dataCurrentUser
-  estaEnMesa:boolean;
+  estaEnMesa:boolean = true;
   mesaOcupada:string;
   listaEspera: boolean;
   encuesta = false;

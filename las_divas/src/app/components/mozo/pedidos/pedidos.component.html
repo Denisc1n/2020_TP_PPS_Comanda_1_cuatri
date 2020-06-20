@@ -6,7 +6,7 @@
       <span id="msj-pedidos"></span>
       <ul>
         <li *ngFor="let pedido of this.pedidos">
-          Pedido mesa {{pedido.nombre}}
+          Pedido mesa {{pedido.numero}}
           <div class="listado-pedidos-icons">
             <ion-icon name="checkmark-sharp" (click)="this.cambiarEstado('habilitar',pedido)"></ion-icon>
           </div>

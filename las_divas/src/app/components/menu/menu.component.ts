@@ -59,8 +59,8 @@ export class MenuComponent implements OnInit {
   }
 
   agregarPedido(){
-    this.pedidosService.addOrderToOrders(this.listadoPedido, this.mesaOcupada,this.totalAmount);
-    this.pedidosService.addOrderToTable(this.listadoPedido, this.mesaOcupada, this.totalAmount);
+    this.pedidosService.addOrderToOrders(this.listadoPedido, "Mesa 1 Las Divas",this.totalAmount);
+    this.pedidosService.addOrderToTable(this.listadoPedido, "Mesa 1 Las Divas", this.totalAmount);
     this.terminoPedido.emit(true);
   }
 

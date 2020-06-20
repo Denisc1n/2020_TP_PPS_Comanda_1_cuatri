@@ -166,6 +166,15 @@ export class FirebaseService {
         },error=>reject(error))
       })
     }
+
+    getPendingOrder()
+    {
+      return new Promise((resolve,reject) => {
+        this.db.collection('pedidos', ref => { return ref.where('estado', '==', 'pendiente')}).valueChanges().subscribe((pedidos:any) => {
+          resolve(pedidos);
+        },error=>reject(error))
+      })
+    }
     
     updateDoc(collection:string, doc:string, data:any)
     {

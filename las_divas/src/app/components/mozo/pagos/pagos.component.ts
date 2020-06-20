@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FirebaseService } from 'src/app/servicios/firebase.service';
 
 @Component({
   selector: 'app-pagos',
@@ -8,12 +9,19 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class PagosComponent implements OnInit {
 
   @Output() volver:EventEmitter<any>=new EventEmitter<any>()
+  mesas:any;
 
-  constructor() { }
+  constructor(private fireService : FirebaseService) {
+    this.actualizarLista()
+   }
 
   ngOnInit() {}
 
   back(){
     this.volver.emit('home')
+  }
+
+  actualizarLista(){
+    this.fireService.getDB("mesas").then(datos=>this.mesas=datos)
   }
 }
