@@ -12,7 +12,7 @@ export class ClienteComponent implements OnInit {
   currentUser
   dataCurrentUser
   mesaOcupada:string;
-  estadoCliente:string 
+  estadoCliente:string; 
 
   constructor(private QRService:QRScannerService, private fireService:FirebaseService) {
     this.currentUser = fireService.getCurrentUser()

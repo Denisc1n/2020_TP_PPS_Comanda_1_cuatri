@@ -70,8 +70,8 @@ export class MenuComponent implements OnInit {
     if(this.listadoPedido.platos.fideos.cantidad > 0 || this.listadoPedido.platos.hamburguesa.cantidad > 0 || this.listadoPedido.platos.milanesa.cantidad > 0 || this.listadoPedido.platos.muzzarelitas.cantidad > 0 || this.listadoPedido.postres.chocotorta.cantidad > 0 || this.listadoPedido.postres.flan.cantidad > 0 || this.listadoPedido.postres.helado.cantidad > 0)
       pendienteComida = true;
 
-    this.pedidosService.addOrderToOrders(this.listadoPedido, this.mesaOcupada,this.totalAmount);
-    this.pedidosService.addOrderToTable(this.listadoPedido, this.mesaOcupada, this.totalAmount, pendienteComida, pendienteBebida);
+    this.pedidosService.addOrderToOrders(this.listadoPedido, 'Mesa 1 Las Divas',this.totalAmount);
+    this.pedidosService.addOrderToTable(this.listadoPedido, 'Mesa 1 Las Divas', this.totalAmount, pendienteComida, pendienteBebida);
     this.terminoPedido.emit('encuesta');
   }
 

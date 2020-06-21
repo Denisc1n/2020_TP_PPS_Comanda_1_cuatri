@@ -1,4 +1,4 @@
-<div class="container-client" *ngIf="!(estadoCliente == 'enMesa')">
+<div class="container-client" *ngIf="false">
   <p *ngIf="!estadoCliente" id="container-client-p">¡Anotate en la lista!</p>
   <p *ngIf="estadoCliente == 'listaEspera'" id="container-client-p">Mesa asignada</p>
   <p *ngIf="estadoCliente == 'encuesta'" id="container-client-p">Complete la encuesta</p>
@@ -12,6 +12,6 @@
     <img src="../../../assets/img/qr.png" alt="">
   </div>
 </div>
-<div class="menu-comidas" *ngIf="estadoCliente == 'enMesa'">
+<div class="menu-comidas" *ngIf="true">
   <app-menu (terminoPedido)="estadoCliente = $event" [mesaOcupada]="mesaOcupada"></app-menu>
 </div>
