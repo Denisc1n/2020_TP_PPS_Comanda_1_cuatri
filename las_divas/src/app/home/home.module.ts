@@ -17,6 +17,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { ListaEsperaComponent  } from '../components/metre/lista-espera/lista-espera.component'
 import { BartenderComponent } from '../components/bartender/bartender.component';
 import { CocineroComponent } from '../components/cocinero/cocinero.component';
+import { EncuestaComponent } from '../components/encuesta/encuesta.component';
 import { BebidasPipe } from '../pipes/bebidas.pipe';
 import { ComidasPipe } from '../pipes/comidas.pipe';
 
@@ -43,6 +44,7 @@ import { ComidasPipe } from '../pipes/comidas.pipe';
     ListadoMesasComponent,
     BartenderComponent,
     CocineroComponent,
+    EncuestaComponent,
     BebidasPipe,
     ComidasPipe]
 })

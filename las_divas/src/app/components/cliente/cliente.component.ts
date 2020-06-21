@@ -12,7 +12,10 @@ export class ClienteComponent implements OnInit {
   currentUser
   dataCurrentUser
   mesaOcupada:string;
-  estadoCliente:string 
+  estadoCliente:string;
+  encuesta:boolean = false;
+  pago:boolean;
+  mesaParaPagar:any;
 
   constructor(private QRService:QRScannerService, private fireService:FirebaseService) {
     this.currentUser = fireService.getCurrentUser()
@@ -112,6 +115,25 @@ export class ClienteComponent implements OnInit {
   }
 
   scanEncuesta(){
+
+    this.QRService.scan().then((a:any) => {
+
+      if(a.text == "Encuesta Las Divas")
+      {
+        this.encuesta = true;
+      }
+
+    })  
     
+  }
+
+  pagar()
+  {
+    this.fireService.getTable(this.mesaOcupada).then((datos:any) => {
+      datos.pagoPendiente = true;
+      this.pago = true;
+      this.mesaParaPagar = datos;
+      this.fireService.updateDoc("mesas", this.mesaOcupada, datos);
+    })
   }
 }
