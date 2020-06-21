@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PedidosService } from 'src/app/servicios/pedidos.service';
+import { send } from 'process';
 
 @Component({
   selector: 'app-menu',
@@ -16,6 +17,8 @@ export class MenuComponent implements OnInit {
   totalAmount:number = 0;
   orderConfirmation:boolean = false;
   menu:string = 'platos'
+  abrirConsulta:boolean = false;
+  consulta:string;
 
   constructor(private pedidosService:PedidosService) { }
 
@@ -59,9 +62,22 @@ export class MenuComponent implements OnInit {
   }
 
   agregarPedido(){
-    this.pedidosService.addOrderToOrders(this.listadoPedido, "Mesa 1 Las Divas",this.totalAmount);
-    this.pedidosService.addOrderToTable(this.listadoPedido, "Mesa 1 Las Divas", this.totalAmount);
-    this.terminoPedido.emit(true);
+    let pendienteBebida:boolean = false;
+    let pendienteComida:boolean = false;
+
+    if(this.listadoPedido.bebidas.agua.cantidad > 0 || this.listadoPedido.bebidas.gaseosa.cantidad > 0 || this.listadoPedido.bebidas.cerveza.cantidad > 0)
+      pendienteBebida = true;
+    if(this.listadoPedido.platos.fideos.cantidad > 0 || this.listadoPedido.platos.hamburguesa.cantidad > 0 || this.listadoPedido.platos.milanesa.cantidad > 0 || this.listadoPedido.platos.muzzarelitas.cantidad > 0 || this.listadoPedido.postres.chocotorta.cantidad > 0 || this.listadoPedido.postres.flan.cantidad > 0 || this.listadoPedido.postres.helado.cantidad > 0)
+      pendienteComida = true;
+
+    this.pedidosService.addOrderToOrders(this.listadoPedido, this.mesaOcupada,this.totalAmount);
+    this.pedidosService.addOrderToTable(this.listadoPedido, this.mesaOcupada, this.totalAmount, pendienteComida, pendienteBebida);
+    this.terminoPedido.emit('encuesta');
+  }
+
+  enviarConsulta(){
+    this.pedidosService.sendQuery(this.consulta, this.mesaOcupada);
+    this.abrirConsulta = false;
   }
 
 }

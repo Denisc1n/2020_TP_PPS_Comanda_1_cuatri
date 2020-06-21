@@ -307,7 +307,7 @@
         </ion-slides>
     </div>
     <div class="footer-menu">
-      <div class="queries-menu">
+      <div class="queries-menu" (click)="abrirConsulta = true">
         <span> <ion-icon name="headset"></ion-icon> Consulta al mozo</span>
       </div>
       <div class="amount-order-menu">
@@ -337,6 +337,18 @@
     <div class="confirmation-buttons-menu">
       <div class="button-menu confirm" (click)="agregarPedido()"><p>Confirmar</p></div>
       <div class="button-menu cancel" (click)="orderConfirmation=false"><p>Cancelar</p></div>
+    </div>  
+  </div>
+</div>
+<div class="order-confirmation-menu" *ngIf="abrirConsulta">
+  <div class="content-order-confirmation">
+    <p class="tittle-order-confirmation ">Ingrese su consulta al mozo</p>
+    <div class="food query">
+      <textarea name="consulta" [(ngModel)]="consulta" cols="45" rows="8"></textarea>
+    </div>
+    <div class="confirmation-buttons-menu">
+      <div class="button-menu confirm" (click)="enviarConsulta()"><p>Enviar</p></div>
+      <div class="button-menu cancel" (click)="abrirConsulta=false"><p>Cancelar</p></div>
     </div>  
   </div>
 </div>

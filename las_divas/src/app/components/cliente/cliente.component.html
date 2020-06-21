@@ -1,16 +1,17 @@
-<div class="container-client" *ngIf="!this.estaEnMesa">
-  <p *ngIf="!this.listaEspera" id="container-client-p">¡Anotate en la lista!</p>
-  <p *ngIf="this.listaEspera" id="container-client-p">Mesa asignada</p>
-  <div class="btn-scan" (click)="scanListaDeEspera()" *ngIf="!this.listaEspera">
+<div class="container-client" *ngIf="!(estadoCliente == 'enMesa')">
+  <p *ngIf="!estadoCliente" id="container-client-p">¡Anotate en la lista!</p>
+  <p *ngIf="estadoCliente == 'listaEspera'" id="container-client-p">Mesa asignada</p>
+  <p *ngIf="estadoCliente == 'encuesta'" id="container-client-p">Complete la encuesta</p>
+  <div class="btn-scan" (click)="scanListaDeEspera()" *ngIf="!estadoCliente">
     <img src="../../../assets/img/qr.png" alt="">
   </div>
-  <div class="btn-scan" (click)="scanMesa()" *ngIf="!this.listaEspera">
+  <div class="btn-scan" (click)="scanMesa()" *ngIf="estadoCliente == 'listaEspera'">
     <img src="../../../assets/img/qr.png" alt="">
   </div>
-  <div class="btn-scan" (click)="scanEncuesta()" *ngIf="!this.encuesta">
+  <div class="btn-scan" (click)="scanEncuesta()" *ngIf="estadoCliente == 'encuesta'">
     <img src="../../../assets/img/qr.png" alt="">
   </div>
 </div>
-<div class="menu-comidas" *ngIf="this.estaEnMesa">
-  <app-menu (terminoPedido)="estaEnMesa=false; encuesta=$event;" [mesaOcupada]="mesaOcupada"></app-menu>
+<div class="menu-comidas" *ngIf="estadoCliente == 'enMesa'">
+  <app-menu (terminoPedido)="estadoCliente = $event" [mesaOcupada]="mesaOcupada"></app-menu>
 </div>
