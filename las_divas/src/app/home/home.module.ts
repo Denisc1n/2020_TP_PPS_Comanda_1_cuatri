@@ -20,6 +20,7 @@ import { CocineroComponent } from '../components/cocinero/cocinero.component';
 import { EncuestaComponent } from '../components/encuesta/encuesta.component';
 import { BebidasPipe } from '../pipes/bebidas.pipe';
 import { ComidasPipe } from '../pipes/comidas.pipe';
+import { EstadoPedidoComponent } from '../components/estado-pedido/estado-pedido.component';
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { ComidasPipe } from '../pipes/comidas.pipe';
     CocineroComponent,
     EncuestaComponent,
     BebidasPipe,
+    EstadoPedidoComponent,
     ComidasPipe]
 })
 export class HomePageModule {}

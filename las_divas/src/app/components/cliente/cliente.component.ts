@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QRScannerService } from 'src/app/servicios/qrscanner.service';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
+import { PedidosService } from 'src/app/servicios/pedidos.service';
 
 @Component({
   selector: 'app-cliente',
@@ -16,11 +17,13 @@ export class ClienteComponent implements OnInit {
   encuesta:boolean = false;
   pago:boolean;
   mesaParaPagar:any;
+  opt:string;
+  encuestaTerminada:boolean = false;
 
-  constructor(private QRService:QRScannerService, private fireService:FirebaseService) {
+  constructor(private QRService:QRScannerService, private fireService:FirebaseService, private pedidoService:PedidosService) {
     this.currentUser = fireService.getCurrentUser()
 
-    if(!this.currentUser.isAnonymous){
+   if(!this.currentUser.isAnonymous){
       fireService.getDBByDoc('cliente', this.currentUser.email).then(data=>this.dataCurrentUser=data);
 
       this.fireService.getWaitingList(this.currentUser.email).then((data:any) => {
@@ -67,47 +70,50 @@ export class ClienteComponent implements OnInit {
         if(datos != undefined)
         {
           this.fireService.getTable(a.text).then((data:any) => {
-
-            if(!data.ocupada)
-            {
-              data.ocupada = true;
-              data.cliente = this.dataCurrentUser;
-              data.pedido = {productos: {}, total: 0};
-              data.pendienteBebida = false;
-              data.pendienteComida = false;
-              data.consulta = "";
-              switch(a.text)
-              { 
-                case 'Mesa 1 Las Divas':
-                  this.fireService.updateDoc("mesas", a.text, data)
-                  this.estadoCliente = 'enMesa';
-                  this.mesaOcupada = 'Mesa 1 Las Divas';
-                  break;
-
-                case 'Mesa 2 Las Divas':
-                  this.fireService.updateDoc("mesas", a.text, data)
-                  this.estadoCliente = 'enMesa';
-                  this.mesaOcupada = 'Mesa 2 Las Divas';
-                  break;
-
-                case 'Mesa 3 Las Divas':
-                  this.fireService.updateDoc("mesas", a.text, data)
-                  this.estadoCliente = 'enMesa';
-                  this.mesaOcupada = 'Mesa 3 Las Divas';
-                  break;
-
-                case 'Mesa 4 Las Divas':
-                  this.fireService.updateDoc("mesas", a.text, data)
-                  this.estadoCliente = 'enMesa';
-                  this.mesaOcupada = 'Mesa 4 Las Divas';
-                  break;
-
-                default:
-                  console.log("el qr no es el correcto");
+            console.log(this.estadoCliente)
+            if(this.estadoCliente == 'listaEspera'){
+              if(!data.ocupada)
+              {
+                data.ocupada = true;
+                data.cliente = this.dataCurrentUser;
+                switch(a.text)
+                { 
+                  case 'Mesa 1 Las Divas':
+                    this.fireService.updateDoc("mesas", a.text, data)
+                    this.estadoCliente = 'enMesa';
+                    this.mesaOcupada = 'Mesa 1 Las Divas';
+                    break;
+  
+                  case 'Mesa 2 Las Divas':
+                    this.fireService.updateDoc("mesas", a.text, data)
+                    this.estadoCliente = 'enMesa';
+                    this.mesaOcupada = 'Mesa 2 Las Divas';
+                    break;
+  
+                  case 'Mesa 3 Las Divas':
+                    this.fireService.updateDoc("mesas", a.text, data)
+                    this.estadoCliente = 'enMesa';
+                    this.mesaOcupada = 'Mesa 3 Las Divas';
+                    break;
+  
+                  case 'Mesa 4 Las Divas':
+                    this.fireService.updateDoc("mesas", a.text, data)
+                    this.estadoCliente = 'enMesa';
+                    this.mesaOcupada = 'Mesa 4 Las Divas';
+                    break;
+  
+                  default:
+                    console.error("el qr no es el correcto");
+                }
               }
+              else
+                console.error("mesa ocupada");
             }
-            else
-              console.log("mesa ocupada");
+            else if(this.estadoCliente == 'encuesta'){
+              console.log("entre");
+              this.estadoCliente = 'opts';
+            }
+
           })
         }
       })
@@ -131,9 +137,21 @@ export class ClienteComponent implements OnInit {
   {
     this.fireService.getTable(this.mesaOcupada).then((datos:any) => {
       datos.pagoPendiente = true;
-      this.pago = true;
+      this.opt = 'pagar';
       this.mesaParaPagar = datos;
       this.fireService.updateDoc("mesas", this.mesaOcupada, datos);
+    })
+  }
+
+  irse(){
+    this.pedidoService.isPaymentPending(this.mesaOcupada).then((a:any)=>{
+      if(!a.pagoPendiente){
+        this.pago = true;
+        this.estadoCliente='despedida';
+      }
+      else{
+        console.log("todavia no pagaste bro");
+      }
     })
   }
 }
