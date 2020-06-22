@@ -8,10 +8,33 @@
   <div class="btn-scan" (click)="scanMesa()" *ngIf="estadoCliente == 'listaEspera'">
     <img src="../../../assets/img/qr.png" alt="">
   </div>
-  <div class="btn-scan" (click)="scanEncuesta()" *ngIf="estadoCliente == 'encuesta'">
+  <div class="btn-scan" (click)="scanEncuesta()" *ngIf="estadoCliente == 'encuesta' && !this.encuesta">
     <img src="../../../assets/img/qr.png" alt="">
+  </div>
+  <div class="btn-pedir-cuenta" *ngIf="estadoCliente == 'pagar'">
+    <button *ngIf="!this.pago" (click)="pagar()">Pedir cuenta</button>
+    <p *ngIf="this.pago">El mozo vendra pronto...</p>
   </div>
 </div>
 <div class="menu-comidas" *ngIf="true">
   <app-menu (terminoPedido)="estadoCliente = $event" [mesaOcupada]="mesaOcupada"></app-menu>
+</div>
+<div class="encuesta-satisfaccion" *ngIf="this.encuesta">
+  <app-encuesta [mesa]="this.mesaOcupada" (cancelar)="this.encuesta = $event" (finalizar)="this.estadoCliente=$event"></app-encuesta>
+</div>
+<div class="listado-pedido">
+  <div class="order-confirmation-menu">
+    <div class="content-order-confirmation">
+      <p class="tittle-order-confirmation ">¿Confirma el pago?</p>
+      <div class="food">
+        <ul>
+          <li *ngFor="let pedido of this.mesaParaPagar.productos">
+            <p>Milanesa: {{mesaParaPagar.pedido.productos.platos.milanesa.cantidad}}</p>
+            <p>${{mesaParaPagar.pedido.productos.platos.milanesa.precio}}</p>
+          </li>
+        </ul>
+      </div>
+      <p class="food-total-amount">Total: .-</p>
+    </div>
+  </div>
 </div>

@@ -12,14 +12,7 @@ export class PedidosComponent implements OnInit {
   pedidos:any;
 
   constructor(private fireService : FirebaseService) {
-    this.fireService.getDisabledClient().then((datos) => {
-      this.pedidos = datos;
-      console.log(this.pedidos);
-
-      if(this.pedidos.length == 0){
-        document.getElementById("msj-solicitudes").innerHTML = "No hay pedidos pendientes";
-      }
-    })
+  this.Actualizar();
    }
 
   ngOnInit() {}
@@ -30,20 +23,23 @@ export class PedidosComponent implements OnInit {
 
   cambiarEstado(option:string,pedido:any)
   {
-    let i = this.pedidos.indexOf(pedido);
-    this.pedidos.splice(i, 1);
 
     if(option == 'habilitar')
-        pedido.habilitado = 'aceptado'
-    else
-        pedido.habilitado = 'rechazado'
+        pedido.estado = 'proceso'
 
-    //this.fireService.updateDoc("pedido", pedido.correo, pedido)
+    this.fireService.updateDoc("pedidos", `Mesa ${pedido.numero} Las Divas`, pedido)
 
-    console.log(this.pedidos);
+    this.Actualizar();
+  }
 
-    if(this.pedidos.length == 0){
-      document.getElementById("msj-solicitudes").innerHTML = "No hay solicitudes pendientes";
-    }
+  Actualizar() {
+    this.fireService.getPendingOrder().then((datos) => {
+      this.pedidos = datos;
+      
+
+      if(this.pedidos.length == 0){
+        document.getElementById("msj-pedidos").innerHTML = "No hay pedidos pendientes";
+      }
+    })
   }
 }

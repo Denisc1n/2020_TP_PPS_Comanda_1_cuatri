@@ -5,8 +5,8 @@
       <span>{{mesa.numero}}</span>
       <div class="ctn-notificaciones">
         <div *ngIf="mesa.consulta != ''">!</div>
-        <div *ngIf="mesa.pedidoBebida != true"><ion-icon name="wine-outline"></ion-icon></div>
-        <div *ngIf="mesa.pedidoComida != true"><ion-icon name="fast-food-outline"></ion-icon></div>
+        <div *ngIf="mesa.pedidoBebida == true"><ion-icon name="wine-outline"></ion-icon></div>
+        <div *ngIf="mesa.pedidoComida == true"><ion-icon name="fast-food-outline"></ion-icon></div>
       </div>
     </div>
 

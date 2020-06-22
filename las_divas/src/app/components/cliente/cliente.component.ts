@@ -12,7 +12,10 @@ export class ClienteComponent implements OnInit {
   currentUser
   dataCurrentUser
   mesaOcupada:string;
-  estadoCliente:string; 
+  estadoCliente:string;
+  encuesta:boolean = false;
+  pago:boolean;
+  mesaParaPagar:any;
 
   constructor(private QRService:QRScannerService, private fireService:FirebaseService) {
     this.currentUser = fireService.getCurrentUser()
@@ -65,46 +68,51 @@ export class ClienteComponent implements OnInit {
         {
           this.fireService.getTable(a.text).then((data:any) => {
 
-            if(!data.ocupada)
-            {
-              data.ocupada = true;
-              data.cliente = this.dataCurrentUser;
-              data.pedido = {productos: {}, total: 0};
-              data.pendienteBebida = false;
-              data.pendienteComida = false;
-              data.consulta = "";
-              switch(a.text)
-              { 
-                case 'Mesa 1 Las Divas':
-                  this.fireService.updateDoc("mesas", a.text, data)
-                  this.estadoCliente = 'enMesa';
-                  this.mesaOcupada = 'Mesa 1 Las Divas';
-                  break;
-
-                case 'Mesa 2 Las Divas':
-                  this.fireService.updateDoc("mesas", a.text, data)
-                  this.estadoCliente = 'enMesa';
-                  this.mesaOcupada = 'Mesa 2 Las Divas';
-                  break;
-
-                case 'Mesa 3 Las Divas':
-                  this.fireService.updateDoc("mesas", a.text, data)
-                  this.estadoCliente = 'enMesa';
-                  this.mesaOcupada = 'Mesa 3 Las Divas';
-                  break;
-
-                case 'Mesa 4 Las Divas':
-                  this.fireService.updateDoc("mesas", a.text, data)
-                  this.estadoCliente = 'enMesa';
-                  this.mesaOcupada = 'Mesa 4 Las Divas';
-                  break;
-
-                default:
-                  console.log("el qr no es el correcto");
+            if(this.estadoCliente == 'listaEspera'){
+              if(!data.ocupada)
+              {
+                data.ocupada = true;
+                data.cliente = this.dataCurrentUser;
+                data.pedido = {productos: {}, total: 0};
+                data.pendienteBebida = false;
+                data.pendienteComida = false;
+                data.consulta = "";
+                switch(a.text)
+                { 
+                  case 'Mesa 1 Las Divas':
+                    this.fireService.updateDoc("mesas", a.text, data)
+                    this.estadoCliente = 'enMesa';
+                    this.mesaOcupada = 'Mesa 1 Las Divas';
+                    break;
+  
+                  case 'Mesa 2 Las Divas':
+                    this.fireService.updateDoc("mesas", a.text, data)
+                    this.estadoCliente = 'enMesa';
+                    this.mesaOcupada = 'Mesa 2 Las Divas';
+                    break;
+  
+                  case 'Mesa 3 Las Divas':
+                    this.fireService.updateDoc("mesas", a.text, data)
+                    this.estadoCliente = 'enMesa';
+                    this.mesaOcupada = 'Mesa 3 Las Divas';
+                    break;
+  
+                  case 'Mesa 4 Las Divas':
+                    this.fireService.updateDoc("mesas", a.text, data)
+                    this.estadoCliente = 'enMesa';
+                    this.mesaOcupada = 'Mesa 4 Las Divas';
+                    break;
+  
+                  default:
+                    console.error("el qr no es el correcto");
+                }
               }
+              else
+                console.error("mesa ocupada");
             }
-            else
-              console.log("mesa ocupada");
+            else if(this.estadoCliente == 'consulta'){
+              this.encuesta = true;
+            }
           })
         }
       })
@@ -112,6 +120,25 @@ export class ClienteComponent implements OnInit {
   }
 
   scanEncuesta(){
+
+    this.QRService.scan().then((a:any) => {
+
+      if(a.text == "Encuesta Las Divas")
+      {
+        this.encuesta = true;
+      }
+
+    })  
     
+  }
+
+  pagar()
+  {
+    this.fireService.getTable(this.mesaOcupada).then((datos:any) => {
+      datos.pagoPendiente = true;
+      this.pago = true;
+      this.mesaParaPagar = datos;
+      this.fireService.updateDoc("mesas", this.mesaOcupada, datos);
+    })
   }
 }

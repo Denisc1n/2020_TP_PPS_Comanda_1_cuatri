@@ -29,4 +29,8 @@ export class PedidosService {
   sendQuery(query:string, table){
     this.db.collection('mesas').doc(table).update({consulta: query});
   }
+
+  sendQueryPayment(query:boolean, table){
+    this.db.collection('mesas').doc(table).update({pagoPendiente: query});
+  }
 }

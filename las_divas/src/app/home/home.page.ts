@@ -22,7 +22,7 @@ export class HomePage {
     else
       this.tipoUser = 'cliente';
 
-  }
+}
 
 back()
 { 
