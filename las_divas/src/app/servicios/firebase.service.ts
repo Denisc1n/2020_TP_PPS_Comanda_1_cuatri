@@ -170,7 +170,16 @@ export class FirebaseService {
     getPendingOrder()
     {
       return new Promise((resolve,reject) => {
-        this.db.collection('pedidos', ref => { return ref.where('estado', '==', 'pendiente')}).valueChanges().subscribe((pedidos:any) => {
+        this.db.collection('mesas', ref => { return ref.where('estado', '==', 'pendiente')}).valueChanges().subscribe((pedidos:any) => {
+          resolve(pedidos);
+        },error=>reject(error))
+      })
+    }
+
+    getClientQuery()
+    {
+      return new Promise((resolve,reject) => {
+        this.db.collection('mesas', ref => { return ref.where('consulta', '>', '')}).valueChanges().subscribe((pedidos:any) => {
           resolve(pedidos);
         },error=>reject(error))
       })

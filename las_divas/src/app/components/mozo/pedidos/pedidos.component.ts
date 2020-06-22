@@ -27,7 +27,7 @@ export class PedidosComponent implements OnInit {
     if(option == 'habilitar')
         pedido.estado = 'proceso'
 
-    this.fireService.updateDoc("pedidos", `Mesa ${pedido.numero} Las Divas`, pedido)
+    this.fireService.updateDoc("mesas", `Mesa ${pedido.numero} Las Divas`, pedido)
 
     this.Actualizar();
   }
