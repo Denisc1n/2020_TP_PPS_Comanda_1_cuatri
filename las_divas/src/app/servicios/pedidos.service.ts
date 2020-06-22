@@ -13,6 +13,7 @@ export class PedidosService {
       data.pendienteComida = pendentFood;
       data.pedido.total = totalAmount;
       data.pedido.productos = order;
+      data.pedido.totalConPropina = totalAmount;
       this.db.collection("mesas").doc(table).update(data).then(a=>obs.unsubscribe());
     })
   }
@@ -32,5 +33,11 @@ export class PedidosService {
 
   sendQueryPayment(query:boolean, table){
     this.db.collection('mesas').doc(table).update({pagoPendiente: query});
+  }
+
+  isPaymentPending(table:string){
+    return new Promise((resolve,reject)=>{
+      this.db.collection('mesas').doc(table).valueChanges().subscribe(data=>resolve(data), e=>reject(e))
+    })
   }
 }

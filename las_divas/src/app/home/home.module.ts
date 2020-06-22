@@ -21,6 +21,7 @@ import { EncuestaComponent } from '../components/encuesta/encuesta.component';
 import { BebidasPipe } from '../pipes/bebidas.pipe';
 import { ComidasPipe } from '../pipes/comidas.pipe';
 import { PedidosPendientesComponent } from '../components/mozo/pedidos-pendientes/pedidos-pendientes.component';
+import { EstadoPedidoComponent } from '../components/estado-pedido/estado-pedido.component';
 
 @NgModule({
   imports: [
@@ -48,6 +49,7 @@ import { PedidosPendientesComponent } from '../components/mozo/pedidos-pendiente
     EncuestaComponent,
     BebidasPipe,
     ComidasPipe,
-    PedidosPendientesComponent]
+    PedidosPendientesComponent,
+    EstadoPedidoComponent]
 })
 export class HomePageModule {}

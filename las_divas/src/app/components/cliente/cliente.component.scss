@@ -1,3 +1,11 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'cicero';
+}
+
 p {
     text-align: center;
     width: 100%;
@@ -50,11 +58,12 @@ p {
 
 .btn-pedir-cuenta
 {
-    position: relative;
-    top: 28%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
     text-align: center;
-    width: 75%;
-    height: 15%;
+    height: 100%;
 
     button
     {
@@ -65,5 +74,70 @@ p {
         border-radius: 5px;
         box-shadow: inset 0px 0px 24px 1px;
     }
+
 }
 
+.opcionesCliente{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-flow: column;
+    width: 85%;
+    height: 15%;
+
+    div{
+        background: #b40000;
+        width: 100%;
+        height: 30%;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2em;
+    }
+}
+
+.food-total-amount{
+    text-align: end;
+    width: 100%;
+}
+
+.food {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-flow: column;
+    height: 70%;
+    width: 75%;
+    li{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        p{
+            font-size: 1em;
+        }
+    }
+
+    ul
+    {
+        width: 100%;
+    }
+
+    .salir
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        height: 10%;
+        background: #b40000;
+        color: #fff;
+
+        span
+        {
+            font-size: 1.5em;
+        }
+    }
+}
