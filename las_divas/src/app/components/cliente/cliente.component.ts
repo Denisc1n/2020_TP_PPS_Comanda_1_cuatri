@@ -70,8 +70,8 @@ export class ClienteComponent implements OnInit {
         if(datos != undefined)
         {
           this.fireService.getTable(a.text).then((data:any) => {
-            console.log(this.estadoCliente)
-            if(this.estadoCliente == 'listaEspera'){
+      
+            if(this.estadoCliente == 'listaEspera' && data != undefined){
               if(!data.ocupada)
               {
                 data.ocupada = true;
@@ -110,10 +110,11 @@ export class ClienteComponent implements OnInit {
                 console.error("mesa ocupada");
             }
             else if(this.estadoCliente == 'encuesta'){
-              console.log("entre");
               this.estadoCliente = 'opts';
             }
-
+            else{
+              console.log("Codigo incorrecto");
+            }
           })
         }
       })
