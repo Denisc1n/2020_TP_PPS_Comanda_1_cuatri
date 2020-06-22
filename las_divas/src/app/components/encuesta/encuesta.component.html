@@ -29,7 +29,15 @@
               <input type="radio" name="group1" value="Malo">
           </div>
           </div>
-          <hr>
+          <div class="uploadPhoto">
+            <button type="button" (click)="this.selectPhotoInPhotolibrary()">Cargar fotos</button>
+            <ul>
+                <p>Maximo 3 fotos</p>
+                <li>
+                    {{this.files.length}}
+                </li>
+            </ul>
+          </div>
           <div class="encuesta-button">
               <input type="submit">
               <button type="button" (click)="this.cancelar.emit(undefined)">Cancelar</button>

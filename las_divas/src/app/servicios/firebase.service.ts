@@ -76,11 +76,15 @@ export class FirebaseService {
         },error=>reject(error));
       })
     });
-
   }
      
   createDocInDB(collection:string, docName:string, data:any){
     this.db.collection(collection).doc(docName).set(data);
+  }
+
+  createDocRandomInDB(collection:string,data:any)
+  {
+    this.db.collection(collection).add(data);
   }
 
   getDBByDoc(collection:string, docName:string){

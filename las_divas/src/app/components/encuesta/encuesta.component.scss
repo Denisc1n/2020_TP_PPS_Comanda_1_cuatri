@@ -55,7 +55,9 @@
 .encuesta-radio
 {
     width: 50%;
+    height: 35%;
 }
+
 .encuesta-checkbox 
 {
     width: 50%;
@@ -111,4 +113,30 @@ hr
 .encuesta-button button:hover, .encuesta-button input[type="submit"]:hover
 {
     filter: brightness(0.7);
+}
+
+.uploadPhoto
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    width: 50%;
+    height: 15%;
+    
+    button
+    {
+        width: 100%;
+        height: 50%;
+        background: #eb445a;
+        color: ghostwhite;
+        font-size: 1em;
+        border-radius: 5px;
+    }
+
+    ul
+    {
+        list-style: none;
+        height: 60%;
+    }
 }

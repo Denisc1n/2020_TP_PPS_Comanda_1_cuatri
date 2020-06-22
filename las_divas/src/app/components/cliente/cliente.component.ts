@@ -10,10 +10,10 @@ import { PedidosService } from 'src/app/servicios/pedidos.service';
 })
 export class ClienteComponent implements OnInit {
 
-  currentUser
-  dataCurrentUser
+  currentUser;
+  dataCurrentUser;
   mesaOcupada:string;
-  estadoCliente:string;
+  estadoCliente:string = "opts";
   encuesta:boolean = false;
   pago:boolean;
   mesaParaPagar:any;
