@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
+import { UtilidadService } from 'src/app/servicios/utilidad.service';
 
 @Component({
   selector: 'app-encuesta',
@@ -8,12 +9,14 @@ import { FirebaseService } from 'src/app/servicios/firebase.service';
 })
 export class EncuestaComponent implements OnInit {
 
-  constructor(private fire : FirebaseService) { }
+  constructor(private fire : FirebaseService, private utilidad : UtilidadService) { }
 
   cometario:string;
   @Input() mesa:string;
   @Output() cancelar : EventEmitter<any> = new EventEmitter<any>();
   @Output() finalizar : EventEmitter<any> = new EventEmitter<any>();
+  files = [];
+  path = [];
   mesaData:any;
   propina:number;
 
@@ -79,12 +82,39 @@ export class EncuestaComponent implements OnInit {
 
     this.subirEncuesta();
     this.fire.updateDoc("mesas", this.mesa, this.mesaData);
+    this.uploadAllPhotos();
     this.finalizar.emit(undefined);
   }
 
   subirEncuesta()
   {
     this.mesaData.encuesta = {comentario: this.getComentario(), satisfecho : this.getRadio()}
+  }
+
+  selectPhotoInPhotolibrary(){
+    this.fire.choosePhotoLibrary().then((foto) =>
+    {
+      if(this.files.length < 3)
+        this.files.push(<string>foto)
+    });
+  }
+
+  uploadAllPhotos()
+  {
+    let contador = 0;
+
+    for(let foto of this.files)
+    {
+      this.fire.uploadPhoto(foto, `encuesta/${this.utilidad.getDateTime()}_${contador}`).then((path)=>{
+
+        this.path.push(path);
+
+        if(this.path.length == this.files.length)
+        {
+          this.fire.createDocRandomInDB("encuestas", {fotos:this.path, encuesta: this.mesaData.encuesta});
+        }
+      });
+    }
   }
 
 

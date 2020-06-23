@@ -12,10 +12,10 @@ import { VibrationService } from 'src/app/servicios/vibration.service';
 })
 export class ClienteComponent implements OnInit {
 
-  currentUser
-  dataCurrentUser
+  currentUser;
+  dataCurrentUser;
   mesaOcupada:string;
-  estadoCliente:string;
+  estadoCliente:string = "opts";
   encuesta:boolean = false;
   pago:boolean;
   mesaParaPagar:any;
@@ -75,8 +75,8 @@ export class ClienteComponent implements OnInit {
         if(datos != undefined)
         {
           this.fireService.getTable(a.text).then((data:any) => {
-            console.log(this.estadoCliente)
-            if(this.estadoCliente == 'listaEspera'){
+      
+            if(this.estadoCliente == 'listaEspera' && data != undefined){
               if(!data.ocupada)
               {
                 data.ocupada = true;
@@ -120,10 +120,11 @@ export class ClienteComponent implements OnInit {
               }
             }
             else if(this.estadoCliente == 'encuesta'){
-              console.log("entre");
               this.estadoCliente = 'opts';
             }
-
+            else{
+              console.log("Codigo incorrecto");
+            }
           })
         }
       })

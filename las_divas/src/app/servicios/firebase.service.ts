@@ -76,11 +76,15 @@ export class FirebaseService {
         },error=>reject(error));
       })
     });
-
   }
      
   createDocInDB(collection:string, docName:string, data:any){
     this.db.collection(collection).doc(docName).set(data);
+  }
+
+  createDocRandomInDB(collection:string,data:any)
+  {
+    this.db.collection(collection).add(data);
   }
 
   getDBByDoc(collection:string, docName:string){
@@ -203,9 +207,14 @@ export class FirebaseService {
     getTable(id:string)
     {
       return new Promise((resolve, reject) => {
-        this.db.collection("mesas").doc(id).valueChanges().subscribe((datos) => {
-          resolve(datos);
-        },error => reject(error));
+        if(id == "Mesa 1 Las Divas" || id == "Mesa 2 Las Divas" || id == "Mesa 3 Las Divas" || id == "Mesa 4 Las Divas"){
+          this.db.collection("mesas").doc(id).valueChanges().subscribe((datos) => {
+            resolve(datos);
+          },error => reject(error));
+        }
+        else{
+          resolve(undefined);
+        }
       })
     }
 
