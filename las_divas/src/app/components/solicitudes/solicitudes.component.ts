@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { FirebaseService } from 'src/app/servicios/firebase.service';
 export class SolicitudesComponent implements OnInit {
 
   clientes:any;
+  @Output()volver : EventEmitter<any> = new EventEmitter<any>();
+
   constructor(private fireService : FirebaseService) 
   {
     this.fireService.getDisabledClient().then((datos) => {
@@ -22,6 +24,10 @@ export class SolicitudesComponent implements OnInit {
   }
 
   ngOnInit(){
+  }
+
+  back() {
+    this.volver.emit('home');
   }
 
   cambiarEstado(option:string,cliente:any)

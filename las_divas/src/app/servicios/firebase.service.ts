@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore } from 'angularfire2/firestore';
-import {storage} from 'firebase'
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import {storage, functions} from 'firebase'
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/internal/operators/map';
+import { FunctionCall } from '@angular/compiler';
 
 
 @Injectable({
@@ -12,7 +14,7 @@ import { Router } from '@angular/router';
 export class FirebaseService {
 
   
-  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore, private camera:Camera) { }
+  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore,/*private snap: AngularFirestoreDocument ,*/ private camera:Camera) { }
 
   logout(){
     return this.afAuth.auth.signOut();
@@ -167,6 +169,15 @@ export class FirebaseService {
       })
     }
 
+    getPendingClient()
+    {
+      return new Promise((resolve,reject) => {
+        this.db.collection('cliente', ref => { return ref.where('habilitado', '==', 'aceptado')}).valueChanges().subscribe((clientes:any) => {
+          resolve(clientes);
+        },error=>reject(error))
+      })
+    }
+
     getPendingOrder()
     {
       return new Promise((resolve,reject) => {
@@ -207,5 +218,10 @@ export class FirebaseService {
           resolve(datos);
         },error => reject(error));
       })
+    }
+
+    snapshotsarasa(criterio : Function) {
+      
+      this.db.collection("mesas").doc("Mesa 1 Las Divas").snapshotChanges().subscribe(data=>criterio())
     }
 }

@@ -1,4 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FirebaseService } from 'src/app/servicios/firebase.service';
+
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-estado-pedido',
@@ -8,13 +11,24 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class EstadoPedidoComponent implements OnInit {
 
   @Output() volver:EventEmitter<any> = new EventEmitter<any>();
+  mesas:any;
 
-  constructor() { }
+  constructor(private fireService : FirebaseService, private db: AngularFirestore) {
+    this.traerLista();
+   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    //this.db.collection('notificaciones').doc('dueño').update({email: 'asd@asd.com'})
+  }
 
   salir(){
     this.volver.emit(undefined)
+  }
+
+  traerLista() {
+    this.fireService.getPendingOrder().then((datos) => {
+      this.mesas = datos;
+  })
   }
 
 }

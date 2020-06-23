@@ -7,6 +7,14 @@
     font-family: 'cicero';
 }
 
+ion-icon {
+    font-size: 3.5em;
+    color: #000000;
+    position: absolute;
+    transition: all ease 0.3s;
+    z-index: 10;
+}
+
 .template-lista {
     background: url(../../../assets/img/template-lista.png) center;
     background-size: cover;
