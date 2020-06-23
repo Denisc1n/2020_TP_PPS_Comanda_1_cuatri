@@ -39,14 +39,16 @@ export class SolicitudesComponent implements OnInit {
     let i = this.clientes.indexOf(cliente);
     this.clientes.splice(i, 1);
 
-    if(option == 'habilitar')
+    if(option == 'habilitar'){
         cliente.habilitado = 'aceptado'
-    else
+        this.fireService.sendEmail(cliente, "¡Usted ha sido aceptado, bienvenido a Las Divas!","Respuesta solicitud registro Las Divas restaurant")
+    }
+    else{
         cliente.habilitado = 'rechazado'
+        this.fireService.sendEmail(cliente, "Lo sentimos, pero usted ha sido rechazado","Respuesta solicitud registro Las Divas restaurant")
+    }
 
     this.fireService.updateDoc("cliente", cliente.correo, cliente)
-
-    console.log(this.clientes);
 
     if(this.clientes.length == 0){
       document.getElementById("msj-solicitudes").innerHTML = "No hay solicitudes pendientes";

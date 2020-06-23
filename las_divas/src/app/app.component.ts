@@ -29,23 +29,10 @@ export class AppComponent {
       this.splashScreen.hide();
       if(this.splash) { 
         setTimeout(() => {
-          this.sendEmail();
           this.splash = false;
           this.router.navigate(['login']);
          },5000);
        }
     });
-  }
-
-  sendEmail()
-  {
-      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-      this.http.post('https://formspree.io/matiassh20@gmail.com',
-        { name: "test", replyto: "herreranmatias@gmail.com", message: "probando bro"},
-        { 'headers': headers }).subscribe(
-          response => {
-            console.log(response);
-          }
-        );
   }
 }

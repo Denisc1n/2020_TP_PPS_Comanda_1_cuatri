@@ -6,6 +6,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/internal/operators/map';
 import { FunctionCall } from '@angular/compiler';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ import { FunctionCall } from '@angular/compiler';
 export class FirebaseService {
 
   
-  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore,/*private snap: AngularFirestoreDocument ,*/ private camera:Camera) { }
+  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore,/*private snap: AngularFirestoreDocument ,*/ private camera:Camera,private http : HttpClient) { }
 
   logout(){
     return this.afAuth.auth.signOut()
@@ -231,6 +232,17 @@ export class FirebaseService {
 
     sendNotification(value:string, doc:string){
       this.db.collection('notificaciones').doc(doc).update({email: value})
+    }
+
+    sendEmail(cliente:any, cuerpo:any, subject:string)
+    {
+      this.http.post(`https://us-central1-comandita-bce01.cloudfunctions.net/mailer`, {
+            to: cliente.correo,
+            message: cuerpo,
+            subject: subject 
+            }).subscribe(res=>{
+              console.log(res);
+            });  
     }
   
 }
