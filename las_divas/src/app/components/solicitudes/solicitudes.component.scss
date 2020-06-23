@@ -7,7 +7,7 @@
     font-family: 'cicero';
 }
 
-ion-icon {
+.exit {
     font-size: 3.5em;
     color: #000000;
     position: absolute;
@@ -87,4 +87,23 @@ ion-icon {
 .listado-solicitudes-icons ion-icon:nth-child(1)
 {
     background: rgb(52, 151, 13);
+}
+
+.refresh {
+    border-radius: 5%;
+    width: 75%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #b40000;
+    box-shadow: 0px 18px 15px -10px rgba(0,0,0,0.75);
+    transition: all ease 0.2s;
+    font-size: 1.5em;
+    position: absolute;
+    top: 85%;
+    left: 15%;
+    &:active {
+         background: #8b0101;
+    }
 }

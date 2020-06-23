@@ -17,10 +17,10 @@ import { Vibration } from '@ionic-native/vibration/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { HttpClientModule } from '@angular/common/http';
-import { ChangeStatusColorDirective } from './directives/change-status-color.directive';
+import * as $ from 'jquery';
 
 @NgModule({
-  declarations: [AppComponent, ChangeStatusColorDirective],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, 
     AngularFireModule.initializeApp(firebaseconfig), AngularFireAuthModule, AngularFirestoreModule, HttpClientModule],

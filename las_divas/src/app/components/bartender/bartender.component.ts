@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { PedidosService } from 'src/app/servicios/pedidos.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-bartender',
@@ -13,7 +14,7 @@ export class BartenderComponent implements OnInit {
   @Output() volver:EventEmitter<any>=new EventEmitter<any>()
   consultas:any;
   mesaSeleccionada:any;
-  firstTime = true;
+  firstTime = 0;
 
   constructor(private fireService : FirebaseService, private db:AngularFirestore, private pedidosService:PedidosService) {
     this.actualizarLista()
@@ -47,9 +48,16 @@ export class BartenderComponent implements OnInit {
   }
 
   activarNotificacion(){
-    if(!this.firstTime){
-      alert('hay uno nuevo en la lista de espera perro')
+    if(this.firstTime > 0){
+      $("#notificacion-push").css("top","2%");
+      $("#content-title").text("Actualizacion pedido");
+      $("#content-msj").text("Tiene un nuevo pedido de bebida");
+
+      setTimeout(() => {
+        $("#notificacion-push").css("top","-15%");
+      }, 3000);
     }
+    this.firstTime += 1;
   }
 
   terminarPedido(numeroMesa){

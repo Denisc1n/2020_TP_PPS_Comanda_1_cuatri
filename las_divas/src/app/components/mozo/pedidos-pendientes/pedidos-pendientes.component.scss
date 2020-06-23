@@ -35,8 +35,16 @@ ion-icon {
             font-size: 2em;
         }
 
-        span {
+        p {
             position: fixed;
+        }
+        .btn-entregar{
+            width: 100%;
+            background: #ee82ee;
+            color: #fff;
+            position: relative;
+            top: 35%;
+            font-size: 1em;
         }
 }
 

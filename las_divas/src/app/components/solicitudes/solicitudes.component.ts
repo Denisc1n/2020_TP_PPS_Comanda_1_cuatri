@@ -13,6 +13,10 @@ export class SolicitudesComponent implements OnInit {
 
   constructor(private fireService : FirebaseService) 
   {
+    this.actualizar()
+  }
+
+  actualizar(){
     this.fireService.getDisabledClient().then((datos) => {
       this.clientes = datos;
       console.log(this.clientes);
