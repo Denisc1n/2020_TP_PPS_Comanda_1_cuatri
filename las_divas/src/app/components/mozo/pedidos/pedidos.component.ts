@@ -23,13 +23,18 @@ export class PedidosComponent implements OnInit {
 
   cambiarEstado(option:string,pedido:any)
   {
-
+    let hora = Date.prototype.getUTCHours()
     if(option == 'habilitar')
         pedido.estado = 'proceso'
 
-    this.fireService.updateDoc("pedidos", `Mesa ${pedido.numero} Las Divas`, pedido)
+    this.fireService.updateDoc("mesas", `Mesa ${pedido.numero} Las Divas`, pedido)
 
     this.Actualizar();
+    if(pedido.pendienteComida)
+      this.fireService.sendNotification(`Mesa ${pedido.numero} - ${hora}`, 'cocinero')
+    if(pedido.pendienteBebida)
+      this.fireService.sendNotification(`Mesa ${pedido.numero} - ${hora}`, 'bartender')
+  
   }
 
   Actualizar() {

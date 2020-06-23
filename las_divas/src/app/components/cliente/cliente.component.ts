@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { QRScannerService } from 'src/app/servicios/qrscanner.service';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
+import { PedidosService } from 'src/app/servicios/pedidos.service';
+import { UtilidadService } from 'src/app/servicios/utilidad.service';
+import { VibrationService } from 'src/app/servicios/vibration.service';
 
 @Component({
   selector: 'app-cliente',
@@ -16,11 +19,13 @@ export class ClienteComponent implements OnInit {
   encuesta:boolean = false;
   pago:boolean;
   mesaParaPagar:any;
+  opt:string;
+  encuestaTerminada:boolean = false;
 
-  constructor(private QRService:QRScannerService, private fireService:FirebaseService) {
+  constructor(private QRService:QRScannerService, private fireService:FirebaseService, private pedidoService:PedidosService, private utilidadService:UtilidadService, private vibrationService:VibrationService) {
     this.currentUser = fireService.getCurrentUser()
 
-    if(!this.currentUser.isAnonymous){
+   if(!this.currentUser.isAnonymous){
       fireService.getDBByDoc('cliente', this.currentUser.email).then(data=>this.dataCurrentUser=data);
 
       this.fireService.getWaitingList(this.currentUser.email).then((data:any) => {
@@ -51,9 +56,12 @@ export class ClienteComponent implements OnInit {
           this.fireService.createDocInDB('listaEspera', this.currentUser.uid, this.dataCurrentUser)
 
         this.estadoCliente = 'listaEspera';
+        this.fireService.sendNotification(this.currentUser.email, 'metre')
       }
       else{
         console.error('Primero debe ir a la lista de espera')
+        this.utilidadService.textoMostrar('#modal-error-text-p-general', 'Primero debes anotarte a la lista de espera', '#modal-error-general', '#container-client')
+        this.vibrationService.error()
       }
     })
   }
@@ -67,16 +75,12 @@ export class ClienteComponent implements OnInit {
         if(datos != undefined)
         {
           this.fireService.getTable(a.text).then((data:any) => {
-
+            console.log(this.estadoCliente)
             if(this.estadoCliente == 'listaEspera'){
               if(!data.ocupada)
               {
                 data.ocupada = true;
                 data.cliente = this.dataCurrentUser;
-                data.pedido = {productos: {}, total: 0};
-                data.pendienteBebida = false;
-                data.pendienteComida = false;
-                data.consulta = "";
                 switch(a.text)
                 { 
                   case 'Mesa 1 Las Divas':
@@ -105,14 +109,21 @@ export class ClienteComponent implements OnInit {
   
                   default:
                     console.error("el qr no es el correcto");
+                    this.utilidadService.textoMostrar('#modal-error-text-p-general', 'El QR no es el correcto', '#modal-error-general', '#container-client')
+                    this.vibrationService.error()
                 }
               }
-              else
+              else{
                 console.error("mesa ocupada");
+                this.utilidadService.textoMostrar('#modal-error-text-p-general', 'La mesa se encuentra ocupada', '#modal-error-general', '#container-client')
+                this.vibrationService.error()
+              }
             }
-            else if(this.estadoCliente == 'consulta'){
-              this.encuesta = true;
+            else if(this.estadoCliente == 'encuesta'){
+              console.log("entre");
+              this.estadoCliente = 'opts';
             }
+
           })
         }
       })
@@ -136,9 +147,23 @@ export class ClienteComponent implements OnInit {
   {
     this.fireService.getTable(this.mesaOcupada).then((datos:any) => {
       datos.pagoPendiente = true;
-      this.pago = true;
+      this.opt = 'pagar';
       this.mesaParaPagar = datos;
       this.fireService.updateDoc("mesas", this.mesaOcupada, datos);
+    })
+  }
+
+  irse(){
+    this.pedidoService.isPaymentPending(this.mesaOcupada).then((a:any)=>{
+      if(!a.pagoPendiente){
+        this.pago = true;
+        this.estadoCliente='despedida';
+      }
+      else{
+        console.error("todavia no pagaste bro");
+        this.utilidadService.textoMostrar('#modal-error-text-p-general', 'Todavía no has pagado', '#btn-pedir-cuenta', '#container-client')
+        this.vibrationService.error()
+      }
     })
   }
 }

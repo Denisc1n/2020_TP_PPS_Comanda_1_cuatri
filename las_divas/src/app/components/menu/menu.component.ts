@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PedidosService } from 'src/app/servicios/pedidos.service';
 import { send } from 'process';
+import { FirebaseService } from 'src/app/servicios/firebase.service';
 
 @Component({
   selector: 'app-menu',
@@ -20,7 +21,7 @@ export class MenuComponent implements OnInit {
   abrirConsulta:boolean = false;
   consulta:string;
 
-  constructor(private pedidosService:PedidosService) { }
+  constructor(private pedidosService:PedidosService, private fireService:FirebaseService) { }
 
   ngOnInit() { }
 
@@ -78,6 +79,7 @@ export class MenuComponent implements OnInit {
   enviarConsulta(){
     this.pedidosService.sendQuery(this.consulta, this.mesaOcupada);
     this.abrirConsulta = false;
+    this.fireService.sendNotification(this.fireService.getCurrentUser().email, 'mozoConsulta')
   }
 
 }

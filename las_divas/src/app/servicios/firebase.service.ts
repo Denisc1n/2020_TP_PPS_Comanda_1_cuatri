@@ -15,7 +15,7 @@ export class FirebaseService {
   constructor(private afAuth: AngularFireAuth, private db: AngularFirestore, private camera:Camera) { }
 
   logout(){
-    return this.afAuth.auth.signOut();
+    return this.afAuth.auth.signOut()
   }
 
   loginEmail(email:string, pass:string){
@@ -170,7 +170,16 @@ export class FirebaseService {
     getPendingOrder()
     {
       return new Promise((resolve,reject) => {
-        this.db.collection('pedidos', ref => { return ref.where('estado', '==', 'pendiente')}).valueChanges().subscribe((pedidos:any) => {
+        this.db.collection('mesas', ref => { return ref.where('estado', '==', 'pendiente')}).valueChanges().subscribe((pedidos:any) => {
+          resolve(pedidos);
+        },error=>reject(error))
+      })
+    }
+
+    getClientQuery()
+    {
+      return new Promise((resolve,reject) => {
+        this.db.collection('mesas', ref => { return ref.where('consulta', '>', '')}).valueChanges().subscribe((pedidos:any) => {
           resolve(pedidos);
         },error=>reject(error))
       })
@@ -199,4 +208,9 @@ export class FirebaseService {
         },error => reject(error));
       })
     }
+
+    sendNotification(value:string, doc:string){
+      this.db.collection('notificaciones').doc(doc).update({email: value})
+    }
+  
 }

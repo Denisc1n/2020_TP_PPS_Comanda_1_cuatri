@@ -1,40 +1,56 @@
-<div class="container-client" *ngIf="false">
+<div class="container-client" *ngIf="!(estadoCliente == 'enMesa' || opt)">
   <p *ngIf="!estadoCliente" id="container-client-p">¡Anotate en la lista!</p>
   <p *ngIf="estadoCliente == 'listaEspera'" id="container-client-p">Mesa asignada</p>
-  <p *ngIf="estadoCliente == 'encuesta'" id="container-client-p">Complete la encuesta</p>
+  <p *ngIf="estadoCliente == 'encuesta'" id="container-client-p">Continúe con su pedido</p>
   <div class="btn-scan" (click)="scanListaDeEspera()" *ngIf="!estadoCliente">
     <img src="../../../assets/img/qr.png" alt="">
   </div>
   <div class="btn-scan" (click)="scanMesa()" *ngIf="estadoCliente == 'listaEspera'">
     <img src="../../../assets/img/qr.png" alt="">
   </div>
-  <div class="btn-scan" (click)="scanEncuesta()" *ngIf="estadoCliente == 'encuesta' && !this.encuesta">
+  <div class="btn-scan" (click)="scanMesa()" *ngIf="estadoCliente == 'encuesta'">
     <img src="../../../assets/img/qr.png" alt="">
   </div>
-  <div class="btn-pedir-cuenta" *ngIf="estadoCliente == 'pagar'">
-    <button *ngIf="!this.pago" (click)="pagar()">Pedir cuenta</button>
-    <p *ngIf="this.pago">El mozo vendra pronto...</p>
-  </div>
+  <div class="opcionesCliente" *ngIf="this.estadoCliente == 'opts'">
+      <div (click)="opt = 'estadoPedido'"><span>Estado del pedido</span></div>
+      <div (click)="opt = 'encuesta'"><span>Encuesta</span></div>
+      <div *ngIf="encuestaTerminada" (click)="pagar()"><span>Pedir cuenta</span></div>
+  </div>  
 </div>
-<div class="menu-comidas" *ngIf="true">
+
+<div class="menu-comidas" *ngIf="estadoCliente == 'enMesa'">
   <app-menu (terminoPedido)="estadoCliente = $event" [mesaOcupada]="mesaOcupada"></app-menu>
 </div>
-<div class="encuesta-satisfaccion" *ngIf="this.encuesta">
-  <app-encuesta [mesa]="this.mesaOcupada" (cancelar)="this.encuesta = $event" (finalizar)="this.estadoCliente=$event"></app-encuesta>
+
+<div class="encuesta-satisfaccion" *ngIf="opt == 'encuesta'">
+  <app-encuesta [mesa]="this.mesaOcupada" (cancelar)="opt = $event;" (finalizar)="opt = $event; encuestaTerminada = true"></app-encuesta>
 </div>
-<div class="listado-pedido">
-  <div class="order-confirmation-menu">
-    <div class="content-order-confirmation">
-      <p class="tittle-order-confirmation ">¿Confirma el pago?</p>
-      <div class="food">
-        <ul>
-          <li *ngFor="let pedido of this.mesaParaPagar.productos">
-            <p>Milanesa: {{mesaParaPagar.pedido.productos.platos.milanesa.cantidad}}</p>
-            <p>${{mesaParaPagar.pedido.productos.platos.milanesa.precio}}</p>
-          </li>
-        </ul>
-      </div>
-      <p class="food-total-amount">Total: .-</p>
-    </div>
+
+<div class="btn-pedir-cuenta" *ngIf="opt == 'pagar'">
+  <div class="food">
+    <ul>
+      <li *ngIf="mesaParaPagar.pedido.productos.platos.milanesa.cantidad > 0"><p>Milanesa: {{mesaParaPagar.pedido.productos.platos.milanesa.cantidad}}</p><p>${{mesaParaPagar.pedido.productos.platos.milanesa.precio}}</p></li>
+      <li *ngIf="mesaParaPagar.pedido.productos.platos.fideos.cantidad > 0"><p>Fideos: {{mesaParaPagar.pedido.productos.platos.fideos.cantidad}}</p><p>${{mesaParaPagar.pedido.productos.platos.fideos.precio}}</p></li>
+      <li *ngIf="mesaParaPagar.pedido.productos.platos.muzzarelitas.cantidad > 0"><p>Muzzarelitas: {{mesaParaPagar.pedido.productos.platos.muzzarelitas.cantidad}}</p><p>${{mesaParaPagar.pedido.productos.platos.muzzarelitas.precio}}</p></li>
+      <li *ngIf="mesaParaPagar.pedido.productos.platos.hamburguesa.cantidad > 0"><p>Hamburguesa: {{mesaParaPagar.pedido.productos.platos.hamburguesa.cantidad}}</p><p>${{mesaParaPagar.pedido.productos.platos.hamburguesa.precio}}</p></li>
+      <li *ngIf="mesaParaPagar.pedido.productos.bebidas.agua.cantidad > 0"><p>Agua: {{mesaParaPagar.pedido.productos.bebidas.agua.cantidad}}</p><p>${{mesaParaPagar.pedido.productos.bebidas.agua.precio}}</p></li>
+      <li *ngIf="mesaParaPagar.pedido.productos.bebidas.cerveza.cantidad > 0"><p>Cerveza: {{mesaParaPagar.pedido.productos.bebidas.cerveza.cantidad}}</p><p>${{mesaParaPagar.pedido.productos.bebidas.cerveza.precio}}</p></li>
+      <li *ngIf="mesaParaPagar.pedido.productos.bebidas.gaseosa.cantidad > 0"><p>Gaseosa: {{mesaParaPagar.pedido.productos.bebidas.gaseosa.cantidad}}</p><p>${{mesaParaPagar.pedido.productos.bebidas.gaseosa.precio}}</p></li>
+      <li *ngIf="mesaParaPagar.pedido.productos.postres.chocotorta.cantidad > 0"><p>Chocotorta: {{mesaParaPagar.pedido.productos.postres.chocotorta.cantidad}}</p><p>${{mesaParaPagar.pedido.productos.postres.chocotorta.precio}}</p></li>
+      <li *ngIf="mesaParaPagar.pedido.productos.postres.flan.cantidad > 0"><p>Flan: {{mesaParaPagar.pedido.productos.postres.flan.cantidad}}</p><p>${{mesaParaPagar.pedido.productos.postres.flan.precio}}</p></li>
+      <li *ngIf="mesaParaPagar.pedido.productos.postres.helado.cantidad > 0"><p>Helado: {{mesaParaPagar.pedido.productos.postres.helado.cantidad}}</p><p>${{mesaParaPagar.pedido.productos.postres.helado.precio}}</p></li>
+      <li><p>Propina: </p><p>${{mesaParaPagar.pedido.propina}}</p></li>
+    </ul>
+
+    <p class="food-total-amount">Total: ${{mesaParaPagar.pedido.totalConPropina}}.-</p>
+    <p >El mozo vendra pronto...</p>
+    <div class="salir" (click)="irse()"><span>Salir</span></div>
   </div>
 </div>
+<div class="despedida" *ngIf="this.estadoCliente == 'despedida'">
+  <p>¡Gracias por su visita, vuelva pronto!</p>
+</div>
+<div class="estado-pedido" *ngIf="opt == 'estadoPedido'">
+  <app-estado-pedido (volver)="opt = $event"></app-estado-pedido>
+</div>
+

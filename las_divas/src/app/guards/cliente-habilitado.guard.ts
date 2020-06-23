@@ -3,13 +3,14 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } fro
 import { Observable } from 'rxjs';
 import { FirebaseService } from '../servicios/firebase.service';
 import { UtilidadService } from '../servicios/utilidad.service';
+import { VibrationService } from '../servicios/vibration.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteHabilitadoGuard implements CanActivate {
 
-  constructor(private fire : FirebaseService, private utilidad : UtilidadService){}
+  constructor(private fire : FirebaseService, private vibrationService:VibrationService,private utilidad : UtilidadService){}
   current :any;
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -24,8 +25,10 @@ export class ClienteHabilitadoGuard implements CanActivate {
           if(datos != undefined){
             if(datos.habilitado == 'aceptado')
               return true;
-            else
+            else{
               this.utilidad.textoMostrar("#mensajeTexto", "Usted no se encuentra autorizado, contactese con el mozo", "#mensajeLogin", "");
+              this.vibrationService.error()
+            }
           }
           else{
             return true;

@@ -1,5 +1,7 @@
 import { Component, OnInit,Output, EventEmitter } from '@angular/core';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { PedidosService } from 'src/app/servicios/pedidos.service';
 
 @Component({
   selector: 'app-cocinero',
@@ -11,12 +13,15 @@ export class CocineroComponent implements OnInit {
   @Output() volver:EventEmitter<any>=new EventEmitter<any>()
   consultas:any;
   mesaSeleccionada:any;
+  firstTime = true;
 
-  constructor(private fireService : FirebaseService) {
+  constructor(private fireService : FirebaseService, private db:AngularFirestore, private pedidosService:PedidosService) {
     this.actualizarLista()
    }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.db.collection('notificaciones').doc('cocinero').snapshotChanges().subscribe(data=>this.activarNotificacion())
+  }
 
   back(){
     this.volver.emit('home')
@@ -38,4 +43,14 @@ export class CocineroComponent implements OnInit {
     this.mesaSeleccionada = null;
   }
 
+  activarNotificacion(){
+    if(!this.firstTime){
+      alert('hay uno nuevo en la lista de espera perro')
+    }
+  }
+
+  terminarPedido(numeroMesa){
+    this.pedidosService.changeOrderStatus('pendienteComida', false, `Mesa ${numeroMesa} Las Divas`)
+    this.fireService.sendNotification(`Mesa ${numeroMesa} Las Divas`, 'mozoComida')
+  }
 }

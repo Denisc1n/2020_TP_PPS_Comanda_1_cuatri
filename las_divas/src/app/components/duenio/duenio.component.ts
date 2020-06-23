@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-duenio',
@@ -8,12 +9,21 @@ import { Component, OnInit } from '@angular/core';
 export class DuenioComponent implements OnInit {
 
   solicitudes:boolean = false;
-  constructor() { }
+  firstTime = true;
+  constructor(private db:AngularFirestore) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.db.collection('notificaciones').doc('dueño').snapshotChanges().subscribe(data=>this.activarNotificacion())
+  }
 
   verSolicitudes()
   {
     this.solicitudes = true;
+  }
+
+  activarNotificacion(){
+    if(!this.firstTime){
+      alert('hay uno nuevo wachin')
+    }
   }
 }

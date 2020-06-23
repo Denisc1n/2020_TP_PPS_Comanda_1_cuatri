@@ -30,7 +30,7 @@ export class PagosComponent implements OnInit {
 
   cambiarEstadoPago(){
     this.pedidosService.sendQueryPayment(false,`Mesa ${this.mesaParaPagar.numero} Las Divas`);
-    this.fireService.updateDoc('mesas',`Mesa ${this.mesaParaPagar.numero} Las Divas`,{cliente: {},consulta : "",encuesta: {comentario : "", satisfecho: ""} ,ocupada:false,pagoPendiente: false,pedido: {productos:{},total: 0},pendienteBebida:false,pendienteComida:false});
+    this.fireService.updateDoc('mesas',`Mesa ${this.mesaParaPagar.numero} Las Divas`,{cliente: {},consulta : "",encuesta: {comentario : "", satisfecho: ""} ,ocupada:false,pagoPendiente: false,pedido: {productos:{},total: 0},pendienteBebida:false,pendienteComida:false, estado: ""});
     this.paymentConfirmation = false;
     this.actualizarLista();
   }

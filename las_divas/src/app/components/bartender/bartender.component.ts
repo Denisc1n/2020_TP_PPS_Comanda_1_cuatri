@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { PedidosService } from 'src/app/servicios/pedidos.service';
 
 @Component({
   selector: 'app-bartender',
@@ -11,14 +13,15 @@ export class BartenderComponent implements OnInit {
   @Output() volver:EventEmitter<any>=new EventEmitter<any>()
   consultas:any;
   mesaSeleccionada:any;
+  firstTime = true;
 
-  constructor(private fireService : FirebaseService) {
+  constructor(private fireService : FirebaseService, private db:AngularFirestore, private pedidosService:PedidosService) {
     this.actualizarLista()
    }
 
   ngOnInit() 
   {
-  
+    this.db.collection('notificaciones').doc('bartender').snapshotChanges().subscribe(data=>this.activarNotificacion())
   }
 
   back(){
@@ -41,6 +44,17 @@ export class BartenderComponent implements OnInit {
   {
     (<HTMLInputElement>document.querySelector(".ctn-lista-mesas")).style.filter = "none";
     this.mesaSeleccionada = null;
+  }
+
+  activarNotificacion(){
+    if(!this.firstTime){
+      alert('hay uno nuevo en la lista de espera perro')
+    }
+  }
+
+  terminarPedido(numeroMesa){
+    this.pedidosService.changeOrderStatus('pendienteComida', false, `Mesa ${numeroMesa} Las Divas`)
+    this.fireService.sendNotification(`Mesa ${numeroMesa} Las Divas`, 'mozoBebida')
   }
 
 }

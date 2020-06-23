@@ -55,3 +55,44 @@
     width: 300px;
     height: 300px;
 }
+
+.modal-error-general
+{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 70%;
+    height: 35%;
+    z-index: 5;
+}
+
+.modal-error-img-general
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background: #fcfefc;
+}
+
+.modal-error-img-general img
+{
+    width: 60%;
+}
+
+.modal-error-text-general
+{
+    height: 40%;
+    background: #7a0101;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 5;
+}
+
+.modal-error-text-general p {
+    font-size: 1.5em;
+}

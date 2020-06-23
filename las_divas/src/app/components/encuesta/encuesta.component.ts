@@ -79,7 +79,7 @@ export class EncuestaComponent implements OnInit {
 
     this.subirEncuesta();
     this.fire.updateDoc("mesas", this.mesa, this.mesaData);
-    this.finalizar.emit("pagar");
+    this.finalizar.emit(undefined);
   }
 
   subirEncuesta()
