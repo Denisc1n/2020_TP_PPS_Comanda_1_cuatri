@@ -27,6 +27,7 @@
 </div>
 
 <div class="btn-pedir-cuenta" *ngIf="opt == 'pagar'">
+  <ion-icon name="close-circle-sharp" class="back" (click)="salir()"></ion-icon>
   <div class="food">
     <ul>
       <li *ngIf="mesaParaPagar.pedido.productos.platos.milanesa.cantidad > 0"><p>Milanesa: {{mesaParaPagar.pedido.productos.platos.milanesa.cantidad}}</p><p>${{mesaParaPagar.pedido.productos.platos.milanesa.precio}}</p></li>
@@ -51,6 +52,6 @@
   <p>¡Gracias por su visita, vuelva pronto!</p>
 </div>
 <div class="estado-pedido" *ngIf="opt == 'estadoPedido'">
-  <app-estado-pedido (volver)="opt = $event"></app-estado-pedido>
+  <app-estado-pedido (volver)="opt = $event" [mesaOcupada]="mesaOcupada"></app-estado-pedido>
 </div>
 

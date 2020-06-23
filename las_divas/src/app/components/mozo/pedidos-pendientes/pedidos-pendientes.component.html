@@ -3,6 +3,7 @@
   <div class="lista-mesas">
     <div class="mesas {{mesa.ocupada}}" *ngFor="let mesa of this.pedidos">
       <span>{{mesa.numero}}</span>
+      <div *ngIf="terminado(mesa)" (click)="entregar(mesa.numero)"><span>Entregar</span></div>
       <div class="ctn-notificaciones">
         <div *ngIf="mesa.pendienteBebida == true"><ion-icon name="wine-outline" (click)="mesaSeleccionadaBebida = mesa"></ion-icon></div>
         <div *ngIf="mesa.pendienteComida == true"><ion-icon name="fast-food-outline" (click)="mesaSeleccionadaComida = mesa"></ion-icon></div>

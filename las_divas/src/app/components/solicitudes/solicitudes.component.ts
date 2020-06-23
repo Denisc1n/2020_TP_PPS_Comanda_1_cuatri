@@ -27,7 +27,7 @@ export class SolicitudesComponent implements OnInit {
   }
 
   back() {
-    this.volver.emit('home');
+    this.volver.emit(false);
   }
 
   cambiarEstado(option:string,cliente:any)

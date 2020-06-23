@@ -1,17 +1,17 @@
-<ion-icon name="close-circle-sharp" (click)="salir()"></ion-icon>
+<ion-icon name="close-circle-sharp" class="back" (click)="salir()"></ion-icon>
 <div class="ctn-estado-de-pedido">
   <div class="ctn-estados">
-    <div class="ctn-comida">
-      <ion-icon name="fast-food-outline"></ion-icon>
+    <div class="ctn-comida" [changeStatusColor]="mesa.pendienteComida">
+      <ion-icon name="pizza-outline"></ion-icon>
     </div>
-    <div class="ctn-bebida">
+    <div class="ctn-bebida" [changeStatusColor]="mesa.pendienteBebida">
       <ion-icon name="wine-outline"></ion-icon>
     </div>
   </div>
   <div class="ctn-estado-actual">
-    <span class="estado-actual">En proceso</span>
+    <span class="estado-actual">{{estado}}</span>
   </div>
-  <div class="btn-confirmacion">
+  <div class="btn-confirmacion" (click)="pedidoRecibido()">
     <span>Confirmar recepción</span>
   </div>
 </div>

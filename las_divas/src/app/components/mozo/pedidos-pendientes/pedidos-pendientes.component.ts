@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
+import { PedidosService } from 'src/app/servicios/pedidos.service';
 
 @Component({
   selector: 'app-pedidos-pendientes',
@@ -13,7 +14,7 @@ export class PedidosPendientesComponent implements OnInit {
   mesaSeleccionadaComida : any;
   mesaSeleccionadaBebida : any;
 
-  constructor(private fireService : FirebaseService) {
+  constructor(private fireService : FirebaseService, private pedidosService:PedidosService) {
     this.actualizarLista()
    }
 
@@ -25,6 +26,25 @@ export class PedidosPendientesComponent implements OnInit {
 
 
   actualizarLista(){
-    this.fireService.getDB("mesas").then(datos=>this.pedidos=datos)
+    this.fireService.getDB("mesas").then(datos=>{
+      this.pedidos=datos
+      for (let mesita of this.pedidos) {
+        if(this.terminado(mesita) && mesita.estado == 'en proceso')
+          this.pedidosService.changeOrderStatus('estado', 'terminado', `Mesa ${mesita.numero} Las Divas`)
+      }
+    })
+  }
+
+  entregar(mesa){
+    this.pedidosService.changeOrderStatus('estado', 'entregado', `Mesa ${mesa} Las Divas`)
+  }
+
+  terminado(mesa):boolean{
+    let retorno:boolean = false;
+    if(mesa.estado == 'en proceso' && !mesa.pendienteBebida && !mesa.pendienteComida){
+      retorno = true;
+    }
+
+    return retorno
   }
 }

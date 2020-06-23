@@ -23,9 +23,10 @@ export class PedidosComponent implements OnInit {
 
   cambiarEstado(option:string,pedido:any)
   {
-    let hora = Date.prototype.getUTCHours()
+    let date = new Date()
+    let hora = date.getUTCHours()
     if(option == 'habilitar')
-        pedido.estado = 'proceso'
+        pedido.estado = 'en proceso'
 
     this.fireService.updateDoc("mesas", `Mesa ${pedido.numero} Las Divas`, pedido)
 

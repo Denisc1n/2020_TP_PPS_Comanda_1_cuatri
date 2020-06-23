@@ -22,6 +22,7 @@ import { BebidasPipe } from '../pipes/bebidas.pipe';
 import { ComidasPipe } from '../pipes/comidas.pipe';
 import { PedidosPendientesComponent } from '../components/mozo/pedidos-pendientes/pedidos-pendientes.component';
 import { EstadoPedidoComponent } from '../components/estado-pedido/estado-pedido.component';
+import { ChangeStatusColorDirective } from '../directives/change-status-color.directive'
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import { EstadoPedidoComponent } from '../components/estado-pedido/estado-pedido
     BebidasPipe,
     ComidasPipe,
     PedidosPendientesComponent,
-    EstadoPedidoComponent]
+    EstadoPedidoComponent,
+    ChangeStatusColorDirective]
 })
 export class HomePageModule {}

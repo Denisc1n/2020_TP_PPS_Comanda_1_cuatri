@@ -42,8 +42,9 @@ export class PedidosService {
     })
   }
 
-  changeOrderStatus(type:string, status:boolean, table:string){
-    this.db.collection('mesas').doc(table).update({[type]: status});
+  changeOrderStatus(type:string, status:any, table:string){
+    console.log(table)
+    this.db.collection('mesas').doc(table).update({[type]: status}).then(a=>console.log(a),e=>console.log(e));
   }
 
 }

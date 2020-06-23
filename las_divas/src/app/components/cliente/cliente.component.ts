@@ -15,7 +15,7 @@ export class ClienteComponent implements OnInit {
   currentUser;
   dataCurrentUser;
   mesaOcupada:string;
-  estadoCliente:string = "opts";
+  estadoCliente:string;
   encuesta:boolean = false;
   pago:boolean;
   mesaParaPagar:any;
@@ -159,12 +159,18 @@ export class ClienteComponent implements OnInit {
       if(!a.pagoPendiente){
         this.pago = true;
         this.estadoCliente='despedida';
+        this.fireService.logout()
       }
       else{
         console.error("todavia no pagaste bro");
-        this.utilidadService.textoMostrar('#modal-error-text-p-general', 'Todavía no has pagado', '#btn-pedir-cuenta', '#container-client')
+        this.utilidadService.textoMostrar('#modal-error-text-p-general', 'Todavía no has pagado', '#modal-error-general', '.btn-pedir-cuenta')
         this.vibrationService.error()
       }
     })
   }
+
+  salir(){
+    this.opt = undefined
+  }
+
 }
