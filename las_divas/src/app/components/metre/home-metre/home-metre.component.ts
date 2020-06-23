@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-home-metre',
@@ -18,9 +19,18 @@ export class HomeMetreComponent implements OnInit {
   }
 
   activarNotificacion(){
+    this.firstTime = false;
     if(!this.firstTime){
-      alert('hay uno nuevo en la lista de espera perro')
+      $("#notificacion-push").css("top","2%");
+      $("#content-title").text("Nuevo usuario en lista de espera");
+      $("#content-msj").text("Tiene un usuario nuevo en lista de espera");
+
+      setTimeout(() => {
+        $("#notificacion-push").css("top","-15%");
+      }, 3000);
+      
     }
+  
   }
 
 }

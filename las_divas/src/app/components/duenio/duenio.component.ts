@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { FirebaseService } from 'src/app/servicios/firebase.service';
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-duenio',
@@ -11,7 +14,8 @@ export class DuenioComponent implements OnInit {
   solicitudes:boolean = false;
   redirect = 'home'
   firstTime = true;
-  constructor(private db:AngularFirestore) { }
+  clientes:any;
+  constructor(private db:AngularFirestore,private fireService : FirebaseService) { }
 
   ngOnInit() {
     this.db.collection('notificaciones').doc('dueño').snapshotChanges().subscribe(data=>this.activarNotificacion())
@@ -23,8 +27,24 @@ export class DuenioComponent implements OnInit {
   }
 
   activarNotificacion(){
+    this.firstTime = false;
     if(!this.firstTime){
-      alert('hay uno nuevo wachin')
+      $("#notificacion-push").css("top","2%");
+      $("#content-title").text("Nuevo Usuario");
+      $("#content-msj").text("Tiene un usuario nuevo pendiente de confirmación");
+
+      this.fireService.getDisabledClient().then((datos) => {
+      this.clientes = datos;
+
+      if(this.clientes.length == 0){
+        document.getElementById("msj-solicitudes").innerHTML = "No hay solicitudes pendientes";
+      }
+    })
+
+      setTimeout(() => {
+        $("#notificacion-push").css("top","-15%");
+      }, 3000);
+      
     }
   }
 }

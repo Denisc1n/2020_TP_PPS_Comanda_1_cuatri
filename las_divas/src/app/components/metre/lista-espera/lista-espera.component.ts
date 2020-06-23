@@ -21,10 +21,6 @@ export class ListaEsperaComponent implements OnInit {
 
   ngOnInit(){
     //this.fireService.snapshotsarasa(this.traerLista());
-    this.db.collection("mesas").doc("Mesa 1 Las Divas").snapshotChanges().subscribe(data=>this.traerLista())
-    this.db.collection("mesas").doc("Mesa 2 Las Divas").snapshotChanges().subscribe(data=>this.traerLista())
-    this.db.collection("mesas").doc("Mesa 3 Las Divas").snapshotChanges().subscribe(data=>this.traerLista())
-    this.db.collection("mesas").doc("Mesa 4 Las Divas").snapshotChanges().subscribe(data=>this.traerLista())
   }
 
   back() {
@@ -35,8 +31,6 @@ export class ListaEsperaComponent implements OnInit {
   {
     this.fireService.getDB("listaEspera").then((datos) => {
       this.clientes = datos;
-      console.log("cambio")
-      
 
       if(this.clientes.length == 0){
         document.getElementById("msj-espera").innerHTML = "No hay clientes en espera";

@@ -17,6 +17,7 @@ import { Vibration } from '@ionic-native/vibration/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { HttpClientModule } from '@angular/common/http';
+import * as $ from 'jquery';
 
 @NgModule({
   declarations: [AppComponent],
