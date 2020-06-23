@@ -13,7 +13,7 @@ export class DuenioComponent implements OnInit {
 
   solicitudes:boolean = false;
   redirect = 'home'
-  firstTime = true;
+  firstTime = 0;
   clientes:any;
   constructor(private db:AngularFirestore,private fireService : FirebaseService) { }
 
@@ -27,8 +27,8 @@ export class DuenioComponent implements OnInit {
   }
 
   activarNotificacion(){
-    this.firstTime = false;
-    if(!this.firstTime){
+    
+    if(this.firstTime > 0){
       $("#notificacion-push").css("top","2%");
       $("#content-title").text("Nuevo Usuario");
       $("#content-msj").text("Tiene un usuario nuevo pendiente de confirmación");
@@ -46,5 +46,6 @@ export class DuenioComponent implements OnInit {
       }, 3000);
       
     }
+    this.firstTime += 1;
   }
 }

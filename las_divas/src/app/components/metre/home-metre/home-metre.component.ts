@@ -10,7 +10,7 @@ import * as $ from 'jquery';
 export class HomeMetreComponent implements OnInit {
 
   redirect:string = 'home';
-  firstTime = true;
+  firstTime = 0;
   
   constructor(private db:AngularFirestore) { }
 
@@ -19,8 +19,8 @@ export class HomeMetreComponent implements OnInit {
   }
 
   activarNotificacion(){
-    this.firstTime = false;
-    if(!this.firstTime){
+    
+    if(this.firstTime > 0){
       $("#notificacion-push").css("top","2%");
       $("#content-title").text("Nuevo usuario en lista de espera");
       $("#content-msj").text("Tiene un usuario nuevo en lista de espera");
@@ -30,7 +30,7 @@ export class HomeMetreComponent implements OnInit {
       }, 3000);
       
     }
-  
+    this.firstTime += 1;
   }
 
 }
