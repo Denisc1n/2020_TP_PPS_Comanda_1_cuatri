@@ -14,6 +14,7 @@ export class PedidosService {
       data.pedido.total = totalAmount;
       data.pedido.productos = order;
       data.pedido.totalConPropina = totalAmount;
+      data.estado = 'pendiente';
       this.db.collection("mesas").doc(table).update(data).then(a=>obs.unsubscribe());
     })
   }
@@ -40,4 +41,9 @@ export class PedidosService {
       this.db.collection('mesas').doc(table).valueChanges().subscribe(data=>resolve(data), e=>reject(e))
     })
   }
+
+  changeOrderStatus(type:string, status:boolean, table:string){
+    this.db.collection('mesas').doc(table).update({[type]: status});
+  }
+
 }

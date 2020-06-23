@@ -140,10 +140,12 @@ export class LoginPage implements OnInit {
     else if(this.email == "")
     {
       this.textoMostrar("Correo Requerido");
+      this.vibrationService.error()
     }
     else
     {
       this.textoMostrar("El campo debe ser de tipo correo");
+      this.vibrationService.error()
     }
 
     return retorno;
@@ -156,10 +158,12 @@ export class LoginPage implements OnInit {
     if(this.pass == "")
     {
       this.textoMostrar("Contraseña Requerida")
+      this.vibrationService.error()
     }
     else if(this.pass.length < 6)
     {
       this.textoMostrar("La clave debe ser mayor a 6 digitos");
+      this.vibrationService.error()
     }
     else
     {
@@ -215,6 +219,7 @@ export class LoginPage implements OnInit {
     }
     else{
       this.utilidadService.textoMostrar("#mensajeTexto", "Campo nombre requerido", "#mensajeLogin", "");
+      this.vibrationService.error()
     }
   }
 

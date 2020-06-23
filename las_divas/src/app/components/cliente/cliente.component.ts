@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { QRScannerService } from 'src/app/servicios/qrscanner.service';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
 import { PedidosService } from 'src/app/servicios/pedidos.service';
+import { UtilidadService } from 'src/app/servicios/utilidad.service';
+import { VibrationService } from 'src/app/servicios/vibration.service';
 
 @Component({
   selector: 'app-cliente',
@@ -10,17 +12,17 @@ import { PedidosService } from 'src/app/servicios/pedidos.service';
 })
 export class ClienteComponent implements OnInit {
 
-  currentUser
-  dataCurrentUser
+  currentUser;
+  dataCurrentUser;
   mesaOcupada:string;
-  estadoCliente:string;
+  estadoCliente:string = "opts";
   encuesta:boolean = false;
   pago:boolean;
   mesaParaPagar:any;
   opt:string;
   encuestaTerminada:boolean = false;
 
-  constructor(private QRService:QRScannerService, private fireService:FirebaseService, private pedidoService:PedidosService) {
+  constructor(private QRService:QRScannerService, private fireService:FirebaseService, private pedidoService:PedidosService, private utilidadService:UtilidadService, private vibrationService:VibrationService) {
     this.currentUser = fireService.getCurrentUser()
 
    if(!this.currentUser.isAnonymous){
@@ -54,9 +56,12 @@ export class ClienteComponent implements OnInit {
           this.fireService.createDocInDB('listaEspera', this.currentUser.uid, this.dataCurrentUser)
 
         this.estadoCliente = 'listaEspera';
+        this.fireService.sendNotification(this.currentUser.email, 'metre')
       }
       else{
         console.error('Primero debe ir a la lista de espera')
+        this.utilidadService.textoMostrar('#modal-error-text-p-general', 'Primero debes anotarte a la lista de espera', '#modal-error-general', '#container-client')
+        this.vibrationService.error()
       }
     })
   }
@@ -70,8 +75,8 @@ export class ClienteComponent implements OnInit {
         if(datos != undefined)
         {
           this.fireService.getTable(a.text).then((data:any) => {
-            console.log(this.estadoCliente)
-            if(this.estadoCliente == 'listaEspera'){
+      
+            if(this.estadoCliente == 'listaEspera' && data != undefined){
               if(!data.ocupada)
               {
                 data.ocupada = true;
@@ -104,16 +109,22 @@ export class ClienteComponent implements OnInit {
   
                   default:
                     console.error("el qr no es el correcto");
+                    this.utilidadService.textoMostrar('#modal-error-text-p-general', 'El QR no es el correcto', '#modal-error-general', '#container-client')
+                    this.vibrationService.error()
                 }
               }
-              else
+              else{
                 console.error("mesa ocupada");
+                this.utilidadService.textoMostrar('#modal-error-text-p-general', 'La mesa se encuentra ocupada', '#modal-error-general', '#container-client')
+                this.vibrationService.error()
+              }
             }
             else if(this.estadoCliente == 'encuesta'){
-              console.log("entre");
               this.estadoCliente = 'opts';
             }
-
+            else{
+              console.log("Codigo incorrecto");
+            }
           })
         }
       })
@@ -150,7 +161,9 @@ export class ClienteComponent implements OnInit {
         this.estadoCliente='despedida';
       }
       else{
-        console.log("todavia no pagaste bro");
+        console.error("todavia no pagaste bro");
+        this.utilidadService.textoMostrar('#modal-error-text-p-general', 'Todavía no has pagado', '#btn-pedir-cuenta', '#container-client')
+        this.vibrationService.error()
       }
     })
   }

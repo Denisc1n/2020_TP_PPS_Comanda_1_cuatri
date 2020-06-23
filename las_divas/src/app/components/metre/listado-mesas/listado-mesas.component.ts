@@ -1,6 +1,7 @@
 import { Component, OnInit, Input ,Output, EventEmitter } from '@angular/core';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
 import { UtilidadService } from 'src/app/servicios/utilidad.service';
+import { VibrationService } from 'src/app/servicios/vibration.service';
 
 @Component({
   selector: 'app-listado-mesas',
@@ -14,7 +15,7 @@ export class ListadoMesasComponent implements OnInit {
   mesas : any;
   mesaSeleccionada: any;
 
-  constructor(private fireService : FirebaseService, private s_utilidad : UtilidadService) {
+  constructor(private fireService : FirebaseService, private s_utilidad : UtilidadService, private vibrationService:VibrationService) {
     this.actualizarLista()
   }
 
@@ -28,6 +29,7 @@ export class ListadoMesasComponent implements OnInit {
 
     if(mesa.ocupada) {
       this.s_utilidad.textoMostrar("#modal-error-mesa-text-p","Mesa ocupada", "#modal-error-mesa", ".ctn-lista-mesas")
+      this.vibrationService.error()
     }
     
   }
