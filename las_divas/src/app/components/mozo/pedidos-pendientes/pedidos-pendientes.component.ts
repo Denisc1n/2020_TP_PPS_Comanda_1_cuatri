@@ -29,8 +29,9 @@ export class PedidosPendientesComponent implements OnInit {
     this.fireService.getDB("mesas").then(datos=>{
       this.pedidos=datos
       for (let mesita of this.pedidos) {
-        if(this.terminado(mesita) && mesita.estado == 'en proceso')
-          this.pedidosService.changeOrderStatus('estado', 'terminado', `Mesa ${mesita.numero} Las Divas`)
+        if(!mesita.pendienteBebida && !mesita.pendienteComida && mesita.estado == 'en proceso'){
+          this.pedidosService.changeOrderStatus('estado', 'terminado', `Mesa ${mesita.numero} Las Divas`);
+        }
       }
     })
   }
@@ -41,7 +42,7 @@ export class PedidosPendientesComponent implements OnInit {
 
   terminado(mesa):boolean{
     let retorno:boolean = false;
-    if(mesa.estado == 'en proceso' && !mesa.pendienteBebida && !mesa.pendienteComida){
+    if(mesa.estado == 'terminado' && !mesa.pendienteBebida && !mesa.pendienteComida){
       retorno = true;
     }
 

@@ -38,14 +38,6 @@ ion-icon {
         p {
             position: fixed;
         }
-        .btn-entregar{
-            width: 100%;
-            background: #ee82ee;
-            color: #fff;
-            position: relative;
-            top: 35%;
-            font-size: 1em;
-        }
 }
 
 .true {
@@ -75,31 +67,49 @@ ion-icon {
 }
 
 .ctn-notificaciones {
-    text-align: center;
     position: relative;
-    top: 70%;
+    top: 55%;
     width: 125px;
-    height: 35px;
+    height: 80px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-evenly;
 
-
-    div {
-        width: (125px / 3);
-        border-radius: 50%;
-        background-color: ghostwhite;
+    .ctn-iconitos {
+        width: 100%;
+        position: relative;
+        top: 20px;
+        border-radius: 0;
         display: flex;
-        justify-content: center;
+        flex-direction: row;
+        justify-content: space-evenly;
         align-items: center;
-        font-weight: bold;
-        color: red;
 
-        ion-icon {
-            font-size: 1em;
-            color: red;
+        div {
+            width: (125px / 3);
+            padding: 25px;
+            border-radius: 50%;
+            background-color: ghostwhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-weight: bold;
+            color: red;
+    
+            ion-icon {
+                font-size: 1em;
+                color: red;
+                font-weight: bold;
+            }
         }
+    }
+
+    .btn-entregar{
+        width: 100%;
+        background: ghostwhite;
+        color: red;
+        position: relative;
+        top: -105%;
     }
 }
 
