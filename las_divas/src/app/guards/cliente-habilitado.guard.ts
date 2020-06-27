@@ -27,11 +27,12 @@ export class ClienteHabilitadoGuard implements CanActivate {
               return true;
             else{
               this.utilidad.textoMostrar("#mensajeTexto", "Usted no se encuentra autorizado, contactese con el mozo", "#mensajeLogin", "");
-              this.vibrationService.error()
+              this.vibrationService.error();
+              return false;
             }
           }
           else{
-            return false;
+            return true;
           }
           
         })
