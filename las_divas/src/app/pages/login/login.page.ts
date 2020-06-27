@@ -185,6 +185,11 @@ export class LoginPage implements OnInit {
     }
   }
 
+  predeterminados(email:string,password:string) {
+    $("#correo").val(email);
+    $("#pass").val(password);
+  }
+
   getUsers()
   {
     this.fireService.getDB('usuarios').then((users)=>{

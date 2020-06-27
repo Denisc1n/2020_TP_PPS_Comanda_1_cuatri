@@ -42,6 +42,7 @@ export class CocineroComponent implements OnInit {
   {
     (<HTMLInputElement>document.querySelector(".ctn-lista-mesas")).style.filter = "none";
     this.mesaSeleccionada = null;
+    this.actualizarLista();
   }
 
   activarNotificacion(){

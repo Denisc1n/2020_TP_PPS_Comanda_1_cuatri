@@ -35,6 +35,11 @@
       </div>
   </div>
   <div class="usuarios">
-    <ion-icon name="restaurant-outline" *ngFor="let usuarios of this.listado" (click)="completar(usuarios.correo)"></ion-icon>
+    <ion-icon name="restaurant-outline" (click)="predeterminados('duenio@duenio.com', '123456')"></ion-icon>
+    <ion-icon name="restaurant-outline" (click)="predeterminados('cliente@cliente.com', '123456')"></ion-icon>
+    <ion-icon name="restaurant-outline" (click)="predeterminados('mozo@mozo.com', '123456')"></ion-icon>
+    <ion-icon name="restaurant-outline" (click)="predeterminados('metre@metre.com', '123456')"></ion-icon>
+    <ion-icon name="restaurant-outline" (click)="predeterminados('bartender@bartender.com', '123456')"></ion-icon>
+    <ion-icon name="restaurant-outline" (click)="predeterminados('cocinero@cocinero.com', '123456')"></ion-icon>
   </div>
 </div>

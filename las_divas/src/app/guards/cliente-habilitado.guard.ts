@@ -20,7 +20,7 @@ export class ClienteHabilitadoGuard implements CanActivate {
 
     if(!this.current.isAnonymous)
     {
-        return this.fire.getDBByDoc("clientes",this.current.email).then((datos:any) => {
+        return this.fire.getDBByDoc("cliente",this.current.email).then((datos:any) => {
 
           if(datos != undefined){
             if(datos.habilitado == 'aceptado')
@@ -31,7 +31,7 @@ export class ClienteHabilitadoGuard implements CanActivate {
             }
           }
           else{
-            return true;
+            return false;
           }
           
         })

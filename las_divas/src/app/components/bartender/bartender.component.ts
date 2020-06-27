@@ -45,6 +45,7 @@ export class BartenderComponent implements OnInit {
   {
     (<HTMLInputElement>document.querySelector(".ctn-lista-mesas")).style.filter = "none";
     this.mesaSeleccionada = null;
+    this.actualizarLista();
   }
 
   activarNotificacion(){
@@ -61,7 +62,7 @@ export class BartenderComponent implements OnInit {
   }
 
   terminarPedido(numeroMesa){
-    this.pedidosService.changeOrderStatus('pendienteComida', false, `Mesa ${numeroMesa} Las Divas`)
+    this.pedidosService.changeOrderStatus('pendienteBebida', false, `Mesa ${numeroMesa} Las Divas`)
     this.fireService.sendNotification(`Mesa ${numeroMesa} Las Divas`, 'mozoBebida')
   }
 

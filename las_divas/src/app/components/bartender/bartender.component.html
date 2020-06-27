@@ -3,7 +3,7 @@
     <div class="mesas {{mesa.ocupada}}" *ngFor="let mesa of this.consultas">
       <span>{{mesa.numero}}</span>
       <div class="ctn-notificaciones">
-        <div *ngIf="mesa.pedidoBebida != true" (click)="displayModal(mesa)"><ion-icon name="wine-outline"></ion-icon></div>
+        <div *ngIf="mesa.pendienteBebida == true" (click)="displayModal(mesa)"><ion-icon name="wine-outline"></ion-icon></div>
       </div>
     </div>
   </div>
