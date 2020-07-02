@@ -4,6 +4,7 @@ import { FirebaseService } from 'src/app/servicios/firebase.service';
 import { PedidosService } from 'src/app/servicios/pedidos.service';
 import { UtilidadService } from 'src/app/servicios/utilidad.service';
 import { VibrationService } from 'src/app/servicios/vibration.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cliente',
@@ -22,7 +23,7 @@ export class ClienteComponent implements OnInit {
   opt:string;
   encuestaTerminada:boolean = false;
 
-  constructor(private QRService:QRScannerService, private fireService:FirebaseService, private pedidoService:PedidosService, private utilidadService:UtilidadService, private vibrationService:VibrationService) {
+  constructor(private QRService:QRScannerService, private fireService:FirebaseService, private pedidoService:PedidosService, private utilidadService:UtilidadService, private vibrationService:VibrationService, private navegador : Router) {
     this.currentUser = fireService.getCurrentUser()
 
    if(!this.currentUser.isAnonymous){
@@ -56,10 +57,9 @@ export class ClienteComponent implements OnInit {
           this.fireService.createDocInDB('listaEspera', this.currentUser.uid, this.dataCurrentUser)
 
         this.estadoCliente = 'listaEspera';
-        this.fireService.sendNotification(this.currentUser.email, 'metre')
+        this.fireService.sendNotification(Math.floor(Math.random() * (10000 - 1) + 1), 'metre')
       }
       else{
-        console.error('Primero debe ir a la lista de espera')
         this.utilidadService.textoMostrar('#modal-error-text-p-general', 'Primero debes anotarte a la lista de espera', '#modal-error-general', '#container-client')
         this.vibrationService.error()
       }
@@ -68,9 +68,11 @@ export class ClienteComponent implements OnInit {
 
   scanMesa()
   {
-    this.QRService.scan().then((a:any)=>{
 
-      this.fireService.getWaitingList(this.currentUser.email).then((datos:any) => {
+    let aux:any = this.currentUser.isAnonymous ? this.currentUser.uid : this.currentUser.email;
+
+    this.QRService.scan().then((a:any)=>{
+      this.fireService.getWaitingList(aux).then((datos:any) => {
 
         if(datos != undefined)
         {
@@ -159,7 +161,8 @@ export class ClienteComponent implements OnInit {
       if(!a.pagoPendiente){
         this.pago = true;
         this.estadoCliente='despedida';
-        this.fireService.logout()
+        this.fireService.logout();
+        this.navegador.navigate(["login"]);
       }
       else{
         console.error("todavia no pagaste bro");

@@ -230,7 +230,7 @@ export class FirebaseService {
       })
     }
 
-    sendNotification(value:string, doc:string){
+    sendNotification(value:any, doc:string){
       this.db.collection('notificaciones').doc(doc).update({email: value})
     }
 
