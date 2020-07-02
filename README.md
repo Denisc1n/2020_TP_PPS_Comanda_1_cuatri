@@ -63,6 +63,30 @@ Thomas Rosas: Menù de comidas y pedidos (lógica), Principal metre, lista de es
  Matias Herrera: Menù de comidas (diseño), Vista de bartender y cocinero, Scaner de Mesas
 </li>
 </ul>
+<h2>Semana del 14/06 al 20/06</h2>
+<ul>
+  <li>
+  Pablo Matwijiszyn: lista de pedidos de mozo,lista de pagos de mozo,lista de consultas mozo, responde consulta 
+  </li>
+  <li>
+Thomas Rosas: Consultas del cliente,  estado del pedido, 
+</li>
+  <li>
+ Matias Herrera: Encuesta del cliente, pedir cuenta
+</li>
+</ul>
+<h2>Semana del 21/06 al 27/06</h2>
+<ul>
+  <li>
+  Pablo Matwijiszyn:lista pedidos pendientes mozo, diseño push notifications, botones flotantes login, arreglo de errores
+  </li>
+  <li>
+Thomas Rosas: Logica de las push notifications, arreglo de errores
+</li>
+  <li>
+ Matias Herrera: mandar mail al cliente, arreglo de errores
+</li>
+</ul>
 <hr>
 <h2>Grupo:</h2><br>
 <ul>
