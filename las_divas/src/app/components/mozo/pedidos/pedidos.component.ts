@@ -25,10 +25,17 @@ export class PedidosComponent implements OnInit {
   {
     let date = new Date()
     let hora = date.getUTCHours()
-    if(option == 'habilitar')
-        pedido.estado = 'en proceso'
+    if(option == 'habilitar'){
+        pedido.estado = 'en proceso';
+        console.log(pedido);
+        if(pedido.pedido.productos.bebidas.agua.cantidad > 0 || pedido.pedido.productos.bebidas.gaseosa.cantidad > 0 || pedido.pedido.productos.bebidas.cerveza.cantidad > 0)
+          pedido.pendienteBebida = true;
+    if(pedido.pedido.productos.platos.fideos.cantidad > 0 || pedido.pedido.productos.platos.hamburguesa.cantidad > 0 || pedido.pedido.productos.platos.milanesa.cantidad > 0 || pedido.pedido.productos.platos.muzzarelitas.cantidad > 0 || pedido.pedido.productos.postres.chocotorta.cantidad > 0 || pedido.pedido.productos.postres.flan.cantidad > 0 || pedido.pedido.productos.postres.helado.cantidad > 0)
+          pedido.pendienteComida = true;
+    }
 
     this.fireService.updateDoc("mesas", `Mesa ${pedido.numero} Las Divas`, pedido)
+    
 
     this.Actualizar();
     if(pedido.pendienteComida)

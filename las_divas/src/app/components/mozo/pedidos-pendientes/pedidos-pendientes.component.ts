@@ -37,7 +37,8 @@ export class PedidosPendientesComponent implements OnInit {
   }
 
   entregar(mesa){
-    this.pedidosService.changeOrderStatus('estado', 'entregado', `Mesa ${mesa} Las Divas`)
+    this.pedidosService.changeOrderStatus('estado', 'entregado', `Mesa ${mesa} Las Divas`);
+    this.actualizarLista();
   }
 
   terminado(mesa):boolean{
