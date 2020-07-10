@@ -21,6 +21,7 @@ export class HomeMozoComponent implements OnInit {
     this.db.collection('notificaciones').doc('mozoConsulta').snapshotChanges().subscribe(data=>this.activarNotificacionConsulta())
     this.db.collection('notificaciones').doc('mozoComida').snapshotChanges().subscribe(data=>this.activarNotificacionComida())
     this.db.collection('notificaciones').doc('mozoBebida').snapshotChanges().subscribe(data=>this.activarNotificacionBebida())
+    this.db.collection('notificaciones').doc('mozoComidaNueva').snapshotChanges().subscribe(data=>this.activarNotificacionComidaNueva())
 
   }
 
@@ -51,6 +52,20 @@ activarNotificacionComida(){
     }
     this.firstTimeComida += 1;
   }
+
+  activarNotificacionComidaNueva(){
+  
+    if(this.firstTimeComida > 0){
+      $("#notificacion-push").css("top","2%");
+        $("#content-title").text("Nuevo pedido");
+        $("#content-msj").text("El cliente ha realizado un nuevo pedido");
+  
+        setTimeout(() => {
+          $("#notificacion-push").css("top","-15%");
+        }, 3000);
+      }
+      this.firstTimeComida += 1;
+    }
 
   activarNotificacionBebida(){
     if(this.firstTimeBebida > 0){

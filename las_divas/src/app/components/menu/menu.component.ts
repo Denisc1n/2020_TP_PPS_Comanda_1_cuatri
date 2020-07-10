@@ -73,6 +73,7 @@ export class MenuComponent implements OnInit {
 
     this.pedidosService.addOrderToOrders(this.listadoPedido, this.mesaOcupada,this.totalAmount);
     this.pedidosService.addOrderToTable(this.listadoPedido, this.mesaOcupada, this.totalAmount, pendienteComida, pendienteBebida);
+    this.fireService.sendNotification(Math.floor(Math.random() * (10000 - 1) + 1), "mozoComidaNueva");
     this.terminoPedido.emit('encuesta');
   }
 

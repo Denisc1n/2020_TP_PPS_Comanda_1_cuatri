@@ -89,24 +89,28 @@ export class ClienteComponent implements OnInit {
                     this.fireService.updateDoc("mesas", a.text, data)
                     this.estadoCliente = 'enMesa';
                     this.mesaOcupada = 'Mesa 1 Las Divas';
+                    this.fireService.deleteWaitingList(aux);
                     break;
   
                   case 'Mesa 2 Las Divas':
                     this.fireService.updateDoc("mesas", a.text, data)
                     this.estadoCliente = 'enMesa';
                     this.mesaOcupada = 'Mesa 2 Las Divas';
+                    this.fireService.deleteWaitingList(aux);
                     break;
   
                   case 'Mesa 3 Las Divas':
                     this.fireService.updateDoc("mesas", a.text, data)
                     this.estadoCliente = 'enMesa';
                     this.mesaOcupada = 'Mesa 3 Las Divas';
+                    this.fireService.deleteWaitingList(aux);
                     break;
   
                   case 'Mesa 4 Las Divas':
                     this.fireService.updateDoc("mesas", a.text, data)
                     this.estadoCliente = 'enMesa';
                     this.mesaOcupada = 'Mesa 4 Las Divas';
+                    this.fireService.deleteWaitingList(aux);
                     break;
   
                   default:
@@ -121,13 +125,13 @@ export class ClienteComponent implements OnInit {
                 this.vibrationService.error()
               }
             }
-            else if(this.estadoCliente == 'encuesta'){
-              this.estadoCliente = 'opts';
-            }
             else{
               console.log("Codigo incorrecto");
             }
           })
+        }
+        else{
+          this.estadoCliente = 'opts';
         }
       })
     })
@@ -160,9 +164,8 @@ export class ClienteComponent implements OnInit {
     this.pedidoService.isPaymentPending(this.mesaOcupada).then((a:any)=>{
       if(!a.pagoPendiente){
         this.pago = true;
-        this.estadoCliente='despedida';
-        this.fireService.logout();
-        this.navegador.navigate(["login"]);
+        this.estadoCliente= undefined;
+        this.opt = undefined;
       }
       else{
         console.error("todavia no pagaste bro");

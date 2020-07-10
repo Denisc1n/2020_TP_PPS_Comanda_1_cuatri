@@ -244,5 +244,10 @@ export class FirebaseService {
               console.log(res);
             });  
     }
+
+    deleteWaitingList(id)
+    {
+      this.db.collection("listaEspera").doc(id).delete();
+    }
   
 }
