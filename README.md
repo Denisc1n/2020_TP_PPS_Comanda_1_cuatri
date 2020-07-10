@@ -8,22 +8,56 @@
 <img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/gifSplash.gif">
 </p>
 <hr>
-<h3 align="center">Ingreso</h3>
+<h3 align="center">Ingreso / Registro</h3>
 <p align="center">
 <img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/login.png">
 <img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/login_invitado.png">
-</p>
-<hr>
-<h3 align="center">Registro de Cliente</h3>
-<p align="center">
 <img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/registro_usuario.png">
 </p>
 <hr>
-<h3 align="center">Principal Cliente - Mozo - Supervisor</h3>
+<h3 align="center">Cliente</h3>
 <p align="center">
 <img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/home_cliente.png">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/encuesta_cliente.jpeg">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/menu_comida_cliente.jpeg">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/menu_comida_cliente_2.jpeg">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/pago_cliente.jpeg">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/estado_pedido_cliente.jpeg">
+</p>
+<hr>
+<h3 align="center">Dueño</h3>
+<p align="center">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/home_dueño.png">
+</p>
+<hr>
+<h3 align="center">Metre</h3>
+<p align="center">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/home_metre.png">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/lista_espera_metre.png">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/mesas_disponibles_metre.png">
+</p>
+<hr>
+<h3 align="center">Mozo</h3>
+<p align="center">
 <img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/home_mozo.png">
-<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/home_supervisor.png">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/lista_consultas_mozo.png">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/lista_pago_mozo_1.png">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/lista_pago_mozo_2.png">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/pedidos_pendientes_mozo_1.png">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/pedidos_pendientes_mozo_2.png">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/confirmar_pedidos_mozo.png">
+</p>
+<hr>
+<h3 align="center">Cocinero</h3>
+<p align="center">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/pedidos_cocinero_1.png">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/pedidos_cocinero_2.png">
+</p>
+<hr>
+<h3 align="center">Bar Tender</h3>
+<p align="center">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/pedidos_bartender_1.png">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/pedidos_bartender_2.png">
 </p>
 <hr>
 <h1 align="center">Tareas Realizadas</h1>
