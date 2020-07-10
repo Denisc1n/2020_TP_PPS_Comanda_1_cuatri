@@ -41,8 +41,8 @@
 <p align="center">
 <img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/home_mozo.png">
 <img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/lista_consultas_mozo.png">
-<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/lista_pago_mozo_1.png">
-<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/lista_pago_mozo_2.png">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/lista_pagos_mozo_1.png">
+<img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/lista_pagos_mozo_2.png">
 <img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/pedidos_pendientes_mozo_1.png">
 <img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/pedidos_pendientes_mozo_2.png">
 <img src="https://github.com/rosasthomas/2020_TP_PPS_Comanda_1_cuatri/blob/master/readme_assets/confirmar_pedidos_mozo.png">
